@@ -1,0 +1,111 @@
+@use "~@cloudscape-design/design-tokens" as awsui;
+* {
+  box-sizing: border-box;
+}
+:root {
+  --cedar-green: #284334;
+  --cedar-green-light: #1a4d0a;
+}
+.cedar-green {
+  background-image: url('../static/background.jpg');
+  background-color: var(--cedar-green);
+  header {
+    background-image: inherit !important;
+    background-color: inherit !important;
+  }
+}
+
+.transparent-dark-bg {
+  background-color: rgba(0, 0, 0, 0.5);
+  header {
+    background-color: inherit !important;
+  }
+}
+
+h1 {
+  font-family: VaultAlarm-Sharp;
+  font-weight: normal;
+  font-size: 30px;
+}
+
+.medium-container > * {
+  max-width: 900px;
+  text-align: left;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+.app-container {
+  padding-bottom: 36px;
+}
+
+.copyright {
+  color: #4C4C4C;
+}
+
+.flex-row{
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+}
+
+.bottom-bar {
+  z-index: 1000;
+  background-color: white;
+  color: #CCCCCC;
+  border-top: solid 1px #E3E3E3;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: 12px;
+  * {
+    padding: 0 12px;
+  }
+  a {
+    color: #0073BB;
+    text-decoration: none;
+  }
+  a:hover {
+    text-decoration: underline;
+  }
+}
+
+@media(max-width: 600px) {
+  .bottom-bar {
+    position: static;
+    border: none;
+    background-color: #F5F5F5;
+    color: #BBBBBB;
+  }
+  .flex-row {
+    justify-content: flex-start;
+  }
+  .app-container {
+    padding-bottom: 0;
+  }
+}
+
+
+header div[class^=awsui_dropdown-content-wrapper] {
+  background-color: var(--cedar-green-light) !important;
+}
+
+header button[class*=expanded] span, header button[class*=expanded] svg, header li[class*=highlighted] a {
+  color: white !important;
+}
+
+.blogpost {
+  pre {
+    padding: 10px 4px;
+  }
+  tr {
+    padding: 5px 0;
+    td, th {
+      padding: 5px 10px;
+    }
+  }
+  img {
+    max-width: 900px;
+  }
+}
