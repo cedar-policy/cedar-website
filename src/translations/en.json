@@ -1,0 +1,1719 @@
+{
+    "topNavbar":{
+        "cedarTitle":{
+            "text":"Cedar",
+            "note":"Title text for the top navbar"
+        },
+        "overview":{
+            "text":"Overview",
+            "note":"Button text for a navbar button"
+        },
+        "learn":{
+            "text":"Learn",
+            "note":"Button text for a navbar button"
+        },
+        "policyPlayground":{
+            "text":"Policy playground",
+            "note":"Button text for a navbar button"
+        },
+        "cedarSDK":{
+            "link":{
+                "text":"Cedar SDK",
+                "note":"Button text for a navbar button"
+            },
+            "ariaLabel":{
+                "text":"Link to GitHub",
+                "note":"Aria label text for external link arrow"
+            },
+            "iconAltText":{
+                "text":"GitHub logo",
+                "note":"Alt text for icon"
+            }
+        },
+        "integrations":{
+            "text":"Integrations",
+            "note":"Button text for a navbar button"
+        },
+        "overflowMenu":{
+            "triggerText":{
+                "text":"More",
+                "note":"Button text to open the navbar overflow menu on narrow screens"
+            },
+            "titleText":{
+                "text":"All",
+                "note":"Title text for the navbar overflow menu on narrow screens"
+            },
+            "backAriaLabel":{
+                "text":"Back",
+                "note":"Aria label for the back icon"
+            },
+            "closeAriaLabel":{
+                "text":"Close menu",
+                "note":"Aria label for the dismiss icon"
+            }
+        }
+    },
+    "bottomBar":{
+        "privacy":{
+            "text":"Privacy",
+            "note":"Link text for the privacy policy"
+        },
+        "siteTerms":{
+            "text":"Site Terms",
+            "note":"Link text for the site terms"
+        },
+        "cookiePreferences":{
+            "text":"Cookie Preferences",
+            "note":"Link text to open cookie preferences"
+        },
+        "copyrightStatement":{
+            "text":" © {year}, Amazon Web Services, Inc. or its affiliates. All rights reserved.",
+            "note":"Copyright statement on the bottom bar"
+        }
+    },
+    "overview":{
+        "intro":{
+            "title":{
+                "text":"Fast, scalable access control",
+                "note":"Title text for the top section of the page."
+            },
+            "body2":{
+                "text":"Cedar is a language for defining permissions as policies, and a specification for evaluating those policies. Use Cedar to define who is authorized to do what within your application. Cedar is open source.",
+                "note":"Paragraph text for the top section of the page."
+            },
+            "learnLink": {
+                "text":"Learn Cedar",
+                "note":"A link to the learning path."
+            },
+            "tutorialLink":{
+                "text":"Do the tutorial",
+                "note":"A link to the tutorial."
+            },
+            "playgroundLink":{
+                "text":"Try it out in playground",
+                "note":"A link to the playground."
+            }
+        },
+        "announcement":{
+            "body":{
+                "text":"Cedar 4.9 is now released, with refinements to type-aware partial evaluation and additional support for working with FFI types.",
+                "note":"Announcement text shown in a thin bar below the main section"
+            },
+            "date":{
+                "text":"February 9, 2026:",
+                "note":"A date, shown in bold before the announcement"
+            },
+            "learnMore":{
+                "text":"To learn more view the Cedar change log here.",
+                "note":"Link text"
+            }
+        },
+        "description":{
+            "expressive":{
+                "iconAltText":{
+                    "text":"An icon of a pair of paintbrushes.",
+                    "note":"Alt text for an icon over the description."
+                },
+                "title":{
+                    "text":"Expressive",
+                    "note":"Title text for a section of the description."
+                },
+                "body":{
+                    "text":"Cedar is a simple yet expressive language that is purpose-built to support authorization use cases for common authorization models such as RBAC and ABAC.",
+                    "note":"Body text for a section of the description."
+                }
+            },
+            "performant":{
+                "iconAltText":{
+                    "text":"An icon of a gauge display with its needle to the right.",
+                    "note":"Alt text for an icon over the description."
+                },
+                "title":{
+                    "text":"Performant",
+                    "note":"Title text for a section of the description."
+                },
+                "body":{
+                    "text":"Cedar is fast and scalable. The policy structure is designed to be indexed for quick retrieval and to support fast and scalable real-time evaluation, with bounded latency.",
+                    "note":"Body text for a section of the description."
+                }
+            },
+            "analyzable":{
+                "iconAltText":{
+                    "text":"An icon of a magnifying glass.",
+                    "note":"Alt text for an icon over the description."
+                },
+                "title":{
+                    "text":"Analyzable",
+                    "note":"Title text for a section of the description."
+                },
+                "body":{
+                    "text":"Cedar is designed for analysis using Automated Reasoning. This enables analyzer tools capable of optimizing your policies and proving that your security model is what you believe it is.",
+                    "note":"Body text for a section of the description."
+                }
+            },
+            "open":{
+                "iconAltText":{
+                    "text":"An icon of a lock, representing open source software.",
+                    "note":"Alt text for an icon over the description."
+                },
+                "title":{
+                    "text":"Open",
+                    "note":"Title text for a section of the description."
+                },
+                "body":{
+                    "text":"The Cedar language specification, the Cedar SDK, and much more are available from our GitHub repo, under the terms of the Apache-2.0 license.",
+                    "note":"Body text for a section of the description."
+                }
+            }
+        },
+        "getInvolved": {
+            "title": {
+                "text":"Get involved",
+                "note":"Title text for the get involved section"
+            },
+            "joinSlack": {
+                "text":"Join us on Slack",
+                "note":"Title text encouraging the user to join us on slack"
+            },
+            "contribute": {
+                "text":"Contribute to GitHub",
+                "note":"Title text encouraging the user to contribute to github"
+            }
+        },
+        "callToAction":{
+            "title":{
+                "text":"Take control of your security posture",
+                "note":"Title text encouraging the user to use Cedar"
+            },
+            "unifyCode":{
+                "text":"Stop using slightly different authorization code for every service you deploy, or every single use case.",
+                "note":"Paragraph text encouraging the user to use Cedar"
+            },
+            "useCedar":{
+                "text":"With Cedar, you can build it once and deploy it anywhere, with minimal code repetition across services. Offload the access controls to us.",
+                "note":"Paragraph text encouraging the user to use Cedar"
+            }
+        },
+        "otherLinks":{
+            "integrations":{
+                "title2":{
+                    "text":"Managed solutions and other integrations",
+                    "note":"Title text for a link to integrations."
+                },
+                "body2":{
+                    "text":"Learn about {avp}, a fully managed AWS service for storing and evaluating Cedar policies. Find out how more companies and services in different verticals are building {integrations} with Cedar today.",
+                    "note":"Paragraph text linking to integrations. Do not translate {integrations}."
+                },
+                "link":{
+                    "text":"integrations",
+                    "note":"Link text."
+                }
+            },
+            "security":{
+                "title":{
+                    "text":"Security questions",
+                    "note":"Title text for a link to the reporting page."
+                },
+                "body":{
+                    "text":"If you discover a potential security issue in this project we  ask that you notify AWS/Amazon Security via our {page} or directly via email to aws-security@amazon.com.",
+                    "note":"Paragraph text linking to a reporting page. Do not translate {page}."
+                },
+                "vulnerabilityPage":{
+                    "text":"vulnerability reporting page",
+                    "note":"Link text to a reporting page."
+                }
+            }
+        }
+    },
+    "pageTitles":{
+        "cedarLang":{
+            "text":"Cedar Language",
+            "note":"Page title for the overview page"
+        },
+        "policyPlayground":{
+            "text":"Policy playground | Cedar language",
+            "note":"Page title for the policy playground"
+        },
+        "avaPlayground":{
+            "text":"Policy playground | AWS Verified Access",
+            "note":"Page title for the AVA policy playground"
+        },
+        "tutorial":{
+            "text":"Tutorial | Cedar language",
+            "note":"Page title for the tutorial"
+        },
+        "blog":{
+            "text":"Blog | Cedar language",
+            "note":"Page title for the blog"
+        }
+    },
+    "errorBoundary":{
+        "genericError":{
+            "text":"An error occurred.",
+            "note":"A generic error message."
+        },
+        "wasmError":{
+            "title":{
+                "text":"An error occurred while loading WASM.",
+                "note":"Error message for WASM error."
+            },
+            "body":{
+                "text":"Please use a browser compatible with WebAssembly, such as Chrome or Firefox.",
+                "note":"Descriptive error message subtitle for WASM error."
+            }
+        }
+    },
+    "waterfordEditor":{
+        "formattingAriaLabel":{
+            "text":"apply formatting",
+            "note":"Aria label for the Cedar editor formatting button"
+        },
+        "aceRefError":{
+            "text":"Failed to load ace editor ref, dom layout changed!",
+            "note":"error text for when the Ace editor's ref isn't found. 'dom' refers to the Javascript DOM here."
+        }
+    },
+    "tutorial":{
+        "schema": {
+            "title": {
+                "text":"Schema",
+                "note":"Text for title of schema tutorial step"
+            },
+            "label": {
+                "text":"Schema",
+                "note":"Label text for a tutorial step"
+            },
+            "paragraph1": {
+                "text":"As soon as your application adds more than a small number of principal and resource entity types, or when you introduce an entity type that has several attributes, you introduce the risk of errors if your policies and your entities don’t agree on the structure or the names of those elements.",
+                "note":"Part 1 of explanation for schema tutorial step"
+            },
+            "paragraph2": {
+                "text":"A schema is a formal declaration of the names and structure of your entity types. You declare the name of each type of principal, resource, and action that your application supports. The definition of those entities can also include a list of the attributes that define an entity of that type, with each attribute specifying a name and a data type.",
+                "note":"Part 2 of explanation for schema tutorial step"
+            },
+            "paragraph3": {
+                "text":"A schema is defined by using JSON. Schemas have three main properties:",
+                "note":"Part 3 of explanation for schema tutorial step"
+            },
+            "namespaceListItem": {
+                "text":"uniquely identifies the schema. The namespace helps you distinguish between elements with the same name from multiple schemas, for example HRApp::File and MedicalRecordsApp::File. The namespace is expressed as the top level key of the schema. Within each namespace, there is a JSON object defining entityTypes, actions, and types.",
+                "note":"Explanation for namespaces in schema tutorial."
+            },
+            "entityTypesListItem": {
+                "text":"defines the principal types and resource types supported by your application. Each entity type defines a shape that describes its characteristics. The shape must specify a Cedar supported data type, and define the structure for the more complex types like records or sets. The entity can also specify an optional memberOf attribute to describe how this type can participate in a hierarchy, like files can be in folders, users can be members of groups, or photos can be organized in albums. Note that if you specify that an entity can be a member of its own type, then you are specifying that you can nest them, such as placing folders in other folders.",
+                "note":"Explanation for entity types in schema tutorial."
+            },
+            "actionsListItem": {
+                "text":"defines the operations that the principals can potentially perform on the resources. Each action defines a name for the action, and a list of the resources and principals to which the action can apply.",
+                "note":"Explanation for actions in schema tutorial."
+            },
+            "typesListItem": {
+                "text":"defines type aliases for complex record types in the schema. Pre-defining types allows for code re-usability whenever the same type is referenced in multiple entities. This key is optional.",
+                "note":"Explanation for pre-defining types in schema tutorial."
+            },
+            "prePolicy1": {
+                "text":"Cedar can validate policies against the schema. This lets you ensure that you are testing the correct structure and use the correct names, including the correct capitalization.",
+                "note":"Part 1 explanation for policy in schema tutorial."
+            },
+            "prePolicy2": {
+                "text":"If you change any of the actions, or change the principal type from Group or the resource type from Album, then the policy may no longer validate if the entity names no longer match the schema. Give it a try yourself, add entities and play with the policy.",
+                "note":"Part 2 explanation for policy in schema tutorial."
+            },
+            "primaryActionBtn": {
+                "text":"Validate",
+                "note":"Text for validate button in schema tutorial."
+            },
+            "cedarLanguageGuide":{
+                "text":"Schema (Cedar Language Guide)",
+                "note":"Further reading link text"
+            },
+            "cedarcraftCliVideo":{
+                "title":{
+                    "text":"Cedarcraft video on Validating Cedar Policies at the Command Line",
+                    "note":"Link text"
+                },
+                "description":{
+                    "text":"This video describes why and how to do schema based validation using the CLI application.",
+                    "note":"Link description"
+                }
+            },
+            "cedarcraftVsCodeVideo":{
+                "title":{
+                    "text":"Cedarcraft video on Cedar VS Code Extension for Easy Policy Validation",
+                    "note":"Link text"
+                },
+                "description":{
+                    "text":"This video describes why and how to do schema based validation using the VS Code extension. See the {blog} for the full set of Cedarcraft videos from {ztatlock}.",
+                    "note":"Link description"
+                },
+                "blog":{
+                    "text":"Cedarcraft blog",
+                    "note":"Extra link text"
+                }
+            },
+            "validationGithubAction":{
+                "title":{
+                    "text":"Validating Cedar policies with GitHub Actions",
+                    "note":"Link text"
+                },
+                "description":{
+                    "text":"This blog describes a GitHub Action that can be used by anyone storing Cedar policies in GitHub to validate those policies against a Cedar schema.",
+                    "note":"Link description"
+                }
+            }
+        },
+        "templates": {
+            "label": {
+                "text":"Policy templates",
+                "note":"Label text for a tutorial step"
+            },
+            "title": {
+                "text":"Policy templates",
+                "note":"Title text for a tutorial step"
+            },
+            "paragraph1":{
+                "text":"When you write a complete policy that specifies both the principal and the resource, it’s referred to as a static policy. A static policy is immediately ready for use in authorization decisions.",
+                "note":"Paragraph text that explains static policies"
+            },
+            "paragraph2":{
+                "text":"However, sometimes you’ll want to use one set of authorization rules and apply them to many different principals and resources. For example, in a photo sharing application, there might be a common action to share a photo with someone. Performing this action creates a policy for the specified principal and the specified resource. Everything else about the policy is identical in all instance, such as these two samples having the exact same list of actions.",
+                "note":"Paragraph text that explains a case where static policies become very similar"
+            },
+            "paragraph3":{
+                "text":"Using static policies in this way can result in a lot of redundant policies that differ only in the principal and resource elements. It also introduces a big issue If you ever need to make a change in the underlying business logic of what sharing a photo means. In that case you’d have to update every one of the individual policies.",
+                "note":"Paragraph text that explains the issue with static policies used for very similar cases"
+            },
+            "paragraph4":{
+                "body":{
+                    "text":"Policy templates solve this issue by letting you create policies from a template that uses {placeholders} for the principal or resource, or both. After creating a policy template, you can instantiate individual policies by referencing the template and providing values for the specific principal and resource to use. This template-linked policy then works just like an static policy.",
+                    "note":"Paragraph text that explains"
+                },
+                "italic":{
+                    "text":"placeholders",
+                    "note":"Italic section of the paragraph"
+                }
+            },
+            "paragraph5":{
+                "text":"The placeholders in a template are simply the {principal} and {resource} keywords with a leading {questionMark} character. The following example shows a policy template that implements the same permissions as shown in the previous policy examples. We just don’t yet know what the principals and resources will be.",
+                "note":"Paragraph text that explains"
+            },
+            "paragraph6":{
+                "body":{
+                    "text":"Placeholders can appear {only} in the header of a policy, and only on the right-hand side of the {equals} or {in} operators. You can’t use a placeholder for {actions}, and you can’t use a placeholder in a {when} or {unless} clause.",
+                    "note":"Paragraph text that explains"
+                },
+                "italic":{
+                    "text":"only",
+                    "note":"Italic section of the paragraph"
+                }
+            },
+            "paragraph7":{
+                "text":"When you need to create a policy based on that policy template, instead of providing static policy text, you reference the policy template and provide the specific values for each of the placeholders. Cedar then generates a new policy linked to the template with the specified entities.",
+                "note":"Paragraph text that explains"
+            },
+            "paragraph8":{
+                "text":"When Cedar instantiates the template, it creates a template-based policy that fills in the placeholders with the values provided by the request to instantiate the policy. For example, an instantiated policy based on the previous template, that specifies {alice} as the principal and {pic} as the resource would behave just as if it had been written as the following static policy.",
+                "note":"Paragraph text that explains"
+            },
+            "cedarLanguageGuide":{
+                "text":"Templates (Cedar Language Guide)",
+                "note":"Further reading link text"
+            }
+        },
+        "policyStructure":{
+            "label":{
+                "text":"Policy structure",
+                "note":"Label text for a tutorial step"
+            },
+            "title":{
+                "text":"Policy structure",
+                "note":"Title text for a tutorial step"
+            },
+            "header":{
+                "text":"Tutorial",
+                "note":"Title text for a tutorial step"
+            },
+            "prePolicy":{
+                "p1":{
+                    "text":"This tutorial provides an introduction to the Cedar policy language. On completion of this tutorial you will be ready to start writing Cedar policies, and understand how those policies will be evaluated for an authorization request.",
+                    "note":"Paragraph text for a tutorial step."
+                },
+                "p2":{
+                    "text":"With Cedar, permissions are expressed as sets of policy statements. Each statement is a rule that permits or forbids a user (or principal) to act on a resource, given a defined context. This format is often referred to as the PARC model.",
+                    "note":"Paragraph text for a tutorial step."
+                },
+                "list":{
+                    "header":{
+                        "text":"Every policy statement must include an effect and a scope:",
+                        "note":"List header text"
+                    },
+                    "p1":{
+                        "text":"The effect specifies whether this a {permit} or a {forbid} policy.",
+                        "note":"A bullet point on the list. Do not translate {permit} or {forbid}."
+                    },
+                    "p2":{
+                        "text":"The scope specifies the principal[s], the action[s], and the resource[s] to which the effect applies.",
+                        "note":"A bullet point on the list. [s] is meant to show either singular OR plural, like 'principal/principals'."
+                    },
+                    "p3":{
+                        "text":"Optionally, the statement may also include one or more conditions in the form of {when} or {unless} clauses.",
+                        "note":"A bullet point on the list. Do not translate {permit} or {forbid}."
+                    }
+                },
+                "p3":{
+                    "text":"Through this tutorial we will use a photo sharing application as the inspiration for our examples. Below is an example of a very simple Cedar policy. It has an effect and a scope. The effect is {permit}. The scope is a principal of type {user} called Alice, an action called {update}, and a resource of type {photo} called ‘VacationPhoto94.jpg’. In short, the policy permits a User called Alice to update a Photo called VacationPhoto94.jpg.  Note that this policy has no conditions. We will cover these later in the tutorial.",
+                    "note":"Paragraph text for a tutorial step. Do not translate {permit}, {user}, {update}, or {photo.}"
+                }
+            },
+            "postPolicy":{
+                "p1":{
+                    "text":"Principals and resources are identified by a unique combination of a type and an ID, for example, a principal of type ‘User’ called ‘Alice’. For a policy to uniquely reference an entity it must call out both the type and the ID. Alternatively, the {is} operator can be used to reference all entities of a specific type.",
+                    "note":"Paragraph text for a tutorial step."
+                },
+                "p2":{
+                    "text":"Cedar policies are evaluated by a Cedar evaluation engine. The engine considers a set of policy statements in response to an authorization request, and returns either an {allow} or {deny} decision. For the authorization request to be allowed, there must be at least one applicable permit statement and no applicable forbid statements. A policy is applicable if the scope matches that of the authorization request, and all conditions are met.",
+                    "note":"Paragraph text for a tutorial step. Do not translate {allow} or {deny}."
+                },
+                "p3":{
+                    "text":"Within this tutorial, we will present Rust code that illustrates how to use the Cedar library to evaluate authorization requests. This code is not meant to be production quality. The Cedar library is stateless and currently only supports the Rust language. We will provide FFI interfaces into the Cedar library in the future.",
+                    "note":"Paragraph text for a tutorial step."
+                }
+            },
+            "postCode":{
+                "p1":{
+                    "text":"Now try editing the policy in the first code block on this page. Change the principal, action or resource to so that the scopes don't match and see that the request denied because the policy no longer applies. Is the evaluation logic case sensitive? Add a second policy underneath the first one, note that you only need one {permit} policy to apply for an {allow} authorization decision.",
+                    "note":"Paragraph text for a tutorial step. Do not translate {allow} or {permit}."
+                },
+                "p2":{
+                    "text":"As an application developer, you can name your entity types (principals and resources) whatever makes sense to you. For these examples, we've used the type name {user}, but we could use {person}, {consumer} or any other label. What matters is that you are consistent between the entity type names you use in your policies and in your code.",
+                    "note":"Paragraph text for a tutorial step. Do not translate {user}, {person} or {consumer}."
+                }
+            }
+        },
+        "forbid":{
+            "label":{
+                "text":"Forbid policies",
+                "note":"Label/title text for a tutorial step. 'Forbid policies' here means 'policies that forbid'."
+            },
+            "prePolicy":{
+                "p1":{
+                    "text":"By default, in the absence of an applicable permit policy, the authorization decision will be DENY. Additionally you can create policies that explicitly forbid certain requests. Forbid polices override permit policies. Hence forbid policies can act as guard rails ensuring that certain requests will always be denied regardless of any permit policies.",
+                    "note":"Paragraph text for a tutorial step."
+                }
+            },
+            "postPolicy":{
+                "p1":{
+                    "text":"The policy set expressed above illustrates this point. We see two policies with exactly the same scope, but different effects. The first permits alice to view the photo `VacationPhoto94.jpg`, the second forbids her. When we submit the the authorization request below, we expect authorization to be denied.",
+                    "note":"Paragraph text for a tutorial step."
+                }
+            },
+            "postCode":{
+                "p1":{
+                    "text":"The sequence in which policies are arranged has no impact on the outcome of the evaluation. Try rearranging the order of the policies above, and confirm that the decision is remains the same. For the rest of this tutorial we will use examples of permit policies, but remember that all of the concepts that we introduce using permit policies can also be used with forbid policies.",
+                    "note":"Paragraph text for a tutorial step."
+                }
+            }
+        },
+        "sets":{
+            "label":{
+                "text":"Sets",
+                "note":"Label text for a tutorial step"
+            },
+            "prePolicy":{
+                "p1":{
+                    "text":"So far, the example policies we’ve considered have referenced a single principal, action and resource. This would require us to write a separate policy for every permitted combination of these three. Fortunately the Cedar language enables us to write policies with a broader scope. In the case of Actions, we can define a permitted set of actions as part of our policy.",
+                    "note":"Paragraph text for a tutorial step."
+                }
+            },
+            "postPolicy":{
+                "p1":{
+                    "text":"The above policy permits Alice to view, edit and delete the photo called vacationPhoto94.jpg. As you might expect, this evaluates to {allow} for the request below. Within the policy scope you can define sets for actions, but not principals or resources. You can not, for example, define a scope for a set of principals.",
+                    "note":"Paragraph text for a tutorial step. Do not translate {allow}."
+                }
+            },
+            "postCode":{
+                "p1":{
+                    "text":"Does the order of  items in the set affect the authorization decision? What error does the syntax checker give if you edit the scope to be a set of Users for the principal?",
+                    "note":"Paragraph text for a tutorial step."
+                }
+            }
+        },
+        "undefinedScopes":{
+            "label":{
+                "text":"Undefined scopes",
+                "note":"Label text for a tutorial step"
+            },
+            "prePolicy":{
+                "p1":{
+                    "text":"Sets provide one way to broaden the scope of a policy to include more than one action, but they don’t help much for principals and resources, at least within the scope of the policy. There are two ways ways to write a policy with a broader scope for these entities. The first is to leave the scope completely undefined, by not specifying a principal, resource or action. If a scope is undefined it is considered to apply to all entities.",
+                    "note":"Paragraph text for a tutorial step."
+                }
+            },
+            "postPolicy":{
+                "p1":{
+                    "text":"The policy above leaves the principal undefined and is therefore evaluated as applying to all principals, including Alice. Hence the below request will return an {allow} decision.",
+                    "note":"Paragraph text for a tutorial step. Do not translate {allow}."
+                }
+            },
+            "postCode":{
+                "p1":{
+                    "text":"Try editing the policy to leave the resource undefined. What happens if you leave the action undefined?",
+                    "note":"Paragraph text for a tutorial step."
+                },
+                "p2":{
+                    "text":"If we would have left the resource undefined, then the policy would allow all principals to perform those three actions on all resources. Make sure to exercise caution when leaving elements of the scope undefined, as this may result in over permissive policies.",
+                    "note":"Paragraph text for a tutorial step."
+                },
+                "p3":{
+                    "text":"Remember that forbid policies can also have undefined scopes. Try adding a second policy that forbids alice to view any resources.",
+                    "note":"Paragraph text for a tutorial step."
+                }
+            }
+        },
+        "rbac":{
+            "label":{
+                "text":"Groups for role-based access control",
+                "note":"Label text for a tutorial step"
+            },
+            "prePolicy":{
+                "p1":{
+                    "text":"The other way to broaden the scope of a policy is to define it for a group of entities, rather than an individual entity. Principal groups provide us with a way to manage permissions using roles. Let’s imagine users are submitting their photos to a competition for the year’s best vacation photos, and we want a role for the competition judges to be able to view those photos. The policy below permits any principal in the role called {role} to view the photo called {resource}.",
+                    "note":"Paragraph text for a tutorial step. Do not translate {role} or {resource}."
+                }
+            },
+            "postPolicy":{
+                "p1":{
+                    "text":"In this example we are modeling the role as a group. The group is itself an entity and so has a type and an ID. {Role} is not a reserved word, we could equally have called the entity type {UserGroup}. In order to be able to evaluate requests by considering this policy, the evaluation engine needs to know whether the principal referenced within the authorization request is a  member of this group. Therefore, your application will need to pass relevant group membership information to the evaluation engine as part of the authorization request. This is done through the {entities} property, which enables you to provide the Cedar evaluation engine with attribute and group membership data for the principal and resource involved in the authorization call. If you look at the code below you will see that group membership is indicated by defining {bob} as having a parent called {bobRole}.",
+                    "note":"Paragraph text for a tutorial step. Do not translate {Role}, {UserGroup}, {entities}, {bob}, or {bobRole}."
+                }
+            },
+            "postCode":{
+                "p1":{
+                    "text":"Groups of principals don’t necessarily have to equate to Roles. For example, your application could include a concept of friend groups, whereby permissions on photos are managed based on membership of friend groups. There could be a user group called Jane’s friends, and a policy could be created that gives everyone in that group view access to vacationphoto94.jpg. This policy would be identical in structure to the one in this example.",
+                    "note":"Paragraph text for a tutorial step."
+                },
+                "p2":{
+                    "text":"Note that Bob is actually a member of two groups - {judges} and {juniorJudges}. Try adding a second policy that permits Bob to view vacationPhoto94.jpg through his membership in this second group.",
+                    "note":"Paragraph text for a tutorial step. Do not translate {judges} or {juniorJudges}."
+                },
+                "p3":{
+                    "text":"Policies can also be defined on resource groups. For example, your application might group photos into Albums, and create a policy that applies to all photos in the Album. We provide an example of this at the end of this tutorial.",
+                    "note":"Paragraph text for a tutorial step."
+                }
+            }
+        },
+        "abacPt1":{
+            "label":{
+                "text":"Attribute-based conditions",
+                "note":"Label text for a tutorial step"
+            },
+            "header":{
+                "text":"Attribute-based access control (part 1)",
+                "note":"Title text for a tutorial step"
+            },
+            "prePolicy":{
+                "p1":{
+                    "text":"The policy below permits any principal to view any resource, but only on the condition that the accessLevel for the resource is designated as public. It permits any principal to view any photo, but only on the condition that the resource is tagged as public and the location of the principal is equal to \"USA\".",
+                    "note":"Paragraph text for a tutorial step."
+                }
+            },
+            "postPolicy":{
+                "p1":{
+                    "text":"Similar to what we saw with groups, the evaluation engine needs to be told the value of the resource attribute called {accessLevel}, in order to be able to evaluate requests by considering this policy. This information needs to be passed by your application, as part of the authorization request using the {entities} request attribute.",
+                    "note":"Paragraph text for a tutorial step. Do not translate {accessLevel} or {entities}."
+                }
+            },
+            "postCode":{
+                "list1":{
+                    "header":{
+                        "text":"Experiment by modifying the policy to try out these  other operators:",
+                        "note":"Paragraph text for the top of a list in a tutorial step."
+                    },
+                    "p1":{
+                        "text":"logical or",
+                        "note":"Bullet text for a tutorial step bulletpoint list. 'logical or' refers to 'or' specifically as the boolean operator."
+                    },
+                    "p2":{
+                        "text":"not equal to",
+                        "note":"Bullet text for a tutorial step bulletpoint list."
+                    }
+                },
+                "list2":{
+                    "header":{
+                        "text":"The example above uses an attribute of type {String}. Cedar can also support the following types:",
+                        "note":"Paragraph text for the top of a list in a tutorial step. Do not translate {String}."
+                    },
+                    "p1":{
+                        "text":"Boolean",
+                        "note":"Bullet text for a tutorial step bulletpoint list."
+                    },
+                    "p2":{
+                        "text":"Integer",
+                        "note":"Bullet text for a tutorial step bulletpoint list."
+                    },
+                    "p3":{
+                        "text":"Entity ID: eg. {exampleId}",
+                        "note":"Bullet text for a tutorial step bulletpoint list. Do not translate {exampleId}."
+                    },
+                    "p4":{
+                        "text":"Sets: collections of values, expressed with []",
+                        "note":"Bullet text for a tutorial step bulletpoint list."
+                    }
+                }
+            }
+        },
+        "abacPt2":{
+            "label":{
+                "text":"Attribute-based conditions (pt. 2)",
+                "note":"Label text for a tutorial step."
+            },
+            "header":{
+                "text":"Attribute-based access control (part 2)",
+                "note":"Title text for a tutorial step"
+            },
+            "prePolicy":{
+                "p1":{
+                    "text":"In prior examples our conditions have all been evaluated against static values. Cedar also lets you define conditions that compare the values of different attributes. The example policy below permits any principal to view, edit or delete, any resource, with the condition that the resource owner is the principal.",
+                    "note":"Paragraph text for a tutorial step."
+                }
+            },
+            "postPolicy":{
+                "p1":{
+                    "text":"Note that in this case the resource VacationPhoto94.jpg is described in {entities} as having an attribute of type String called Owner with a value of \"alice\". The policy compares this attribute to ID of the principal, which is also a string with the value \"alice\".",
+                    "note":"Paragraph text for a tutorial step. Do not translate {entities}."
+                }
+            },
+            "postCode":{
+                "p1":{
+                    "text":"The authorization request in the above example also defines values for the attribute {dept} for both the resource and the principal. Try adding an additional condition to the policy based on this attribute.",
+                    "note":"Paragraph text for a tutorial step. Do not translate {dept}."
+                }
+            }
+        },
+        "context":{
+            "label":{
+                "text":"Conditions and context",
+                "note":"Label text for a tutorial step"
+            },
+            "prePolicy":{
+                "p1":{
+                    "text":"In the examples so far we’ve examined policies based on attributes of the principal and/or the resource. But what if you wanted to write a policy that takes takes into account variables that are unrelated to either the principal or the resource? Cedar provides a way for you to do this, using the Context record. Context enables you to pass additional data into the authorization request, which can be referenced in policy conditions.",
+                    "note":"Paragraph text for a tutorial step."
+                },
+                "p2":{
+                    "text":"Examples of context data you might use are OpenID claims in a JWT or anything else that is only known at the time of the incoming request and not necessarily stored in your database.",
+                    "note":"Paragraph text for a tutorial step."
+                },
+                "p3":{
+                    "text":"The policy below permits a User called Alice to update and delete a photo called VacationPhoto94.jpg, but only on the condition that she has authenticated using multi-factor authentication and is accessing the application from a specific IP address.",
+                    "note":"Paragraph text for a tutorial step."
+                }
+            },
+            "postPolicy":{
+                "p1":{
+                    "text":"To enable the Cedar evaluation engine to make the authorization decision, we need to supply context values as part of the request. These context values might come from http headers, a signed and verified JWT payload, path parameters, query strings, etc. When using context values, it’s important to remember to structure your policies in such a way that end users cannot spoof the context values. For instance, a good way to ensure a user identity can’t be spoofed is obtaining the user ID from a signed JWT payload.",
+                    "note":"Paragraph text for a tutorial step."
+                }
+            },
+            "postCode":{
+                "p1":{
+                    "text":"Experiment with context by changing the policy so that it uses the {oidc_scope} property instead.",
+                    "note":"Paragraph text for a tutorial step. Do not translate {oidc_scope}."
+                },
+                "p2":{
+                    "text":"The {context} and {entities} parameters of the request are different. The {entities} parameter enables the calling application to provide data about the resource and principal, such as attribute values and group membership. Context provides a mechanism for you to write policies that consider other data beyond that of the principal and resource.",
+                    "note":"Paragraph text for a tutorial step. Do not translate {context} or {entities} (appears twice)."
+                }
+            }
+        },
+        "evaluate":{
+            "text":"Evaluate",
+            "note":"Button text for the tutorial step evaluate button(StaticIsAuthorizedRequestWidget)"
+        },
+        "nextStepButton":{
+            "text":"Next step",
+            "note":"Button text for the tutorial next step button"
+        },
+        "finishButton":{
+            "text":"Finish Tutorial",
+            "note":"Button text for the tutorial button to finish and go to the playground"
+        },
+        "previousStepButton":{
+            "text":"Previous step",
+            "note":"Button text for the tutorial previous step button"
+        },
+        "moreResources": {
+            "text":"More resources:",
+            "note":"List header for further reading section"
+        }
+    },
+    "aceError":{
+        "loadError":{
+            "text":"Error loading Ace editor",
+            "note":"Error message shown when Ace fails to load and initialize"
+        }
+    },
+    "issueAuthRequest":{
+        "entities":{
+            "text":"entities",
+            "note":"Text for the Cedar entities being parsed at the start of an isAuthorized call."
+        },
+        "context":{
+            "text":"context",
+            "note":"Text for the Cedar context being parsed at the start of an isAuthorized call."
+        },
+        "parseError":{
+            "text":"Invalid context or entities input, could not make authorization call.",
+            "note":"Error text when the entities or context fail to parse. "
+        }
+    },
+    "waterfordRust":{
+        "noCedarError":{
+            "text":"Cedar language library has not been initialized.",
+            "note":"Error message for when WASM isn't initialized yet."
+        },
+        "browserIncompatibleError":{
+            "text":"We're sorry. Cedar functionality not supported in this browser.",
+            "note":"Error message for when WASM fails to initialize."
+        },
+        "isAuth":{
+            "cedarError":{
+                "text":"Error loading Cedar Language Library. Please reload page. If problem persists, your browser may not be supported.",
+                "note":""
+            },
+            "internalError":{
+                "text":"An internal error occurred.",
+                "note":"Generic internal error message."
+            },
+            "noResult":{
+                "text":"Unexpected shape returned from wasm: should have a \"result\" property.",
+                "note":"Error message when there's no result to parse from isAuthorized."
+            },
+            "allowAuth":{
+                "text":"Authorization decision: allow.",
+                "note":"Authorization outcome text"
+            },
+            "denyAuth":{
+                "text":"Authorization denied.",
+                "note":"Authorization outcome text"
+            },
+            "parseError":{
+                "text":"An error occured when parsing the result.",
+                "note":"Error message for when the JSON parse of the result errors."
+            }
+        },
+        "schema": {
+            "parseError": {
+                "text":"Policy semantic validation failed due to invalid schema JSON",
+                "note":"Error message for when the invalid JSON schema is passed in to parse"
+            },
+            "validationError": {
+                "text":"Error validating policy semantics against schema",
+                "note":"Error message for when the schema is valid JSON, but not valid semanticly"
+            }
+        },
+        "validate":{
+            "policyTemplateForbidden":{
+                "text":"Policy templates are not allowed in this context.",
+                "note":"Validation error text for when the wrong kind of policy is given"
+            },
+            "inlinePolicyForbidden":{
+                "text":"Inline Policies are not allowed in this context.",
+                "note":"Validation error text for when the wrong kind of policy is given"
+            },
+            "success":{
+                "text":"Policy validation result: success.",
+                "note":"Policy validation outcome text"
+            },
+            "failure":{
+                "text":"Policy validation result: error",
+                "note":"Policy validation outcome text"
+            }
+        },
+        "parse": {
+            "invalid": "Policy syntax is invalid"
+        }
+    },
+    "playground":{
+        "title":{
+            "text":"Playground",
+            "note":"Title text for the playground"
+        },
+        "cedarVersion":{
+            "text":"Cedar v",
+            "note":"Subtitle text to show the version of Cedar in use by WASM, where 'v' is the shortening of 'version'."
+        },
+        "description": {
+            "text": "This page has three examples for how Cedar policies can be used to describe and authorize an application’s permissions. The first is a photo-sharing application where Cedar policies determine which users can view particular photos. The second is a Healthcare application where Cedar policies determine who can make, document, and update healthcare appointments, based on their role and attributes. The third is an example authorizing Kubernetes requests.",
+            "note": "Explanatory text for the playground"
+        },
+        "appLabel":{
+            "text":"Sample application",
+            "note":"Select component label"
+        },
+        "queryLabel":{
+            "text":"Example authorization request",
+            "note":"Select component label"
+        },
+        "copyLink":{
+            "button":{
+                "text":"Copy inputs as shareable link",
+                "note":"Button text"
+            },
+            "success":{
+                "text":"Link copied to clipboard.",
+                "note":"Popover result text"
+            },
+            "error":{
+                "text":"Could not copy shareable link: ",
+                "note":"Popover result text"
+            },
+            "clipboardFailed":{
+                "text":"Copying to clipboard failed.",
+                "note":"Error text"
+            }
+        },
+        "apps":{
+            "photoFlash":{
+                "text":"Photo Sharing App",
+                "note":"Label text for a policy playground sample app."
+            },
+            "healthCare":{
+                "text":"Health Care App",
+                "note":"Label text for a policy playground sample app."
+            },
+            "kubernetes": {
+                "text": "Kubernetes Authorization",
+                "note": "Label text for a policy playground sample app."
+            },
+            "jitna": {
+                "text": "JITNA",
+                "note": "Abbreviation for 'Just in Time Node Access'"
+            },
+            "selectedAriaLabel":{
+                "text":"Selected",
+                "note":"Aria label for the selected sample app"
+            }
+        },
+        "evaluateButton":{
+          "text":"Evaluate",
+          "note":"Button text for the submit button, which evaluates the user input and returns an authorization decision."
+        },
+        "schemaAndPolicies":{
+            "tabLabel":{
+                "text":"Schema and policies",
+                "note":"Header text that sits above where policy and entities are defined."
+            },
+            "headerPolicies":{
+                "text":"Policies",
+                "note":"Header text that sits above where policies are defined."
+            },
+            "descriptionPolicies":{
+                "text":"Define the Cedar policies that will be considered for authorization",
+                "note":"Description for the policy and entities definition"
+            },
+            "validateButton":{
+                "text":"Validate",
+                "note":"Button text for the validate button."
+            },
+            "headerSchema":{
+                "text":"Schema",
+                "note":"Header text that sits above where Schema is defined."
+            },
+            "descriptionSchema":{
+                "text":"Define the schema that describes the types available in your policies",
+                "note":"Description for the schema definition section"
+            }
+        },
+        "query":{
+            "header":{
+                "text":"Authorization request",
+                "note":"Header text for the query section, where users configure the query that is being evaluated."
+            },
+            "description":{
+                "text":"Configure the test case for authorization",
+                "note":"Description text for the query section, where users configure the query that is being evaluated."
+            },
+            "entityType":{
+                "text":"Entity type",
+                "note":"Input placeholder text"
+            },
+            "entityId":{
+                "text":"Entity ID",
+                "note":"Input placeholder text"
+            },
+            "actionType":{
+                "text":"Action type",
+                "note":"Input placeholder text"
+            },
+            "actionId":{
+                "text":"Action ID",
+                "note":"Input placeholder text"
+            },
+            "principal":{
+                "label":{
+                    "text":"Principal",
+                    "note":"Label text for the principal form entry on the query."
+                },
+                "description":{
+                    "text":"The principal making a request to your service",
+                    "note":"Description text for the principal form entry on the query."
+                }
+            },
+            "action":{
+                "label":{
+                    "text":"Action",
+                    "note":"Label text for the action form input."
+                },
+                "description":{
+                    "text":"The action that the principal is attempting",
+                    "note":"Description text for the action form entry on the query."
+                }
+            },
+            "resource":{
+                "label":{
+                    "text":"Resource",
+                    "note":"Label text for the resource form input."
+                },
+                "description":{
+                    "text":"The resource that the request is acting on",
+                    "note":"Description text for the resource form entry on the query."
+                }
+            },
+            "context":{
+                "label":{
+                    "body":{
+                        "text":"Context {optional}",
+                        "note":"Part of the label text for the optional context form entry. Do not translate {optional}."
+                    },
+                    "italic":{
+                        "text":"- optional",
+                        "note":"A separate italic part of the optional context form entry."
+                    }
+                },
+                "description":{
+                    "text":"Additional context data",
+                    "note":"Description text for the optional context form entry on the query."
+                }
+            },
+            "entities":{
+                "label":{
+                    "text":"Entities",
+                    "note":"Label text for the entities form input."
+                },
+                "description":{
+                    "text":"Input the slice of entities to evaluate the policy against",
+                    "note":"Description text for the entity slice input in the definition section."
+                },
+                "avpFormat":{
+                    "text":"Amazon Verified Permissions format",
+                    "note":"Text for the toggle to change entities to AVP format"
+                }
+            }
+        },
+        "avpCallout":{
+            "text":"You can also try this with {avp}.",
+            "note":"Description paragraph text."
+        }
+    },
+    "entityHelpers":{
+        "conversion":{
+            "entityJsonError":{
+                "text":"JSON conversion error (Entities)",
+                "note":"Error text for the simplified/AVP format entity conversion helpers"
+            },
+            "contextJsonError":{
+                "text":"JSON conversion error (Context)",
+                "note":"Error text for the simplified/AVP format entity conversion helpers"
+            },
+            "entityError":{
+                "text":"Error in entities field",
+                "note":"Error text for the simplified/AVP format entity conversion helpers"
+            },
+            "contextError":{
+                "text":"Error in context field",
+                "note":"Error text for the simplified/AVP format entity conversion helpers"
+            }
+        }
+    },
+    "avaPlayground":{
+        "testCases":{
+            "basicIdentity":{
+                "text":"Create policies using identity attributes",
+                "note":"Label text for an AVA policy playground test case."
+            },
+            "basicIdentity2":{
+                "text":"Create policies using identity attributes with additional conditions",
+                "note":"Label text for an AVA policy playground test case."
+            },
+            "crowdStrike":{
+                "text":"Using Crowdstrike",
+                "note":"Label text for an AVA policy playground test case."
+            },
+            "ipAddress":{
+                "text":"Allow based on IP address",
+                "note":"Label text for an AVA policy playground test case."
+            }
+        },
+        "title":{
+            "text":"Permissions Playground for AWS Verified Access",
+            "note":"Title text for the AVA policy playground."
+        },
+        "serviceLink":{
+            "text":"AWS Verified Access",
+            "note":"Link text for the AVA service."
+        },
+        "description":{
+            "text":"Use this permissions playground to experiment with evaluation of {serviceLink} permission policies.",
+            "note":"Description text for the AVA policy playground. Do not translate {serviceLink}."
+        },
+        "evaluateButton":{
+            "text":"Evaluate",
+            "note":"Button text for the submit button, which evaluates the user input and returns an authorization decision."
+        },
+        "cedarVersion":{
+            "text":"Cedar v",
+            "note":"Subtitle text to show the version of Cedar in use by WASM, where 'v' is the shortening of 'version'."
+        },
+        "policy":{
+            "header":{
+                "text":"Permission Policy",
+                "note":"Header text for the policy input"
+            },
+            "label":{
+                "text":"Policy",
+                "note":"Label text for the policy input"
+            }
+        },
+        "context":{
+            "header":{
+                "text":"Authorization Context",
+                "note":"Header text for the context input"
+            },
+            "description":{
+                "text":"Configure the test case for authorization",
+                "note":"Description text for the context input"
+            }
+        }
+    },
+    "integrations":{
+        "title":{
+            "text":"Integrations",
+            "note":"Title heading text"
+        },
+        "description":{
+            "text":"How are people using Cedar in production today? Check out the products and services below to find out.",
+            "note":"Description under the title header"
+        },
+        "verifiedAccess":{
+            "header":{
+                "text":"AWS Verified Access",
+                "note":"Header text for the page section"
+            },
+            "body":{
+                "text":"AWS Verified Access validates each and every application request before granting access. Verified Access removes the need for a VPN, which simplifies the remote connectivity experience for end users and reduces the management complexity for IT administrators.",
+                "note":"Body text for the page section"
+            }
+        },
+        "verifiedPermissions":{
+            "header":{
+                "text":"Amazon Verified Permissions",
+                "note":"Header text for the page section"
+            },
+            "body2":{
+                "text":"Amazon Verified Permissions is a fully managed service for storing and evaluating Cedar policies. Developers can build applications that use Verified Permissions to authorize each user action.",
+                "note":"Body text for the page section"
+            }
+        },
+        "PermitIO":{
+            "header":{
+                "text":"Permit.io",
+                "note":"Header text for the Permit.io section"
+            },
+            "body":{
+                "text":"Permit.io provides access to Cedar as a SaaS service, as well as via OPAL its open-source project. A key enabler for this is Cedar-agent, an open-source project which provides the ability to run Cedar as a standalone agent.",
+                "note":"Body text for the Permit.io section"
+            }
+        },
+        "kubernetes":{
+            "header":{
+                "text":"Kubernetes",
+                "note":"Header text for a section"
+            },
+            "body":{
+                "text":"Using Cedar access controls for Kubernetes, cluster administrators can dynamically create authorization policies that support features like request or user attribute based rules, label-based access controls, conditions, and denial policies.",
+                "note":"Body text for a section"
+            }
+        },
+        "commonFateIo":{
+            "header":{
+                "text":"Commonfate.io",
+                "note":"Header text for a section"
+            },
+            "body":{
+                "text":"Common Fate provides fast and secure access workflows for cloud infrastructure, data warehouses, identity providers and more. Define Cedar policies in Common Fate to authorize access across multiple cloud providers and integrations.",
+                "note":"Body text for a section"
+            }
+        },
+        "strongDM":{
+            "header":{
+                "text":"StrongDM",
+                "note":"Header text for a section"
+            },
+            "body":{
+                "text":"StrongDM is a universal zero trust access platform, providing seamless connectivity, control, and compliance for cloud-native, hybrid, and multi-cloud infrastructure and applications. StrongDM uses Cedar to authorize fine-grained actions across critical infrastructure protocols, including HTTP requests, Kubernetes, interactive shells, and database queries.",
+                "note":"Body text for a section"
+            }
+        },
+        "janssen":{
+            "header":{
+                "text":"Janssen Project Cedarling",
+                "note":"Header text for a section"
+            },
+            "body":{
+                "text":"The Cedarling is an embeddable Policy Decision Point (PDP) that handles logging, JWT validation, and claim mapping. Whether running via the sidecar, WASM or SDK, the Cedarling enables developers to harness the power of the Rust Cedar engine to implement low-latency access control.",
+                "note":"Body text for a section"
+            }
+        },
+        "learnMore":{
+            "text":"Learn more",
+            "note":"Link text for the external learn more link."
+        }
+    },
+    "learn":{
+        "title2":{
+            "text":"Learn Cedar",
+            "note":"Title heading text"
+        },
+        "description":{
+            "text":"We’ve designed Cedar so that it’s human-readable and easy to learn. Check out the resources below to learn more.",
+            "note":"Description under the title header"
+        },
+        "tutorial":{
+            "header":{
+                "text":"Tutorial",
+                "note":"Header text for the page section"
+            },
+            "body":{
+                "text":"This tutorial provides an introduction to the Cedar policy language. On completion of this tutorial you will be ready to start writing Cedar policies, and understand how those policies will be evaluated for an authorization request.",
+                "note":"Body text for the page section"
+            },
+            "button":{
+                "text":"Open tutorial",
+                "note":"Link text for the external learn more link."
+            }
+        },
+        "cedarGuide":{
+            "header":{
+                "text":"Cedar Language Guide",
+                "note":"Header text for the page section"
+            },
+            "body":{
+                "text":"This guide describes how Cedar uses the schema and policies to provide authorization for your applications. It teaches you how to write policies and create schema using the Cedar policy language.",
+                "note":"Body text for the page section"
+            },
+            "button":{
+                "text":"Learn more",
+                "note":"Link text for the external learn more link."
+            }
+        },
+        "estimatedTime": {
+            "text":"Estimated time:",
+            "note":"Time estimate for learning path item."
+        },
+        "oneHour":{
+            "text": "1 hour",
+            "note":"Time estimate"
+        },
+        "oneMinute":{
+            "text": "1 minute",
+            "note":"Time estimate"
+        },
+        "hours": {
+            "text": "{num} hours",
+            "note":"Time estimate"
+        },
+        "minutes":{
+            "text": "{num} minutes",
+            "note":"Time estimate"
+        },
+        "gettingStarted":{
+            "title":{
+                "text":"1. Getting started",
+                "note":"Section title"
+            },
+            "description": {
+                "text":"Learn what Cedar is, why it was created, and the basic constructs to be able to create, evaluate and validate policies.",
+                "note":"Section description"
+            },
+            "theBasics": {
+                "title":{
+                    "text":"Cedar 101 - The basics",
+                    "note":"Subsection title"
+                },
+                "introVideo":{
+                    "title":{
+                        "text":"Watch a short video clip introducing Cedar (from 1:31 to 10:13)",
+                        "note":"Link text"
+                    },
+                    "description":{
+                        "text":"This video clip introduces Cedar and explains why we built it.",
+                        "note":"Link description"
+                    }
+                },
+                "keyTerms":{
+                    "title":{
+                        "text":"Learn the key terms",
+                        "note":"Link header text"
+                    },
+                    "description":{
+                        "text":"Read the descriptions for the following key terms in the documentation:",
+                        "note":"Link description"
+                    },
+                    "authorization":{
+                        "text":"Authorization",
+                        "note":"Key term link text"
+                    },
+                    "policy":{
+                        "text":"Policy",
+                        "note":"Key term link text"
+                    },
+                    "evaluation":{
+                        "text":"Evaluation",
+                        "note":"Key term link text"
+                    }
+                },
+                "cedarTutorial":{
+                    "title":{
+                        "text":"Go through the Cedar Tutorial",
+                        "note":"Link text"
+                    },
+                    "description":{
+                        "text":"Complete the interactive Cedar tutorial to see examples of policies and demonstrate the key constructs of the language.",
+                        "note":"Link description"
+                    }
+                }
+            }
+        },
+        "cedarInAction":{
+            "title":{
+                "text":"2. Cedar in action",
+                "note":"Section title"
+            },
+            "cedarCli":{
+                "title":{
+                    "text":"Cedar 201 - The Cedar CLI",
+                    "note":"Subsection title"
+                },
+                "demoVideo":{
+                    "title":{
+                        "text":"Watch Mike Hicks demonstrate the Cedar CLI tool",
+                        "note":"Link text"
+                    },
+                    "description":{
+                        "text":"Mike demonstrates how to create and evaluate policies using the Cedar CLI tool for the TinyToDo app.",
+                        "note":"Link description"
+                    }
+                },
+                "demoBlog":{
+                    "title":{
+                        "text":"TinyToDo demo app blog post",
+                        "note":"Link text"
+                    },
+                    "description":{
+                        "text":"See also this blog from Mike, which walks you through the TinyToDo app that he demos in the above video.",
+                        "note":"Link description"
+                    }
+                }
+            },
+            "customerStories":{
+                "title":{
+                    "text":"Cedar 202 - Customer stories",
+                    "note":"Subsection title"
+                },
+                "fis":{
+                    "title":{
+                        "text":"Watch Fidelity Information Services demonstrate how they use Cedar",
+                        "note":"Link text"
+                    },
+                    "description":{
+                        "text":"Ana from FIS demonstrates how their Prophet application uses Cedar policies to define and role based permissions that are constrained by attribute based conditions.",
+                        "note":"Link description"
+                    }
+                },
+                "strongDm":{
+                    "title":{
+                        "text":"Watch StrongDM demonstrate how they use Cedar",
+                        "note":"Link text"
+                    },
+                    "description":{
+                        "text":"Justin from StrongDM explains why they chose Cedar and how they use it for data level access.",
+                        "note":"Link description"
+                    }
+                },
+                "twilio":{
+                    "title":{
+                        "text":"Listen to Twilio talk about how they use Cedar",
+                        "note":"Link text"
+                    },
+                    "description":{
+                        "text":"Hear Peter from Twilio explain why they chose a policy based authorization system over a graph based system.",
+                        "note":"Link description"
+                    }
+                }
+            }
+        },
+        "diveDeeper":{
+            "title":{
+                "text":"3. Dive deeper",
+                "note":"Section title"
+            },
+            "authorization":{
+                "title":{
+                    "text":"Cedar 301 - Anatomy of an authorization request",
+                    "note":"Subsection title"
+                },
+                "requestDocs":{
+                    "text":"Documentation on constructing an authorization request",
+                    "note":"Link text"
+                },
+                "entitiesDocs":{
+                    "text":"Documentation on entity data and context",
+                    "note":"Link text"
+                },
+                "cedarWorkshop":{
+                    "title":{
+                        "text":"Do the Cedar workshop",
+                        "note":"Link text"
+                    },
+                    "description":{
+                        "text":"The first section of the workshop will serve as a refresher for some of the content already covered. The sections on 'Entity Sets' and 'Attributes' get into more depth on how to use and pass entity data within your authorization model.",
+                        "note":"Link description"
+                    }
+                },
+                "entitiesVideo":{
+                    "title":{
+                        "text":"Watch the Cedarcraft video on Enriching Cedar Policies and the Need for Validation",
+                        "note":"Link text"
+                    },
+                    "description":{
+                        "text":"This video covers how to handle entity data in Cedar.",
+                        "note":"Link description"
+                    }
+                }
+            },
+            "designPatterns":{
+                "title":{
+                    "text":"Cedar 302 - Policy design patterns",
+                    "note":"Subsection title"
+                },
+                "guidance":{
+                    "title":{
+                        "text":"Read guidance on Cedar policy design patterns",
+                        "note":"Link text"
+                    },
+                    "description":{
+                        "text":"Read the design patterns section in the Cedar documentation to learn how Cedar can be used to implement Role Based Access Control (RBAC) and Relationship based Access Control (ReBAC).",
+                        "note":"Link description"
+                    }
+                }
+            },
+            "whyAwsMadeCedar":{
+                "title":{
+                    "text":"Cedar 303 - Learn why AWS created Cedar, and how we went about it",
+                    "note":"Subsection title"
+                },
+                "leanTogether":{
+                    "title":{
+                        "text":"Lean Together 2024: Emina Torlak, Cedar",
+                        "note":"Link text"
+                    },
+                    "description":{
+                        "text":"Emina, one of the originators of Cedar, explains why and how AWS set about creating Cedar.",
+                        "note":"Link description"
+                    }
+                },
+                "blog":{
+                    "title":{
+                        "text":"How we built Cedar with automated reasoning and differential testing",
+                        "note":"Link text"
+                    },
+                    "description":{
+                        "text":"Mike, another Cedar creator, explains how we use automated reasoning to prove important correctness properties about formal models of Cedar's components, and then differential random testing to show that the models match the production code.",
+                        "note":"Link description"
+                    }
+                }
+            },
+            "policyAnalysis":{
+                "title":{
+                    "text":"Cedar 304 - Policy Analysis",
+                    "note":"Subsection title"
+                },
+                "blog":{
+                    "title":{
+                        "text":"What's Analyzable",
+                        "note":"Link text"
+                    },
+                    "description":{
+                        "text":"Read the blog explaining why a core tenet of Cedar is its analyzability.",
+                        "note":"Link description"
+                    }
+                }
+            },
+            "securityByDesign":{
+                "title":{
+                    "text":"Cedar 305 - Security by design",
+                    "note":"Subsection title"
+                },
+                "securityReport":{
+                    "title":{
+                        "text":"Comparative Language Security Assessment",
+                        "note":"Link text"
+                    },
+                    "description":{
+                        "text":"A report from security advisors Trail of Bits providing a comparison of the Cedar, Rego and OpenFGA languages.",
+                        "note":"Link description"
+                    }
+                }
+            },
+            "oopsla":{
+                "title":{
+                    "text":"Cedar 306 - OOPSLA article on Cedar",
+                    "note":"Subsection title"
+                },
+                "article":{
+                    "title":{
+                        "text":"Cedar: A New Language for Expressive, Fast, Safe, and Analyzable Authorization",
+                        "note":"Link text"
+                    },
+                    "description":{
+                        "text":"The article compares Cedar to two open-source languages, OpenFGA and Rego, and finds (subjectively) that Cedar has equally or more readable policies, but (objectively) performs far better.",
+                        "note":"Link description"
+                    }
+                }
+            },
+            "partialEvaluation":{
+                "title":{
+                    "text":"Cedar 307 - Introducing Partial Evaluation",
+                    "note":"Subsection title"
+                },
+                "cedarBlog":{
+                    "title":{
+                        "text":"A Quick Guide To Partial Evaluation",
+                        "note":"Link text"
+                    },
+                    "description":{
+                        "text":"Read the blog explaining how to use the experimental feature Partial Evaluation to construct data queries. Note that this is currently an experimental feature and should not be used in production.",
+                        "note":"Link description"
+                    }
+                }
+            }
+        },
+        "getHandsOn":{
+            "title":{
+                "text":"4. Get hands on",
+                "note":"Section title"
+            },
+            "github":{
+                "title":{
+                    "text":"Cedar 401 - Cedar on GitHub",
+                    "note":"Subsection title"
+                },
+                "cedarPolicy":{
+                    "title":{
+                        "text":"The Cedar GitHub Repository",
+                        "note":"Link text"
+                    },
+                    "description":{
+                        "text":"Visit the Cedar GitHub repo, download the SDK and start building. Review and comment on RFCs and submit pull requests.",
+                        "note":"Link description"
+                    }
+                }
+            }
+        }
+    },
+    "general":{
+        "namespace":{
+            "text":"Namespace",
+            "note":"Title for namespace explanantion in schema tutorial."
+        },
+        "schema":{
+            "text":"Schema",
+            "note":"Title for Schema in schema tutorial."
+        },
+        "cedar":{
+            "text":"Cedar",
+            "note":"Title for Cedar in schema tutorial."
+        }
+    },
+    "introducingAvp":{
+        "header": {
+            "text":"Introducing Amazon Verified Permissions",
+            "note":"Page header text"
+        },
+        "description": {
+            "openSource":{
+                "text":"Note: The Cedar SDK is open source, which means you don't need to use Amazon Verified Permissions. Think of Amazon Verified Permissions as a tool to help you work with the Cedar SDK effectively.",
+                "note":"Page description text"
+            },
+            "serviceInfo":{
+                "text":"Amazon Verified Permissions is a fully managed service for storing and evaluating Cedar policies. Developers can build applications that use Verified Permissions to authorize each user action.",
+                "note":"Page description text"
+            }
+        },
+        "whyUseAvp":{
+            "title":{
+                "text":"Why would I use Amazon Verified Permissions?",
+                "note":"Page section title text"
+            },
+            "secureStorage":{
+                "text":"A secure place to store and manage Cedar schemas and policies.",
+                "note":"Paragraph text"
+            },
+            "console":{
+                "text":"Console wizards that help you build your Cedar schema and connect to different Identity Providers.",
+                "note":"Paragraph text"
+            },
+            "protectedApis":{
+                "text":"Protected APIs, so that only authorized parties can access and change policies.",
+                "note":"Paragraph text"
+            },
+            "resilientService":{
+                "text":"A resilient authorization service that scales to thousands of requests per second across multiple regions.",
+                "note":"Paragraph text"
+            },
+            "authzInCloudtrail":{
+                "text":"All authorization requests are logged in AWS CloudTrail, providing a complete record of who accessed what.",
+                "note":"Paragraph text"
+            },
+            "managementInCloudtrail":{
+                "text":"All management operations are logged in AWS CloudTrail, so you know who granted access and when.",
+                "note":"Paragraph text"
+            }
+        },
+        "howToGetStarted":{
+            "title":{
+                "text":"How do I get started?",
+                "note":"Page section title text"
+            },
+            "setupAccount":{
+                "body":{
+                    "text":"Amazon Verified Permissions is an AWS service, which means you need an AWS account to use it. If you don't have an account, you can sign up {here}, and try out Verified Permissions.",
+                    "note":"Paragraph text"
+                },
+                "here":{
+                    "text":"here",
+                    "note":"link text"
+                }
+            },
+            "startAvp":{
+                "body":{
+                    "text":"Once you have an account set up, {followSteps}.",
+                    "note":"Paragraph text"
+                },
+                "followSteps":{
+                    "text":"follow these steps to create your first policy store",
+                    "note":"Link text"
+                }
+            }
+        }
+    },
+    "gettingStartedAvp":{
+        "header": {
+            "text":"Getting started with Amazon Verified Permissions",
+            "note":"Page header text"
+        },
+        "sampleScreenshot": {
+            "text":"Sample screenshot",
+            "note":"Expandable section title text"
+        },
+        "createPolicyStore":{
+            "title":{
+                "text":"Create your first policy store",
+                "note":"Page section title text"
+            },
+            "signIn":{
+                "body":{
+                    "text":"Sign in to the AWS console and navigate to the {avpPage}.",
+                    "note":"Paragraph text"
+                },
+                "avpPage":{
+                    "text":"Amazon Verified Permissions page",
+                    "note":"Link text"
+                }
+            },
+            "startWizard":{
+                "text":"Click 'Get started with Verified Permissions', and then click 'Create policy store'.",
+                "note":"Paragraph text"
+            },
+            "makeSamplePStore":{
+                "text":"Select 'Start from a sample policy store', choose ''{PhotoFlash}'', and click 'Create policy store'. Once creation finishes, click 'Go to overview' at the top of the screen.",
+                "note":"Paragraph text"
+            },
+            "navToCreatePolicy":{
+                "text":"Select 'Policies' from the sidebar menu on the left. Click on 'Create policy', and choose 'Create static policy'.",
+                "note":"Paragraph text"
+            },
+            "policyScope":{
+                "text":"Define the policy scope as:",
+                "note":"Paragraph text"
+            },
+            "principal":{
+                "text":"Specific principal, type = ''{type}'', identifier = ''{id}''.",
+                "note":"Paragraph text"
+            },
+            "resource":{
+                "text":"Specific resource, type = ''{type}'', identifier = ''{id}''.",
+                "note":"Paragraph text"
+            },
+            "action":{
+                "text":"Specific set of actions, check ''{action}''.",
+                "note":"Paragraph text"
+            },
+            "finishPolicyCreation":{
+                "text":"Click 'Next' at the bottom of the page. Add a policy description (optional) and click 'Create Policy'.",
+                "note":"Paragraph text"
+            }
+        },
+        "testPolicyStore":{
+            "title":{
+                "text":"Test your policy store",
+                "note":"Page section title text"
+            },
+            "navToTestBench":{
+                "text":"Select 'Test bench' from the sidebar menu on the left.",
+                "note":"Paragraph text"
+            },
+            "authzRequest":{
+                "text":"Define the authorization request as:",
+                "note":"Paragraph text"
+            },
+            "principal":{
+                "text":"Principal: type = ''{type}'', identifier = ''{id}'', Account: {account}",
+                "note":"Paragraph text"
+            },
+            "resource":{
+                "text":"Resource: type = ''{type}'', identifier = ''{id}''.",
+                "note":"Paragraph text"
+            },
+            "action":{
+                "text":"Action: ''{action}''.",
+                "note":"Paragraph text"
+            },
+            "runAuthorization":{
+                "text":"At the top of the page, click 'Run authorization request'.",
+                "note":"Paragraph text"
+            },
+            "expectedResult":{
+                "text":"Based on the policy you created, Verified Permissions should evaluate this request and return a decision of 'Allow' in a message bar at the top of the page.",
+                "note":"Paragraph text"
+            }
+        }
+    },
+    "common":{
+        "avp": {
+            "text":"Amazon Verified Permissions",
+            "note":"Link text of the name of the AVP service."
+        }
+    }
+}

@@ -1,0 +1,54 @@
+{
+  "env": {
+    "test": {
+      "presets": [
+        [
+          "@babel/preset-env",
+          {
+            "corejs": "3.6",
+            "useBuiltIns": "entry"
+          }
+        ],
+        "@babel/preset-react",
+        "@babel/preset-typescript"
+      ],
+      "plugins": [
+        "@babel/plugin-transform-modules-commonjs",
+        "babel-plugin-transform-import-meta"
+      ]
+    }
+  },
+  "presets": [
+    [
+      "@babel/preset-env",
+      {
+        "corejs": "3.6",
+        "useBuiltIns": "entry"
+      }
+    ],
+    "@babel/preset-react",
+    "@babel/preset-typescript"
+  ],
+  "plugins": [
+    [
+      "prismjs",
+      {
+        "languages": [
+          "javascript",
+          "css",
+          "markup",
+          "rust",
+          "shell",
+          "sql",
+          "json",
+          "toml"
+        ],
+        "plugins": [
+          "line-numbers"
+        ],
+        "theme": "default",
+        "css": true
+      }
+    ]
+  ]
+}

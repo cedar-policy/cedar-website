@@ -1,0 +1,13 @@
+.primary-action-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 1000;
+}
+
+.global-container {
+  position: relative;
+  .tabs-wrapper > * > div:nth-child(2) {
+    padding: 0 !important;
+  }
+}
