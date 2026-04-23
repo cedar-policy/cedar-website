@@ -1,0 +1,72 @@
+[
+  {
+    "route": "/blog/tpe",
+    "title": "Type-Aware Partial Evaluation of Cedar Policies",
+    "summary": "Cedar 4.6.0 brings a new capability called Type-Aware Partial Evaluation (TPE). TPE simplifies Cedar policies by incorporating known information about authorization inputs upfront. When you need to run many authorization checks that share common elements, like checking different permissions for the same user, TPE speeds up processing. Instead of evaluating the full policy set each time, it creates streamlined \"residual policies\" that  incorporate the known information. This optimization is particularly useful in scenarios like determining all resources a specific user can access, or all principals who can access a specific resource."
+  },
+  {
+    "route": "/blog/understanding-level-validation",
+    "title": "Understanding Level Validation and Entity Slicing",
+    "summary": "Cedar's Level Validation and Entity Slicing features (released in Cedar version 4.4) address a key challenge in efficiently using Cedar for authorization. To make an authorization request, a user of Cedar must provide data describing the entities relevant to the request and policies, but it's not always obvious what entities are required. Level validation helps you structure your policies in a way that makes this easy. Level based entity slicing then takes advantage of this structure to soundly select a slice of entity data sufficient for a particular request."
+  },
+  {
+    "route": "/blog/secure-expressjs-applications",
+    "title": "Secure your Express application APIs in 5 minutes with Cedar",
+    "summary": "Cedar has released authorization-for-expressjs, a new open source package that enables developers to quickly implement policy-based authorization in Express web applications. The package reduces integration code by 90% and allows developers to externalize authorization logic from application code. Using Cedar policies, developers can easily control API access based on user roles while simplifying security audits and maintenance."
+  },
+  {
+    "route": "/blog/cedar-analysis-mcp-tool",
+    "title": "Cedar Analysis MCP Tool: Verify and Analyze Cedar Authorization Policies",
+    "summary": "Today, we're excited to share a Cedar Analysis MCP tool that helps developers confidently create and modify Cedar authorization policies. Whether writing policies directly or using AI coding assistants to help author policies, teams need assurance that their policies work as intended. This MCP tool uses Cedar's recently launched Cedar Analysis capabilities to enhance the policy development process by checking policies and catching potential issues that might be overlooked. The tool can be used in tandem with AI coding assistants, providing an additional layer of verification to ensure policies generated or modified with AI help meet security and functionality requirements."
+  },
+  {
+    "route": "/blog/introducing-cedar-analysis",
+    "title": "Introducing Cedar Analysis: Open Source Tools for Verifying Authorization Policies",
+    "summary": "Today, we're excited to announce Cedar Analysis, a new open source toolkit for developers that makes it easier for everyone to verify the behavior of their Cedar policies. The toolkit provides powerful tools and automated reasoning capabilities to comprehensively analyze and validate authorization policies, ensuring they work as intended across all scenarios."
+  },
+  {
+    "route": "/blog/datetime-extension",
+    "title": "Working with the Datetime Extension",
+    "summary": "Date and time can be crucial factors in access control. Today, we're introducing the Cedar datetime extension, which allows users to write policy conditions based on date and/or time. For example, administrators could define policies that grant access to resources after a given date or during a specific time window. In this post, we'll walk you through the extension and explain how to use it."
+  },
+  {
+    "route": "/blog/the-case-for-less-expressiveness",
+    "title": "Less is more: The case for less expressiveness in authorization languages",
+    "summary": "When choosing an authorization policy language, one factor to consider is the expressiveness of the language. Certainly, the language must be expressive enough to model concepts like roles and attribute based conditions; but more is not always better.  This post examines the risks of trusting your application security to a language that is too expressive, and discusses how Cedar applies these lessons to maintain a high bar for security, readability, analyzability, and performance."
+  },
+  {
+    "route": "/blog/whats-analyzable",
+    "title": "What's Analyzable?",
+    "summary": "This blog post explains how Cedar is analyzable, and why this is important. Analyzability is a key design principle that distinguishes Cedar from other languages. It allows us to verify properties of Cedar policies through automated reasoning.  This provides users with strong guarantees about the correctness of their access control rules."
+  },
+  {
+    "route": "/blog/cedar-for-kubernetes",
+    "title": "Cedar access controls for Kubernetes",
+    "summary": "Today we are excited to announce a new open source project, Cedar access controls for Kubernetes. This project brings the power of Cedar to Kubernetes authorization and admission validation, showing how cluster administrators can enable a unified access control language for principals making API calls and giving policy authors a single language to write and reason about. With Cedar access controls for Kubernetes, administrators can dynamically create authorization policies that support features like request or user attribute based rules, label-based access controls, conditions, and denial policies."
+  },
+  {
+    "route": "/blog/design-patterns",
+    "title": "Cedar design patterns",
+    "summary": "Product Managers love announcing new code features, but we rarely get excited about new docs. So for all you hard working under-appreciated technical doc writers out there, this one’s for you. We just published an update to the Cedar docs that describe a set of patterns to help developers working with Cedar to design policies.  We explain how these patterns can be used to implement RBAC, ReBAC and ABAC."
+  },
+  {
+    "route": "/blog/validating-policies-with-github-actions",
+    "title": "Validating Cedar policies with GitHub Actions",
+    "summary": "Common Fate provides a secure, controlled way to grant on-call engineers access to AWS roles, based on permissions expressed as Cedar policies. Customers author those policies themselves and store them in GitHub. This blog describes a GitHub Action that can be used by anyone storing Cedar policies in GitHub to validate those policies against a Cedar schema."
+  },
+  {
+    "route": "/blog/introducing-cedarcraft",
+    "title": "Introducing Cedar Craft",
+    "summary": "Cedar Craft is a new video series that gets you started working with Cedar"
+  },
+  {
+    "route": "/blog/partial-evaluation",
+    "title": "A Quick Guide to Partial Evaluation",
+    "summary": "Partial evaluation exposes one key new function on the Authorizer struct: is_authorized_partial. Where is_authorized is guaranteed to always return either Allow or Deny, is_authorized_partial can return Allow, Deny, or a 'residual': the set of policies it was unable to evaluate. The residual policies are essentially constraints that represent Alice's set of viewable resources. This can be used to answer the question, \"what can Alice access?\""
+  },
+  {
+    "route": "/blog/compression",
+    "title": "How well do Cedar policies compress?",
+    "summary": "The answer, of course, is \"it depends\". The space savings ranged from 17% to 90%. This article describes the methodology and details and gives you a mental model about how much space you can save by compressing cedar policies."
+  }
+]
