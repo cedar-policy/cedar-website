@@ -27,6 +27,8 @@ jobs:
 
       - run: npm ci
       - run: npm run build
+        env:
+          NODE_OPTIONS: --loader ts-node/esm
 
       - uses: actions/upload-pages-artifact@v3
         with:
