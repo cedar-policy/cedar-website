@@ -147,6 +147,16 @@ const config = (env: any, args: any) => {
             }),
             ...main.plugins,
         ];
+    } else {
+        main.plugins = [
+            new HtmlWebpackPlugin({
+                template: path.resolve(__dirname, 'static', 'index.html'),
+                publicPath: '/',
+                inject: false,
+                filename: '404.html',
+            }),
+            ...main.plugins,
+        ];
     }
     return main;
 };
