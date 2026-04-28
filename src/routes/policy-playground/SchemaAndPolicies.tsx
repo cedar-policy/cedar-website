@@ -8,7 +8,7 @@ import {
 import CedarIntl from "../../components/CedarIntl";
 import DecisionAndValidationAlert from "../../components/DecisionAndValidationAlert";
 import { useTranslations } from "../../hooks/useTranslations";
-import { CedarPolicyEditor, CedarSchemaEditor } from "@cedar-policy/cedar-monaco-editor";
+import { CedarPolicyEditor, CedarJsonEditor } from "@cedar-policy/cedar-monaco-editor";
 import { checkParsePolicySet, validate } from "@cedar-policy/cedar-wasm";
 import {
   DecisionAndValidationOutputForUI,
@@ -116,8 +116,9 @@ export default function SchemaAndPolicies(props: SchemaAndPoliciesProps) {
           </Header>
         }
       >
-        <CedarSchemaEditor
+        <CedarJsonEditor
           value={props.schema}
+          mode={{ type: 'schema' }}
           onChange={(newSchema: string) => {
             setOutput(undefined);
             props.updateSchema(newSchema);
