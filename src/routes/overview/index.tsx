@@ -242,16 +242,7 @@ export default function Overview() {
                                 <CedarIntl
                                     id='overview.otherLinks.security.body'
                                     defaultMessage={'If you discover a potential security issue in this project we ' +
-                                    'ask that you notify AWS/Amazon Security via our {page} or directly via email to ' +
-                                    'aws-security@amazon.com.'}
-                                    values={{
-                                        page: <Link href='http://aws.amazon.com/security/vulnerability-reporting/' external>
-                                            <CedarIntl
-                                                id='overview.otherLinks.security.vulnerabilityPage'
-                                                defaultMessage='vulnerability reporting page'
-                                            />
-                                        </Link>,
-                                    }}
+                                        'ask that you notify us directly via e-mail to cedar-policy-security@lists.cncf.io.'}
                                 />
                             </p>
                         </div>

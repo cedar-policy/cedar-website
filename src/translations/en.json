@@ -214,13 +214,9 @@
                     "text":"Security questions",
                     "note":"Title text for a link to the reporting page."
                 },
-                "body":{
-                    "text":"If you discover a potential security issue in this project we  ask that you notify AWS/Amazon Security via our {page} or directly via email to aws-security@amazon.com.",
-                    "note":"Paragraph text linking to a reporting page. Do not translate {page}."
-                },
-                "vulnerabilityPage":{
-                    "text":"vulnerability reporting page",
-                    "note":"Link text to a reporting page."
+                "body": {
+                    "text": "If you discover a potential security issue in this project we  ask that you notify us directly via email to cedar-policy-security@lists.cncf.io",
+                    "note": "Paragraph text referencing a security contact."
                 }
             }
         }
