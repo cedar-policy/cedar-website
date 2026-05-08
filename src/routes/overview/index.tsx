@@ -101,8 +101,8 @@ export default function Overview() {
                                 <CedarIntl
                                     id='overview.description.expressive.body'
                                     defaultMessage={'Cedar is a simple yet expressive language that is ' +
-                                    'purpose-built to support authorization use cases for common ' +
-                                    'authorization models such as RBAC and ABAC.'}
+                                        'purpose-built to support authorization use cases for common ' +
+                                        'authorization models such as RBAC and ABAC.'}
                                 />
                             </p>
                         </ColumnWithIcon>
@@ -121,8 +121,8 @@ export default function Overview() {
                                 <CedarIntl
                                     id='overview.description.performant.body'
                                     defaultMessage={'Cedar is fast and scalable. The policy structure is designed ' +
-                                    'to be indexed for quick retrieval and to support fast and scalable real-time ' +
-                                    'evaluation, with bounded latency.'}
+                                        'to be indexed for quick retrieval and to support fast and scalable real-time ' +
+                                        'evaluation, with bounded latency.'}
                                 />
                             </p>
                         </ColumnWithIcon>
@@ -141,8 +141,8 @@ export default function Overview() {
                                 <CedarIntl
                                     id='overview.description.analyzable.body'
                                     defaultMessage={'Cedar is designed for analysis using Automated Reasoning. ' +
-                                    'This enables analyzer tools capable of optimizing your policies and ' +
-                                    'proving that your security model is what you believe it is.'}
+                                        'This enables analyzer tools capable of optimizing your policies and ' +
+                                        'proving that your security model is what you believe it is.'}
                                 />
                             </p>
                         </ColumnWithIcon>
@@ -181,13 +181,13 @@ export default function Overview() {
                                 <CedarIntl
                                     id='overview.callToAction.unifyCode'
                                     defaultMessage={'Stop using slightly different authorization code for every service ' +
-                                    'you deploy, or every single use case.'}
+                                        'you deploy, or every single use case.'}
                                 />
                                 &nbsp;
                                 <CedarIntl
                                     id='overview.callToAction.useCedar'
                                     defaultMessage={'With Cedar, you can build it once and deploy it anywhere, with ' +
-                                    'minimal code repetition across services. Offload the access controls to us.'}
+                                        'minimal code repetition across services. Offload the access controls to us.'}
                                 />
                             </p>
                         </div>
@@ -242,16 +242,7 @@ export default function Overview() {
                                 <CedarIntl
                                     id='overview.otherLinks.security.body'
                                     defaultMessage={'If you discover a potential security issue in this project we ' +
-                                    'ask that you notify AWS/Amazon Security via our {page} or directly via email to ' +
-                                    'aws-security@amazon.com.'}
-                                    values={{
-                                        page: <Link href='http://aws.amazon.com/security/vulnerability-reporting/' external>
-                                            <CedarIntl
-                                                id='overview.otherLinks.security.vulnerabilityPage'
-                                                defaultMessage='vulnerability reporting page'
-                                            />
-                                        </Link>,
-                                    }}
+                                        'ask that you notify us directly via e-mail to cedar-policy-security@lists.cncf.io.'}
                                 />
                             </p>
                         </div>
@@ -286,7 +277,7 @@ export default function Overview() {
     );
 }
 
-interface ColumnWithIconProps extends React.PropsWithChildren{
+interface ColumnWithIconProps extends React.PropsWithChildren {
     mobile: boolean;
     iconPath: string;
     iconAltText: string;
@@ -298,7 +289,7 @@ function ColumnWithIcon(props: ColumnWithIconProps) {
         <Box padding={{ horizontal: 'm' }}>
             <div style={{ display: 'flex', flexDirection: (mobile) ? 'row' : 'column' }}>
                 <img src={iconPath} alt={iconAltText} style={{ width: 'min-content', height: 'min-content' }} />
-                <Box padding = {mobile ? { left: 'm' } : {}}>
+                <Box padding={mobile ? { left: 'm' } : {}}>
                     {children}
                 </Box>
             </div>
