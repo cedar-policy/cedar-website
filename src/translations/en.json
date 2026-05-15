@@ -96,11 +96,11 @@
         },
         "announcement":{
             "body":{
-                "text":"Cedar 4.9 is now released, with refinements to type-aware partial evaluation and additional support for working with FFI types.",
+                "text":"Cedar 4.11 is now released, with a new programmatic interface to construct policies, the PST (Public Syntax Tree).",
                 "note":"Announcement text shown in a thin bar below the main section"
             },
             "date":{
-                "text":"February 9, 2026:",
+                "text":"May 15, 2026:",
                 "note":"A date, shown in bold before the announcement"
             },
             "learnMore":{

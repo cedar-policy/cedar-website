@@ -17,7 +17,7 @@
   },
   "dependencies": {
     "@cedar-policy/cedar-monaco-editor": "^0.2.0",
-    "@cedar-policy/cedar-wasm": "4.9.0",
+    "@cedar-policy/cedar-wasm": "4.11.0",
     "@cloudscape-design/components": "^3.0.0",
     "@cloudscape-design/design-tokens": "^3.0.0",
     "@cloudscape-design/global-styles": "^1.0.0",
