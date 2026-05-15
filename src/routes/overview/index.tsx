@@ -67,13 +67,13 @@ export default function Overview() {
                         &nbsp;
                         <CedarIntl
                             id='overview.announcement.body'
-                            defaultMessage={'Cedar 4.9 is now released, with refinements to type-aware partial evaluation and additional support for working with FFI types.'}
+                            defaultMessage={'Cedar 4.11 is now released, with a new programmatic interface to construct policies, the PST (Public Syntax Tree).'}
                         />
                         &nbsp;
                         <a
                             target={'_blank'}
                             rel="noopener noreferrer"
-                            href='https://github.com/cedar-policy/cedar/releases/tag/v4.9.0'
+                            href='https://github.com/cedar-policy/cedar/releases/tag/v4.11.0'
                         ><CedarIntl
                                 id='overview.announcement.learnMore'
                                 defaultMessage='To learn more view the Cedar change log here.'
