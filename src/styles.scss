@@ -49,6 +49,21 @@ h1 {
   justify-content: flex-end;
 }
 
+.cncf-badge {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 24px 12px;
+  text-align: center;
+  img {
+    height: 50px;
+  }
+  span {
+    color: #4C4C4C;
+  }
+}
+
 .bottom-bar {
   z-index: 1000;
   background-color: white;
@@ -62,6 +77,27 @@ h1 {
   * {
     padding: 0 12px;
   }
+  a {
+    color: #0073BB;
+    text-decoration: none;
+  }
+  a:hover {
+    text-decoration: underline;
+  }
+}
+
+.site-footer {
+  background-color: white;
+  color: #4C4C4C;
+  border-top: solid 1px #E3E3E3;
+  width: 100%;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  font-size: 13px;
+  text-align: center;
   a {
     color: #0073BB;
     text-decoration: none;

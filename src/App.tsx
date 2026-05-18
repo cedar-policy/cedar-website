@@ -189,6 +189,18 @@ export default function App() {
     // TODO: Add your own privacy policy and site terms links here
     const bottomBarLinks = (<></>);
 
+    const siteFooter = (
+        <footer className={'site-footer'}>
+            <span>Copyright Cedar a Series of LF Projects, LLC</span>
+            <span>
+                For website terms of use, trademark policy and other project policies please see <a href="https://lfprojects.org/policies/" target="_blank" rel="noopener noreferrer">lfprojects.org/policies/</a>.
+            </span>
+            <span>
+                The Linux Foundation has registered trademarks and uses trademarks. For a list of trademarks of The Linux Foundation, please see our <a href="https://www.linuxfoundation.org/trademark-usage" target="_blank" rel="noopener noreferrer">Trademark Usage</a> page.
+            </span>
+        </footer>
+    );
+
     return (
         <Box data-testid={'entrypoint'} className={'app-container'}>
             <div className={onOverviewPage ? 'cedar-green' : undefined}>
@@ -297,6 +309,7 @@ export default function App() {
                         </Routes>
                     </Suspense>
                 </WasmErrorBoundary>
+                {siteFooter}
                 <div className={'bottom-bar flex-row'}>
                     {bottomBarLinks}
                 </div>

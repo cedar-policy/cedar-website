@@ -6,6 +6,7 @@ import { getLocaleFromPath } from '../../util/intlHelpers';
 import CedarIntl from '../../components/CedarIntl';
 import { useTranslations } from '../../hooks/useTranslations';
 import { isMobile } from '../../util/miscHelpers';
+import cncfLogo from '../../../static/cncf-color.svg';
 
 export default function Overview() {
     const { t } = useTranslations();
@@ -271,6 +272,12 @@ export default function Overview() {
                             </p>
                         </div>
                     </SpaceBetween>
+                    <div className={'cncf-badge'}>
+                        <a href="https://www.cncf.io" target="_blank" rel="noopener noreferrer">
+                            <img src={cncfLogo} alt="Cloud Native Computing Foundation" />
+                        </a>
+                        <span>We are a Cloud Native Computing Foundation sandbox project.</span>
+                    </div>
                 </Box>
             </section>
         </div>
