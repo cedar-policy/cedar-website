@@ -24,10 +24,7 @@ export default function StaticIsAuthorizedRequestWidget(props: StaticIsAuthorize
                     onClick={onClickPrimaryAction}
                 >
                     <Icon name={'caret-right-filled'} />
-                    <CedarIntl
-                        id='tutorial.evaluate'
-                        defaultMessage='Evaluate'
-                    />
+                    <CedarIntl id="tutorial.evaluate" defaultMessage="Evaluate" />
                 </Button>
             </div>
             <div className="tabs-wrapper">

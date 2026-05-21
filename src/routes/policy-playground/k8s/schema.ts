@@ -49,9 +49,7 @@ export const schema: SchemaJson<string> = {
                         },
                     },
                 },
-                memberOfTypes: [
-                    'Group',
-                ],
+                memberOfTypes: ['Group'],
             },
             NonResourceURL: {
                 shape: {
@@ -132,9 +130,7 @@ export const schema: SchemaJson<string> = {
                         },
                     },
                 },
-                memberOfTypes: [
-                    'Group',
-                ],
+                memberOfTypes: ['Group'],
             },
             User: {
                 shape: {
@@ -153,116 +149,56 @@ export const schema: SchemaJson<string> = {
                         },
                     },
                 },
-                memberOfTypes: [
-                    'Group',
-                ],
+                memberOfTypes: ['Group'],
             },
         },
         actions: {
             approve: {
                 appliesTo: {
-                    principalTypes: [
-                        'Group',
-                        'Node',
-                        'ServiceAccount',
-                        'User',
-                    ],
-                    resourceTypes: [
-                        'Resource',
-                    ],
+                    principalTypes: ['Group', 'Node', 'ServiceAccount', 'User'],
+                    resourceTypes: ['Resource'],
                 },
             },
             attest: {
                 appliesTo: {
-                    principalTypes: [
-                        'Group',
-                        'Node',
-                        'ServiceAccount',
-                        'User',
-                    ],
-                    resourceTypes: [
-                        'Resource',
-                    ],
+                    principalTypes: ['Group', 'Node', 'ServiceAccount', 'User'],
+                    resourceTypes: ['Resource'],
                 },
             },
             bind: {
                 appliesTo: {
-                    principalTypes: [
-                        'Group',
-                        'Node',
-                        'ServiceAccount',
-                        'User',
-                    ],
-                    resourceTypes: [
-                        'Resource',
-                    ],
+                    principalTypes: ['Group', 'Node', 'ServiceAccount', 'User'],
+                    resourceTypes: ['Resource'],
                 },
             },
             create: {
                 appliesTo: {
-                    principalTypes: [
-                        'Group',
-                        'Node',
-                        'ServiceAccount',
-                        'User',
-                    ],
-                    resourceTypes: [
-                        'Resource',
-                    ],
+                    principalTypes: ['Group', 'Node', 'ServiceAccount', 'User'],
+                    resourceTypes: ['Resource'],
                 },
             },
             delete: {
                 appliesTo: {
-                    principalTypes: [
-                        'Group',
-                        'Node',
-                        'ServiceAccount',
-                        'User',
-                    ],
-                    resourceTypes: [
-                        'NonResourceURL',
-                        'Resource',
-                    ],
+                    principalTypes: ['Group', 'Node', 'ServiceAccount', 'User'],
+                    resourceTypes: ['NonResourceURL', 'Resource'],
                 },
             },
             deletecollection: {
                 appliesTo: {
-                    principalTypes: [
-                        'Group',
-                        'Node',
-                        'ServiceAccount',
-                        'User',
-                    ],
-                    resourceTypes: [
-                        'Resource',
-                    ],
+                    principalTypes: ['Group', 'Node', 'ServiceAccount', 'User'],
+                    resourceTypes: ['Resource'],
                 },
             },
             escalate: {
                 appliesTo: {
-                    principalTypes: [
-                        'Group',
-                        'Node',
-                        'ServiceAccount',
-                        'User',
-                    ],
-                    resourceTypes: [
-                        'Resource',
-                    ],
+                    principalTypes: ['Group', 'Node', 'ServiceAccount', 'User'],
+                    resourceTypes: ['Resource'],
                 },
             },
             get: {
                 appliesTo: {
-                    principalTypes: [
-                        'Group',
-                        'Node',
-                        'ServiceAccount',
-                        'User',
-                    ],
-                    resourceTypes: [
-                        'NonResourceURL',
-                        'Resource',
-                    ],
+                    principalTypes: ['Group', 'Node', 'ServiceAccount', 'User'],
+                    resourceTypes: ['NonResourceURL', 'Resource'],
                 },
                 memberOf: [
                     {
@@ -272,46 +208,20 @@ export const schema: SchemaJson<string> = {
             },
             head: {
                 appliesTo: {
-                    principalTypes: [
-                        'Group',
-                        'Node',
-                        'ServiceAccount',
-                        'User',
-                    ],
-                    resourceTypes: [
-                        'NonResourceURL',
-                    ],
+                    principalTypes: ['Group', 'Node', 'ServiceAccount', 'User'],
+                    resourceTypes: ['NonResourceURL'],
                 },
             },
             impersonate: {
                 appliesTo: {
-                    principalTypes: [
-                        'Group',
-                        'Node',
-                        'ServiceAccount',
-                        'User',
-                    ],
-                    resourceTypes: [
-                        'Extra',
-                        'Group',
-                        'Node',
-                        'PrincipalUID',
-                        'ServiceAccount',
-                        'User',
-                    ],
+                    principalTypes: ['Group', 'Node', 'ServiceAccount', 'User'],
+                    resourceTypes: ['Extra', 'Group', 'Node', 'PrincipalUID', 'ServiceAccount', 'User'],
                 },
             },
             list: {
                 appliesTo: {
-                    principalTypes: [
-                        'Group',
-                        'Node',
-                        'ServiceAccount',
-                        'User',
-                    ],
-                    resourceTypes: [
-                        'Resource',
-                    ],
+                    principalTypes: ['Group', 'Node', 'ServiceAccount', 'User'],
+                    resourceTypes: ['Resource'],
                 },
                 memberOf: [
                     {
@@ -321,120 +231,56 @@ export const schema: SchemaJson<string> = {
             },
             options: {
                 appliesTo: {
-                    principalTypes: [
-                        'Group',
-                        'Node',
-                        'ServiceAccount',
-                        'User',
-                    ],
-                    resourceTypes: [
-                        'NonResourceURL',
-                    ],
+                    principalTypes: ['Group', 'Node', 'ServiceAccount', 'User'],
+                    resourceTypes: ['NonResourceURL'],
                 },
             },
             patch: {
                 appliesTo: {
-                    principalTypes: [
-                        'Group',
-                        'Node',
-                        'ServiceAccount',
-                        'User',
-                    ],
-                    resourceTypes: [
-                        'NonResourceURL',
-                        'Resource',
-                    ],
+                    principalTypes: ['Group', 'Node', 'ServiceAccount', 'User'],
+                    resourceTypes: ['NonResourceURL', 'Resource'],
                 },
             },
             post: {
                 appliesTo: {
-                    principalTypes: [
-                        'Group',
-                        'Node',
-                        'ServiceAccount',
-                        'User',
-                    ],
-                    resourceTypes: [
-                        'NonResourceURL',
-                    ],
+                    principalTypes: ['Group', 'Node', 'ServiceAccount', 'User'],
+                    resourceTypes: ['NonResourceURL'],
                 },
             },
             put: {
                 appliesTo: {
-                    principalTypes: [
-                        'Group',
-                        'Node',
-                        'ServiceAccount',
-                        'User',
-                    ],
-                    resourceTypes: [
-                        'NonResourceURL',
-                    ],
+                    principalTypes: ['Group', 'Node', 'ServiceAccount', 'User'],
+                    resourceTypes: ['NonResourceURL'],
                 },
             },
             readOnly: {
                 appliesTo: {
-                    principalTypes: [
-                        'Group',
-                        'Node',
-                        'ServiceAccount',
-                        'User',
-                    ],
-                    resourceTypes: [
-                        'Resource',
-                    ],
+                    principalTypes: ['Group', 'Node', 'ServiceAccount', 'User'],
+                    resourceTypes: ['Resource'],
                 },
             },
             sign: {
                 appliesTo: {
-                    principalTypes: [
-                        'Group',
-                        'Node',
-                        'ServiceAccount',
-                        'User',
-                    ],
-                    resourceTypes: [
-                        'Resource',
-                    ],
+                    principalTypes: ['Group', 'Node', 'ServiceAccount', 'User'],
+                    resourceTypes: ['Resource'],
                 },
             },
             update: {
                 appliesTo: {
-                    principalTypes: [
-                        'Group',
-                        'Node',
-                        'ServiceAccount',
-                        'User',
-                    ],
-                    resourceTypes: [
-                        'Resource',
-                    ],
+                    principalTypes: ['Group', 'Node', 'ServiceAccount', 'User'],
+                    resourceTypes: ['Resource'],
                 },
             },
             use: {
                 appliesTo: {
-                    principalTypes: [
-                        'Group',
-                        'Node',
-                        'ServiceAccount',
-                        'User',
-                    ],
-                    resourceTypes: [
-                        'Resource',
-                    ],
+                    principalTypes: ['Group', 'Node', 'ServiceAccount', 'User'],
+                    resourceTypes: ['Resource'],
                 },
             },
             watch: {
                 appliesTo: {
-                    principalTypes: [
-                        'Group',
-                        'Node',
-                        'ServiceAccount',
-                        'User',
-                    ],
-                    resourceTypes: [
-                        'Resource',
-                    ],
+                    principalTypes: ['Group', 'Node', 'ServiceAccount', 'User'],
+                    resourceTypes: ['Resource'],
                 },
             },
         },

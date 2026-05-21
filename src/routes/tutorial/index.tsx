@@ -6,21 +6,16 @@ import { useTranslations } from '../../hooks/useTranslations';
 import CedarIntl from '../../components/CedarIntl';
 import { isMobile } from '../../util/miscHelpers';
 
-const gridDefinition2Col = [
-    { colspan: 8, offset: 2 },
-    { colspan: 2 },
-];
-const gridDefinition1Col = [
-    { colspan: 12 },
-];
+const gridDefinition2Col = [{ colspan: 8, offset: 2 }, { colspan: 2 }];
+const gridDefinition1Col = [{ colspan: 12 }];
 
-export interface TutorialStepDetails{
+export interface TutorialStepDetails {
     element: JSX.Element;
     navLabelKey: string;
     route: string;
 }
 
-export default function Tutorial(props: {steps: TutorialStepDetails[]}) {
+export default function Tutorial(props: { steps: TutorialStepDetails[] }) {
     const { steps } = props;
     const { '*': stepRouteParam } = useParams();
     const { t } = useTranslations();
@@ -49,45 +44,36 @@ export default function Tutorial(props: {steps: TutorialStepDetails[]}) {
     }
     return (
         <Box margin={'xxl'} padding={{ bottom: 'xxxl' }}>
-            <Grid
-                gridDefinition={gridDefinition}
-            >
+            <Grid gridDefinition={gridDefinition}>
                 {steps[currentStep].element}
-                {
-                    !isMobile() &&
+                {!isMobile() && (
                     <Container>
-                        {
-                            steps.map((step, idx) => {
-                                let label;
-                                if (idx === currentStep) {
-                                    label = <strong>{`${idx + 1} ${t(step.navLabelKey)}`}</strong>;
-                                } else {
-                                    label = `${idx + 1} ${t(step.navLabelKey)}`;
-                                }
-                                return (
-                                    <p key={idx} >
-                                        <Link to={`/${locale}/tutorial/${step.route}`}>{label}</Link>
-                                    </p>
-                                );
-                            })
-                        }
+                        {steps.map((step, idx) => {
+                            let label;
+                            if (idx === currentStep) {
+                                label = <strong>{`${idx + 1} ${t(step.navLabelKey)}`}</strong>;
+                            } else {
+                                label = `${idx + 1} ${t(step.navLabelKey)}`;
+                            }
+                            return (
+                                <p key={idx}>
+                                    <Link to={`/${locale}/tutorial/${step.route}`}>{label}</Link>
+                                </p>
+                            );
+                        })}
                     </Container>
-                }
+                )}
             </Grid>
             <Box float={'right'}>
                 <SpaceBetween size={'xl'} direction={'horizontal'}>
-                    {
-                        currentStep > 0 &&
-                            <Button
-                                onClick={() => navigate(`/${locale}/tutorial/${steps[currentStep - 1].route}`)}
-                                data-testid={'previous-tutorial-step'}
-                            >
-                                <CedarIntl
-                                    id='tutorial.previousStepButton'
-                                    defaultMessage='Previous step'
-                                />
-                            </Button>
-                    }
+                    {currentStep > 0 && (
+                        <Button
+                            onClick={() => navigate(`/${locale}/tutorial/${steps[currentStep - 1].route}`)}
+                            data-testid={'previous-tutorial-step'}
+                        >
+                            <CedarIntl id="tutorial.previousStepButton" defaultMessage="Previous step" />
+                        </Button>
+                    )}
                     <Button variant={'primary'} onClick={primaryButtonClickHandler} data-testid={'next-tutorial-step'}>
                         {primaryButtonCaption}
                     </Button>

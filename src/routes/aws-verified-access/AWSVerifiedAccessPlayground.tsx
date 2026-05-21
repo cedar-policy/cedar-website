@@ -1,8 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import {
-    DecisionAndValidationOutputForUI,
-    convertCedarAuthOutputToIntlOutput,
-} from '../../util/outputMappers';
+import { DecisionAndValidationOutputForUI, convertCedarAuthOutputToIntlOutput } from '../../util/outputMappers';
 import {
     Box,
     Button,
@@ -33,16 +30,11 @@ const EDITOR_LINE_HEIGHT_PX = 19;
 const dummyValue = { type: 'Dummmy', id: 'x' };
 
 export default function AWSVerifiedAccessPlayground() {
-    const initialTestCase = getInitialTestCase(
-        new URLSearchParams(window.location.hash),
-    );
-    const [testCase, setSelectedTestCase] =
-    useState<VerifiedAccessTestCaseDefinition>(initialTestCase);
+    const initialTestCase = getInitialTestCase(new URLSearchParams(window.location.hash));
+    const [testCase, setSelectedTestCase] = useState<VerifiedAccessTestCaseDefinition>(initialTestCase);
     const [policy, setPolicy] = useState<string>(initialTestCase.policyBody);
     const [authContext, setAuthContext] = useState(initialTestCase.context);
-    const [output, setOutput] = useState<
-    DecisionAndValidationOutputForUI | undefined
-  >(undefined);
+    const [output, setOutput] = useState<DecisionAndValidationOutputForUI | undefined>(undefined);
     const { t } = useTranslations();
 
     useEffect(() => {
@@ -79,7 +71,7 @@ export default function AWSVerifiedAccessPlayground() {
         setOutput(undefined);
     };
 
-  const cedarVersion: string = getCedarVersion();
+    const cedarVersion: string = getCedarVersion();
 
     return (
         <Box>
@@ -94,19 +86,13 @@ export default function AWSVerifiedAccessPlayground() {
                     <CedarIntl
                         id="avaPlayground.description"
                         defaultMessage={
-                            "Use this permissions playground to experiment " +
-              'with evaluation of {serviceLink} permission policies.'
+                            'Use this permissions playground to experiment ' +
+                            'with evaluation of {serviceLink} permission policies.'
                         }
                         values={{
                             serviceLink: (
-                                <Link
-                                    external
-                                    href="https://console.aws.amazon.com/vpc/home#VerifiedAccessInstances"
-                                >
-                                    <CedarIntl
-                                        id="avaPlayground.serviceLink"
-                                        defaultMessage="AWS Verified Access"
-                                    />
+                                <Link external href="https://console.aws.amazon.com/vpc/home#VerifiedAccessInstances">
+                                    <CedarIntl id="avaPlayground.serviceLink" defaultMessage="AWS Verified Access" />
                                 </Link>
                             ),
                         }}
@@ -125,34 +111,23 @@ export default function AWSVerifiedAccessPlayground() {
                             }
                             loadTestCase(newTestCase);
                         }}
-                        options={VERIFIED_ACCESS_TEST_CASES.map((testCase) =>
-                            testCaseToSelectOption(testCase, t),
-                        )}
+                        options={VERIFIED_ACCESS_TEST_CASES.map((testCase) => testCaseToSelectOption(testCase, t))}
                     />
                 </div>
             </Box>
             <div className="main-container">
                 <Box padding={'xl'}>
-                    <form
-                        data-testid={'policy-playground'}
-                        onSubmit={(e) => e.preventDefault()}
-                    >
+                    <form data-testid={'policy-playground'} onSubmit={(e) => e.preventDefault()}>
                         <Form
                             actions={
                                 <SpaceBetween size={'xs'}>
                                     <Button variant="primary" onClick={evaluateInput}>
-                                        <CedarIntl
-                                            id="avaPlayground.evaluateButton"
-                                            defaultMessage="Evaluate"
-                                        />
+                                        <CedarIntl id="avaPlayground.evaluateButton" defaultMessage="Evaluate" />
                                     </Button>
                                 </SpaceBetween>
                             }
                         >
-                            <Grid
-                                id={'sandbox-grid'}
-                                gridDefinition={[{ colspan: 6 }, { colspan: 6 }]}
-                            >
+                            <Grid id={'sandbox-grid'} gridDefinition={[{ colspan: 6 }, { colspan: 6 }]}>
                                 <Container
                                     header={
                                         <Header
@@ -179,10 +154,7 @@ export default function AWSVerifiedAccessPlayground() {
 
                                 <Container
                                     header={
-                                        <Header
-                                            variant="h1"
-                                            description={t('avaPlayground.context.description')}
-                                        >
+                                        <Header variant="h1" description={t('avaPlayground.context.description')}>
                                             <CedarIntl
                                                 id="avaPlayground.context.header"
                                                 defaultMessage="Authorization Context"
@@ -194,9 +166,7 @@ export default function AWSVerifiedAccessPlayground() {
                                         <FormField stretch>
                                             <CedarJsonEditor
                                                 value={authContext}
-                                                onChange={(newContent: string) =>
-                                                    setAuthContext(newContent)
-                                                }
+                                                onChange={(newContent: string) => setAuthContext(newContent)}
                                                 mode={{ type: 'json' }}
                                                 height={`${12 * EDITOR_LINE_HEIGHT_PX}px`}
                                             />

@@ -1,6 +1,6 @@
 import { supportedLocales, defaultLocale, Locale } from '../translations/configuration';
 
-export function getLocaleFromPath(path: string, locales = supportedLocales) : Locale {
+export function getLocaleFromPath(path: string, locales = supportedLocales): Locale {
     // Cut away the first segment of the path, which should be locale if specified
     // eg. '/fr/tutorial' -> 'fr', '/' -> defaultlocale -> 'en'
     const pathSegments = path.split('/');
@@ -16,4 +16,3 @@ export function isIntlDebug() {
     const isLocal = host.includes('127.0.0.1') || host.includes('localhost');
     return isLocal && window.location.search.toLowerCase().includes('i18n');
 }
-

@@ -8,29 +8,19 @@ import { isIntlDebug } from '../util/intlHelpers';
     translators, only .text should ever be displayed in the UI.
 */
 interface CedarIntlProps {
-    id: string,
-    defaultMessage?: string,
-    values?: Record<string, React.ReactNode>
+    id: string;
+    defaultMessage?: string;
+    values?: Record<string, React.ReactNode>;
 }
 
-export default function CedarIntl({ id, defaultMessage, values }:CedarIntlProps) {
+export default function CedarIntl({ id, defaultMessage, values }: CedarIntlProps) {
     if (isIntlDebug()) {
         return (
             <span>
-                <FormattedMessage
-                    id={id + '.text'}
-                    defaultMessage={`*${defaultMessage}`}
-                    values={values}
-                />
+                <FormattedMessage id={id + '.text'} defaultMessage={`*${defaultMessage}`} values={values} />
                 {` [${id}]`}
             </span>
         );
     }
-    return (
-        <FormattedMessage
-            id={id + '.text'}
-            defaultMessage={defaultMessage}
-            values={values}
-        />
-    );
+    return <FormattedMessage id={id + '.text'} defaultMessage={defaultMessage} values={values} />;
 }

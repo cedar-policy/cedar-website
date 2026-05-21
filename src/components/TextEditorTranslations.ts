@@ -81,8 +81,8 @@ export const textEditorTranslations: Record<SupportedLocale, CodeEditorProps.I18
         preferencesModalDarkThemes: 'Temas oscuros',
     },
     fr: {
-        loadingState: 'Chargement de l\'éditeur de code',
-        errorState: 'Une erreur s\'est produite lors du chargement de l\'éditeur de code.',
+        loadingState: "Chargement de l'éditeur de code",
+        errorState: "Une erreur s'est produite lors du chargement de l'éditeur de code.",
         errorStateRecovery: 'Réessayer',
         editorGroupAriaLabel: 'Éditeur de code',
         statusBarGroupAriaLabel: 'Barre de statut',
@@ -119,8 +119,8 @@ export const textEditorTranslations: Record<SupportedLocale, CodeEditorProps.I18
         preferencesModalDarkThemes: 'Tema gelap',
     },
     it: {
-        loadingState: 'Caricamento dell\'editor di codice in corso',
-        errorState: 'Si è verificato un errore durante il caricamento dell\'editor di codice.',
+        loadingState: "Caricamento dell'editor di codice in corso",
+        errorState: "Si è verificato un errore durante il caricamento dell'editor di codice.",
         errorStateRecovery: 'Riprova',
         editorGroupAriaLabel: 'Editor di codice',
         statusBarGroupAriaLabel: 'Barra di stato',

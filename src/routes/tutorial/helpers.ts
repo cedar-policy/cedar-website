@@ -1,17 +1,8 @@
-import type {
-  Context,
-  EntityJson,
-  TypeAndId,
-} from "@cedar-policy/cedar-wasm";
+import type { Context, EntityJson, TypeAndId } from '@cedar-policy/cedar-wasm';
 
-export function renderEntitiesString(
-    entities: EntityJson[],
-    extraIndentSpaces = 4,
-) {
+export function renderEntitiesString(entities: EntityJson[], extraIndentSpaces = 4) {
     const padString = new Array(extraIndentSpaces).fill(' ').join('');
-    const stringifiedEntitiesLines = JSON.stringify(entities, null, 4).split(
-        "\n",
-    );
+    const stringifiedEntitiesLines = JSON.stringify(entities, null, 4).split('\n');
     // don't pad the first line
     const stringifiedEntitiesLinesWithPadding = [
         stringifiedEntitiesLines[0],

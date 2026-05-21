@@ -4,13 +4,7 @@ import '@cloudscape-design/global-styles/index.css';
 import './styles.scss';
 import PolicyPlayground from './routes/policy-playground/PolicyPlayground';
 import { Box, Spinner, TopNavigation } from '@cloudscape-design/components';
-import {
-    Routes,
-    Route,
-    useNavigate,
-    useLocation,
-    Navigate,
-} from 'react-router-dom';
+import { Routes, Route, useNavigate, useLocation, Navigate } from 'react-router-dom';
 import Overview from './routes/overview';
 import Tutorial, { TutorialStepDetails } from './routes/tutorial';
 import StepPolicyStructure from './routes/tutorial/StepPolicyStructure';
@@ -99,11 +93,7 @@ export const routes = [
     },
     {
         path: '/:lang/tutorial/*',
-        element: (
-            <Tutorial
-                steps={steps}
-            />
-        ),
+        element: <Tutorial steps={steps} />,
     },
     {
         path: '/:lang/playground',
@@ -135,27 +125,27 @@ export const routes = [
     },
     {
         path: '/',
-        element: <Navigate to={`/${defaultLocale}`} replace/>,
+        element: <Navigate to={`/${defaultLocale}`} replace />,
     },
     {
         path: '/tutorial/*',
-        element: <StarRedirect to={`/${defaultLocale}/tutorial`}/>,
+        element: <StarRedirect to={`/${defaultLocale}/tutorial`} />,
     },
     {
         path: '/learn',
-        element: <Navigate to={`/${defaultLocale}/learn`} replace/>,
+        element: <Navigate to={`/${defaultLocale}/learn`} replace />,
     },
     {
         path: '/playground',
-        element: <Navigate to={`/${defaultLocale}/playground`} replace/>,
+        element: <Navigate to={`/${defaultLocale}/playground`} replace />,
     },
     {
         path: '/sandbox',
-        element: <Navigate to={`/${defaultLocale}/playground`} replace/>,
+        element: <Navigate to={`/${defaultLocale}/playground`} replace />,
     },
     {
         path: '/aws-verified-access',
-        element: <Navigate to={`/${defaultLocale}/aws-verified-access`} replace/>,
+        element: <Navigate to={`/${defaultLocale}/aws-verified-access`} replace />,
     },
     {
         path: '/blog',
@@ -187,119 +177,113 @@ export default function App() {
     const onOverviewPage = pathsWithoutCedarTitle.includes(location.pathname);
 
     // TODO: Add your own privacy policy and site terms links here
-    const bottomBarLinks = (<></>);
+    const bottomBarLinks = <></>;
 
     return (
         <Box data-testid={'entrypoint'} className={'app-container'}>
             <div className={onOverviewPage ? 'cedar-green' : undefined}>
-                {
-                    showNav && (
-                        <div className={onOverviewPage ? 'transparent-dark-bg' : 'cedar-green'}>
-                            <TopNavigation
-                                identity={{
+                {showNav && (
+                    <div className={onOverviewPage ? 'transparent-dark-bg' : 'cedar-green'}>
+                        <TopNavigation
+                            identity={{
+                                href: `/${locale}`,
+                                logo: { src: cedarLogo, alt: t('topNavbar.cedarTitle') },
+                            }}
+                            utilities={[
+                                {
+                                    type: 'button',
+                                    text: t('topNavbar.overview'),
                                     href: `/${locale}`,
-                                    logo: { src: cedarLogo, alt: t('topNavbar.cedarTitle') },
-                                }}
-                                utilities={[
-                                    {
-                                        type: 'button',
-                                        text: t('topNavbar.overview'),
-                                        href: `/${locale}`,
-                                        external: false,
-                                        onClick: (e) => {
+                                    external: false,
+                                    onClick: (e) => {
+                                        e.preventDefault();
+                                        navigate(`/${locale}`);
+                                    },
+                                },
+                                {
+                                    type: 'menu-dropdown',
+                                    text: t('topNavbar.learn'),
+                                    items: [
+                                        {
+                                            id: 'learningPath',
+                                            text: t('learn.title2'),
+                                            href: `/${locale}/learn`,
+                                        },
+                                        {
+                                            id: 'tutorial',
+                                            text: t('learn.tutorial.header'),
+                                            href: `/${locale}/tutorial`,
+                                        },
+                                        {
+                                            id: 'tutorial',
+                                            text: t('learn.cedarGuide.header'),
+                                            external: true,
+                                            href: 'http://docs.cedarpolicy.com',
+                                        },
+                                        {
+                                            id: 'blog',
+                                            text: 'Blog',
+                                            href: '/blog',
+                                        },
+                                    ],
+                                    onItemFollow: (e) => {
+                                        if (!e.detail.external && e.detail.href) {
                                             e.preventDefault();
-                                            navigate(`/${locale}`);
-                                        },
+                                            navigate(e.detail.href);
+                                        }
                                     },
-                                    {
-                                        type: 'menu-dropdown',
-                                        text: t('topNavbar.learn'),
-                                        items: [
-                                            {
-                                                id: 'learningPath',
-                                                text: t('learn.title2'),
-                                                href: `/${locale}/learn`,
-                                            },
-                                            {
-                                                id: 'tutorial',
-                                                text: t('learn.tutorial.header'),
-                                                href: `/${locale}/tutorial`,
-                                            },
-                                            {
-                                                id: 'tutorial',
-                                                text: t('learn.cedarGuide.header'),
-                                                external: true,
-                                                href: 'http://docs.cedarpolicy.com',
-                                            },
-                                            {
-                                                id: 'blog',
-                                                text: 'Blog',
-                                                href: '/blog',
-                                            },
-                                        ],
-                                        onItemFollow: (e) => {
-                                            if (!e.detail.external && e.detail.href) {
-                                                e.preventDefault();
-                                                navigate(e.detail.href);
-                                            }
-                                        },
+                                },
+                                {
+                                    type: 'button',
+                                    text: t('topNavbar.policyPlayground'),
+                                    href: `/${locale}/playground`,
+                                    external: false,
+                                    onClick: (e) => {
+                                        e.preventDefault();
+                                        navigate(`/${locale}/playground`);
                                     },
-                                    {
-                                        type: 'button',
-                                        text: t('topNavbar.policyPlayground'),
-                                        href: `/${locale}/playground`,
-                                        external: false,
-                                        onClick: (e) => {
-                                            e.preventDefault();
-                                            navigate(`/${locale}/playground`);
-                                        },
+                                },
+                                {
+                                    type: 'button',
+                                    text: t('topNavbar.integrations'),
+                                    href: `/${locale}/integrations`,
+                                    external: false,
+                                    onClick: (e) => {
+                                        e.preventDefault();
+                                        navigate(`/${locale}/integrations`);
                                     },
-                                    {
-                                        type: 'button',
-                                        text: t('topNavbar.integrations'),
-                                        href: `/${locale}/integrations`,
-                                        external: false,
-                                        onClick: (e) => {
-                                            e.preventDefault();
-                                            navigate(`/${locale}/integrations`);
-                                        },
-                                    },
-                                    {
-                                        type: 'button',
-                                        text: t('topNavbar.cedarSDK.link'),
-                                        href: 'https://github.com/cedar-policy',
-                                        external: true,
-                                        externalIconAriaLabel: t('topNavbar.cedarSDK.ariaLabel'),
-                                        iconSvg: <img src={'/github.svg'} alt={t('topNavbar.cedarSDK.iconAltText')}/>,
-                                    },
-                                ]}
-                                i18nStrings={{
-                                    searchIconAriaLabel: '',
-                                    searchDismissIconAriaLabel: '',
-                                    overflowMenuTriggerText: t('topNavbar.overflowMenu.triggerText'),
-                                    overflowMenuTitleText: t('topNavbar.overflowMenu.titleText'),
-                                    overflowMenuBackIconAriaLabel: t('topNavbar.overflowMenu.backAriaLabel'),
-                                    overflowMenuDismissIconAriaLabel: t('topNavbar.overflowMenu.closeAriaLabel'),
-                                }}
-                            />
-                        </div>
-                    )
-                }
+                                },
+                                {
+                                    type: 'button',
+                                    text: t('topNavbar.cedarSDK.link'),
+                                    href: 'https://github.com/cedar-policy',
+                                    external: true,
+                                    externalIconAriaLabel: t('topNavbar.cedarSDK.ariaLabel'),
+                                    iconSvg: <img src={'/github.svg'} alt={t('topNavbar.cedarSDK.iconAltText')} />,
+                                },
+                            ]}
+                            i18nStrings={{
+                                searchIconAriaLabel: '',
+                                searchDismissIconAriaLabel: '',
+                                overflowMenuTriggerText: t('topNavbar.overflowMenu.triggerText'),
+                                overflowMenuTitleText: t('topNavbar.overflowMenu.titleText'),
+                                overflowMenuBackIconAriaLabel: t('topNavbar.overflowMenu.backAriaLabel'),
+                                overflowMenuDismissIconAriaLabel: t('topNavbar.overflowMenu.closeAriaLabel'),
+                            }}
+                        />
+                    </div>
+                )}
                 <WasmErrorBoundary>
-                    <Toaster position='top-center' richColors visibleToasts={3} closeButton />
+                    <Toaster position="top-center" richColors visibleToasts={3} closeButton />
                     <Suspense fallback={<Spinner />}>
                         <Routes>
-                            {
-                                routes.map(routeInfo =>
-                                    <Route key={routeInfo.path} path={routeInfo.path} element={routeInfo.element} />,
-                                )
-                            }
+                            {routes.map((routeInfo) => (
+                                <Route key={routeInfo.path} path={routeInfo.path} element={routeInfo.element} />
+                            ))}
                         </Routes>
                     </Suspense>
                 </WasmErrorBoundary>
-                <div className={'bottom-bar flex-row'}>
-                    {bottomBarLinks}
-                </div>
+                <div className={'bottom-bar flex-row'}>{bottomBarLinks}</div>
             </div>
         </Box>
     );

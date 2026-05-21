@@ -60,12 +60,12 @@ when {resource.accessLevel == "public" && principal.location == "USA"};
                         <CedarIntl
                             id="tutorial.abacPt1.prePolicy.p1"
                             defaultMessage={
-                                "The policy below permits any principal to " +
-                'view any resource, but only on the condition that the ' +
-                'accessLevel for the resource is designated as public. It ' +
-                'permits any principal to view any photo, but only on the ' +
-                'condition that the resource is tagged as public and the ' +
-                'location of the principal is equal to "USA".'
+                                'The policy below permits any principal to ' +
+                                'view any resource, but only on the condition that the ' +
+                                'accessLevel for the resource is designated as public. It ' +
+                                'permits any principal to view any photo, but only on the ' +
+                                'condition that the resource is tagged as public and the ' +
+                                'location of the principal is equal to "USA".'
                             }
                         />
                     </p>
@@ -77,12 +77,12 @@ when {resource.accessLevel == "public" && principal.location == "USA"};
                         <CedarIntl
                             id="tutorial.abacPt1.postPolicy.p1"
                             defaultMessage={
-                                "Similar to what we saw with groups, the " +
-                'evaluation engine needs to be told the value of the resource ' +
-                'attribute called {accessLevel}, in order to be able to ' +
-                'evaluate requests by considering this policy. This information ' +
-                'needs to be passed by your application, as part of the ' +
-                'authorization request using the {entities} request attribute.'
+                                'Similar to what we saw with groups, the ' +
+                                'evaluation engine needs to be told the value of the resource ' +
+                                'attribute called {accessLevel}, in order to be able to ' +
+                                'evaluate requests by considering this policy. This information ' +
+                                'needs to be passed by your application, as part of the ' +
+                                'authorization request using the {entities} request attribute.'
                             }
                             values={{
                                 accessLevel: <code>accessLevel</code>,
@@ -98,33 +98,26 @@ when {resource.accessLevel == "public" && principal.location == "USA"};
                         <CedarIntl
                             id="tutorial.abacPt1.postCode.list1.header"
                             defaultMessage={
-                                "Experiment by modifying the policy to try " +
-                'out these  other operators:'
+                                'Experiment by modifying the policy to try ' + 'out these  other operators:'
                             }
                         />
                     </p>
                     <ul>
                         <li>
                             <code>||</code>&nbsp;&nbsp;&nbsp;
-                            <CedarIntl
-                                id="tutorial.abacPt1.postCode.list1.p1"
-                                defaultMessage="logical or"
-                            />
+                            <CedarIntl id="tutorial.abacPt1.postCode.list1.p1" defaultMessage="logical or" />
                         </li>
                         <li>
                             <code>!=</code>&nbsp;&nbsp;&nbsp;
-                            <CedarIntl
-                                id="tutorial.abacPt1.postCode.list1.p2"
-                                defaultMessage="not equal to"
-                            />
+                            <CedarIntl id="tutorial.abacPt1.postCode.list1.p2" defaultMessage="not equal to" />
                         </li>
                     </ul>
                     <p>
                         <CedarIntl
                             id="tutorial.abacPt1.postCode.list2.header"
                             defaultMessage={
-                                "The example above uses an attribute of type " +
-                '{String}. Cedar can also support the following types:'
+                                'The example above uses an attribute of type ' +
+                                '{String}. Cedar can also support the following types:'
                             }
                             values={{
                                 String: <code>String</code>,
@@ -133,16 +126,10 @@ when {resource.accessLevel == "public" && principal.location == "USA"};
                     </p>
                     <ul>
                         <li>
-                            <CedarIntl
-                                id="tutorial.abacPt1.postCode.list2.p1"
-                                defaultMessage={'Boolean'}
-                            />
+                            <CedarIntl id="tutorial.abacPt1.postCode.list2.p1" defaultMessage={'Boolean'} />
                         </li>
                         <li>
-                            <CedarIntl
-                                id="tutorial.abacPt1.postCode.list2.p2"
-                                defaultMessage={'Integer'}
-                            />
+                            <CedarIntl id="tutorial.abacPt1.postCode.list2.p2" defaultMessage={'Integer'} />
                         </li>
                         <li>
                             <CedarIntl
@@ -156,9 +143,7 @@ when {resource.accessLevel == "public" && principal.location == "USA"};
                         <li>
                             <CedarIntl
                                 id="tutorial.abacPt1.postCode.list2.p4"
-                                defaultMessage={
-                                    "Sets: collections of values, expressed with []"
-                                }
+                                defaultMessage={'Sets: collections of values, expressed with []'}
                             />
                         </li>
                     </ul>

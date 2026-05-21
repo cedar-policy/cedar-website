@@ -5,10 +5,7 @@ import { kubernetesApp } from './seedDataKubernetesAuthz';
 import type { SampleAppName } from './types';
 import { jitnaApp } from './seedDataJITNA';
 
-export function getSeedDataForApp(
-    appName: SampleAppName,
-    authQueryIndex: number,
-): PolicyPlaygroundState {
+export function getSeedDataForApp(appName: SampleAppName, authQueryIndex: number): PolicyPlaygroundState {
     let seedData;
     switch (appName) {
         case 'PhotoFlash':
