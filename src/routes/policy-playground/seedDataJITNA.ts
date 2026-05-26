@@ -3,11 +3,11 @@ import type { SchemaJson } from '@cedar-policy/cedar-wasm';
 import type { SampleApp } from './types';
 
 interface CedarEntityWithTags extends CedarEntity {
-  tags?: Record<string, string>;
+    tags?: Record<string, string>;
 }
 
 const schema: SchemaJson<string> = {
-    "AWS::IdentityStore": {
+    'AWS::IdentityStore': {
         entityTypes: {
             Group: {},
             User: {
@@ -41,7 +41,7 @@ const schema: SchemaJson<string> = {
         },
         actions: {},
     },
-    "AWS::SSM": {
+    'AWS::SSM': {
         entityTypes: {
             ManagedInstance: {
                 tags: {
@@ -68,7 +68,7 @@ const schema: SchemaJson<string> = {
             },
         },
     },
-    "AWS::EC2": {
+    'AWS::EC2': {
         entityTypes: {
             Instance: {
                 tags: {

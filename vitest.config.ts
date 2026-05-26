@@ -5,9 +5,7 @@ export default defineConfig({
         environment: 'jsdom',
         setupFiles: ['./tests/setupTests.ts'],
         deps: {
-            inline: [
-                '@cloudscape-design/components',
-            ],
+            inline: ['@cloudscape-design/components'],
         },
     },
 });

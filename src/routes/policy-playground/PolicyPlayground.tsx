@@ -24,10 +24,7 @@ import {
     CedarPlaygroundDataTransferObject,
     PlaygroundDataV1,
 } from '../../playground-helpers';
-import {
-    avpAttributesToCedarRecord,
-    avpEntitiesToCedarEntities,
-} from '../../cedar-utils';
+import { avpAttributesToCedarRecord, avpEntitiesToCedarEntities } from '../../cedar-utils';
 import { isAuthorized, getCedarVersion } from '@cedar-policy/cedar-wasm';
 import { useTranslations } from '../../hooks/useTranslations';
 import CedarIntl from '../../components/CedarIntl';
@@ -59,22 +56,16 @@ const sampleAppsArray = Object.entries(SAMPLE_APPS).map(([value, label]) => ({
     label,
 }));
 export interface PolicyPlaygroundState extends PlaygroundDataV1 {
-  queryChoices: string[];
-  sampleApp: SampleAppName;
-  sampleQueryIndex: number;
+    queryChoices: string[];
+    sampleApp: SampleAppName;
+    sampleQueryIndex: number;
 }
 
 export default function PolicyPlayground() {
     const { t } = useTranslations();
-    const [uiState, setUiState] = useState<PolicyPlaygroundState>(
-        getStateFromHashOrDefault(),
-    );
-    const [output, setOutput] = useState<
-    DecisionAndValidationOutputForUI | undefined
-  >(undefined);
-    const [shareLinkError, setShareLinkError] = useState<string | undefined>(
-        undefined,
-    );
+    const [uiState, setUiState] = useState<PolicyPlaygroundState>(getStateFromHashOrDefault());
+    const [output, setOutput] = useState<DecisionAndValidationOutputForUI | undefined>(undefined);
+    const [shareLinkError, setShareLinkError] = useState<string | undefined>(undefined);
     const navigate = useNavigate();
     const locale = getLocaleFromPath(window.location.pathname);
 
@@ -92,9 +83,7 @@ export default function PolicyPlayground() {
         };
     }, []);
 
-    const updateStateWithMerge = (
-        partialNewState: Partial<PolicyPlaygroundState>,
-    ) => {
+    const updateStateWithMerge = (partialNewState: Partial<PolicyPlaygroundState>) => {
         setUiState((oldState: PolicyPlaygroundState) => ({
             ...oldState,
             ...partialNewState,
@@ -110,8 +99,7 @@ export default function PolicyPlayground() {
     };
 
     const evaluateInput = () => {
-        const { policy, entities, context, principal, action, resource, schema } =
-      uiState;
+        const { policy, entities, context, principal, action, resource, schema } = uiState;
         const start = performance.now();
         let parsedSchema; // cedar-wasm Schema (JSON form)
         let parsedEntities;
@@ -145,23 +133,20 @@ export default function PolicyPlayground() {
         setOutput(convertCedarAuthOutputToIntlOutput(result, t));
     };
 
-  const cedarVersion: string = getCedarVersion();
+    const cedarVersion: string = getCedarVersion();
 
     return (
         <div>
             <Box margin={'l'}>
                 <SpaceBetween size={'m'} direction={'vertical'}>
-                    <Header
-                        variant={'h1'}
-                        description={`${t('playground.cedarVersion')}${cedarVersion}`}
-                    >
+                    <Header variant={'h1'} description={`${t('playground.cedarVersion')}${cedarVersion}`}>
                         <CedarIntl id="playground.title" defaultMessage="Playground" />
                     </Header>
                     <div>
                         <CedarIntl
                             id={'playground.description'}
                             defaultMessage={
-                                "This page has two examples for how Cedar policies can be used to describe and authorize an application’s permissions. The first is a photo-sharing application where Cedar policies determine which users can view particular photos. The second is a Healthcare application where Cedar policies determine who can make, document, and update healthcare appointments, based on their role and attributes."
+                                'This page has two examples for how Cedar policies can be used to describe and authorize an application’s permissions. The first is a photo-sharing application where Cedar policies determine which users can view particular photos. The second is a Healthcare application where Cedar policies determine who can make, document, and update healthcare appointments, based on their role and attributes.'
                             }
                         />
                     </div>
@@ -178,10 +163,7 @@ export default function PolicyPlayground() {
                                             navigate(`/${locale}/integrations/getting-started-avp`);
                                         }}
                                     >
-                                        <CedarIntl
-                                            id="common.avp"
-                                            defaultMessage="Amazon Verified Permissions"
-                                        />
+                                        <CedarIntl id="common.avp" defaultMessage="Amazon Verified Permissions" />
                                     </Link>
                                 ),
                             }}
@@ -191,12 +173,7 @@ export default function PolicyPlayground() {
                         <SpaceBetween direction="horizontal" size="s">
                             <div style={{ minWidth: 400 }}>
                                 <FormField
-                                    label={
-                                        <CedarIntl
-                                            id="playground.appLabel"
-                                            defaultMessage="Sample application"
-                                        />
-                                    }
+                                    label={<CedarIntl id="playground.appLabel" defaultMessage="Sample application" />}
                                 >
                                     <Select
                                         selectedOption={{
@@ -250,9 +227,7 @@ export default function PolicyPlayground() {
                             size="medium"
                             triggerType="custom"
                             content={
-                                <StatusIndicator
-                                    type={shareLinkError === undefined ? 'success' : 'error'}
-                                >
+                                <StatusIndicator type={shareLinkError === undefined ? 'success' : 'error'}>
                                     {shareLinkError === undefined ? (
                                         <CedarIntl
                                             id="playground.copyLink.success"
@@ -283,9 +258,7 @@ export default function PolicyPlayground() {
                                     const { protocol, host, pathname } = window.location;
                                     const hash = `#${PLAYGROUND_URL_FRAG_PREFIX}${playgroundExport.result}`;
                                     try {
-                                        const outputUrl = new URL(
-                                            `${protocol}//${host}${pathname}${hash}`,
-                                        );
+                                        const outputUrl = new URL(`${protocol}//${host}${pathname}${hash}`);
                                         navigator.clipboard
                                             .writeText(outputUrl.toString())
                                             .then(() => {
@@ -293,12 +266,8 @@ export default function PolicyPlayground() {
                                                 console.log(`Copied ${outputUrl} to clipboard`);
                                             })
                                             .catch((e) => {
-                                                setShareLinkError(
-                                                    t('playground.copyLink.clipboardFailed'),
-                                                );
-                                                console.log(
-                                                    `Could not copy ${outputUrl} to clipboard: ${e}`,
-                                                );
+                                                setShareLinkError(t('playground.copyLink.clipboardFailed'));
+                                                console.log(`Could not copy ${outputUrl} to clipboard: ${e}`);
                                             });
                                         window.location.hash = hash;
                                     } catch (error) {
@@ -334,12 +303,10 @@ export default function PolicyPlayground() {
                                             entities={uiState.entities}
                                             schema={uiState.schema}
                                             onChangePAR={(
-                                                property: 'principal' | 'action' | 'resource',
-                                                field: 'type' | 'id',
-                                            ) =>
-                                                (
-                                                    e: NonCancelableCustomEvent<InputProps.ChangeDetail>,
-                                                ) => {
+                                                    property: 'principal' | 'action' | 'resource',
+                                                    field: 'type' | 'id',
+                                                ) =>
+                                                (e: NonCancelableCustomEvent<InputProps.ChangeDetail>) => {
                                                     updateStateWithMerge({
                                                         [property]: {
                                                             ...uiState[property],
@@ -350,9 +317,7 @@ export default function PolicyPlayground() {
                                             onChangeContext={(newContext: string) =>
                                                 updateStateWithMerge({ context: newContext })
                                             }
-                                            onChangeEntities={(entities) =>
-                                                updateStateWithMerge({ entities })
-                                            }
+                                            onChangeEntities={(entities) => updateStateWithMerge({ entities })}
                                             output={output}
                                         />
                                     </div>
@@ -440,24 +405,17 @@ function getStateFromHashOrDefault(): PolicyPlaygroundState {
 
     switch (dataTransferObject.interfaceVersion) {
         case 1: {
-            let { entities, context, isAVPFormat } =
-        dataTransferObject.playgroundData;
+            let { entities, context, isAVPFormat } = dataTransferObject.playgroundData;
             if (isAVPFormat) {
                 // Attempt to convert from AVP to Cedar
-                const conversion = convertStringifiedAVPEntitiesAndContextToCedar(
-                    entities,
-                    context,
-                );
+                const conversion = convertStringifiedAVPEntitiesAndContextToCedar(entities, context);
                 if (conversion) {
                     entities = conversion.entities;
                     context = conversion.context;
                 }
             }
-            const sampleApp = getSampleApp(
-                dataTransferObject.playgroundData.sampleApp,
-            );
-            const sampleQueryIndex =
-        dataTransferObject.playgroundData.sampleQueryIndex ?? 0;
+            const sampleApp = getSampleApp(dataTransferObject.playgroundData.sampleApp);
+            const sampleQueryIndex = dataTransferObject.playgroundData.sampleQueryIndex ?? 0;
             return {
                 ...dataTransferObject.playgroundData,
                 isAVPFormat: false,
@@ -465,8 +423,7 @@ function getStateFromHashOrDefault(): PolicyPlaygroundState {
                 context,
                 sampleApp,
                 sampleQueryIndex,
-                queryChoices: getSeedDataForApp(sampleApp, sampleQueryIndex ?? 0)
-                    .queryChoices,
+                queryChoices: getSeedDataForApp(sampleApp, sampleQueryIndex ?? 0).queryChoices,
             };
         }
         default: {
@@ -483,18 +440,8 @@ function getDTOFromUiState(
     policyPlaygroundState: PolicyPlaygroundState,
     cedarVersion: string,
 ): CedarPlaygroundDataTransferObject {
-    const {
-        action,
-        context,
-        entities,
-        isAVPFormat,
-        policy,
-        principal,
-        resource,
-        schema,
-        sampleApp,
-        sampleQueryIndex,
-    } = policyPlaygroundState;
+    const { action, context, entities, isAVPFormat, policy, principal, resource, schema, sampleApp, sampleQueryIndex } =
+        policyPlaygroundState;
     return {
         cedarVersion,
         interfaceVersion: 1,

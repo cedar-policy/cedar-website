@@ -44,11 +44,10 @@ export default tseslint.config(
         },
         rules: {
             // Formatting
-            indent: ['error', 4, { SwitchCase: 1 }],
-            quotes: ['warn', 'single'],
+            'max-len': ['warn', { code: 120, ignoreUrls: true, ignoreStrings: true, ignoreTemplateLiterals: true }],
+            quotes: ['warn', 'single', { avoidEscape: true }],
             semi: ['warn', 'always'],
             'comma-dangle': ['warn', 'always-multiline'],
-            'space-before-function-paren': ['warn', 'never'],
             // Disabled checks (from original .eslintrc)
             camelcase: 'off',
             'no-use-before-define': 'off',

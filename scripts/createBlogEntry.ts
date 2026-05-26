@@ -21,7 +21,7 @@ if (!slug || !slugRegex.test(slug)) {
 
 const slugDir = path.join(blogDir, slug);
 
-(async() => {
+(async () => {
     try {
         await fs.access(slugDir);
         console.error(`Folder for slug "${slug}" already exists.`);
@@ -48,7 +48,11 @@ const slugDir = path.join(blogDir, slug);
 
     // add the route to the json routes file
     const routesData = await fs.readFile(routesFile, 'utf8');
-    const routes = JSON.parse(routesData) as Array<{route: string, title: string, summary: string}>;
+    const routes = JSON.parse(routesData) as Array<{
+        route: string;
+        title: string;
+        summary: string;
+    }>;
     const newRoute = { route: `/blog/${slug}`, title, summary };
     routes.unshift(newRoute);
     await fs.writeFile(routesFile, JSON.stringify(routes, null, 2));
@@ -94,5 +98,8 @@ export default function ${slugToPascalCase(slug)}() {
 }
 
 function slugToPascalCase(slug: string) {
-    return slug.split('-').map(word => word[0].toUpperCase() + word.slice(1)).join('');
+    return slug
+        .split('-')
+        .map((word) => word[0].toUpperCase() + word.slice(1))
+        .join('');
 }
