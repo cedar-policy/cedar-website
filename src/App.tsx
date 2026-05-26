@@ -213,6 +213,16 @@ export default function App() {
                                     },
                                 },
                                 {
+                                    type: 'button',
+                                    text: 'Blog',
+                                    href: '/blog',
+                                    external: false,
+                                    onClick: (e) => {
+                                        e.preventDefault();
+                                        navigate('/blog');
+                                    },
+                                },
+                                {
                                     type: 'menu-dropdown',
                                     text: t('topNavbar.learn'),
                                     items: [
@@ -231,11 +241,6 @@ export default function App() {
                                             text: t('learn.cedarGuide.header'),
                                             external: true,
                                             href: 'http://docs.cedarpolicy.com',
-                                        },
-                                        {
-                                            id: 'blog',
-                                            text: 'Blog',
-                                            href: '/blog',
                                         },
                                     ],
                                     onItemFollow: (e) => {
