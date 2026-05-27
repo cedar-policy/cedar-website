@@ -98,7 +98,7 @@ when {resource.accessLevel == "public" && principal.location == "USA"};
                         <CedarIntl
                             id="tutorial.abacPt1.postCode.list1.header"
                             defaultMessage={
-                                'Experiment by modifying the policy to try ' + 'out these  other operators:'
+                                'Experiment by modifying the policy to try ' + 'out these other operators:'
                             }
                         />
                     </p>

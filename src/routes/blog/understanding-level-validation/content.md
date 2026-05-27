@@ -97,7 +97,7 @@ forbid(
 ```
 
 Up to this point, TinyTodo has been enforcing that all policies must validate at level 1, and accordingly applying entity slicing at level 1, but there's a problem.
-This policy doesn't validate at level 1! The expression `resource.owner.location`, dereferences the `resource` to get its `owner`, and then dereferences the owner entity to access its `location` attribute. If we tried to use level 1 entity slicing in an authorization request with this policy, the Cedar evaluator would error while trying to the owner's location, causing it to ignore this policy.
+This policy doesn't validate at level 1! The expression `resource.owner.location`, dereferences the `resource` to get its `owner`, and then dereferences the owner entity to access its `location` attribute. If we tried to use level 1 entity slicing in an authorization request with this policy, the Cedar evaluator would error while trying to access the owner's location, causing it to ignore this policy.
 Fortunately, TinyTodo can validate policies at level 1 before making any changes to its policy set.
 We would then see a level validation error when adding this policy, telling us that it requires at least level 2 access to entity data, and avoiding an error during authorization.
 
@@ -142,7 +142,7 @@ pub fn level_one_slice(
 }
 ```
 
-This is simpler than slicing might be in some other application due to a simplify assumption based on TinyTodo's schema.
+This is simpler than slicing might be in some other application due to a simplifying assumption based on TinyTodo's schema.
 We know that no actions have context referencing any entities, so this implementation ignores the context entirely.
 We also don't explicitly handle the request action.
 We do need the action in the slice, but the `Entities` constructor provided by the Cedar Rust library will automatically populate the actions from the schema for us.
@@ -206,7 +206,7 @@ So far we've shown how to apply entity slicing at two specific levels by effecti
 For level one and two policies, these procedures are simple enough to be preferable to implementing the general algorithm, but if the traversal goes deeper or you want to support slicing at multiple different levels, it will be nice to a have a single function to implement all entity slicing.
 This algorithm is essentially a breadth-first search bounded by the level of slicing.
 
-Implemented in Rust, and again assuming that the specific application defines the functions `get_entity` and `get_referened_uids`, this might look like:
+Implemented in Rust, and again assuming that the specific application defines the functions `get_entity` and `get_referenced_uids`, this might look like:
 
 ```rust
 pub fn slice_at_level(

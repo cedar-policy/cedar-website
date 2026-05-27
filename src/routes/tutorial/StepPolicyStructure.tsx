@@ -67,7 +67,7 @@ export default function StepPolicyStructure() {
                             <CedarIntl
                                 id="tutorial.policyStructure.prePolicy.list.p1"
                                 defaultMessage={
-                                    'The effect specifies whether this a {permit} ' + 'or a {forbid} policy.'
+                                    'The effect specifies whether this is a {permit} ' + 'or a {forbid} policy.'
                                 }
                                 values={{
                                     permit: <code>permit</code>,
@@ -111,7 +111,7 @@ export default function StepPolicyStructure() {
                                 'of type {user} called Alice, an action of {update}, and a ' +
                                 'resource of type {photo} called ‘VacationPhoto94.jpg’. In ' +
                                 'short, the policy permits a User called Alice to update a Photo ' +
-                                'called VacationPhoto94.jpg.  Note that this policy has no ' +
+                                'called VacationPhoto94.jpg. Note that this policy has no ' +
                                 'conditions. We will cover these later in the tutorial.'
                             }
                             values={{
@@ -182,7 +182,7 @@ export default function StepPolicyStructure() {
                             id="tutorial.policyStructure.postCode.p1"
                             defaultMessage={
                                 'Now try editing the policy in the first code ' +
-                                'block on this page. Change the principal, action or resource to ' +
+                                'block on this page. Change the principal, action, or resource ' +
                                 "so that the scopes don't match and see the request denied, " +
                                 'because the policy no longer applies. Is the evaluation logic ' +
                                 'case sensitive? Add a second policy underneath the first one, ' +

@@ -6,7 +6,7 @@ Today, the open source [Cedar](https://www.cedarpolicy.com/) project announced t
 
 For example, if you are building a pet store application using the Express framework, using the authorization-for-expressjs feature you can create authorization policies so that only store employees can access the API to add a pet. This standardized implementation for Express authorization middleware replaces the need for custom code and automatically maps client requests into their principals, actions, and resources components, and then into Cedar authorization requests. 
 
-## Why Externalize Authorization with Cedar?**
+## Why Externalize Authorization with Cedar?
 
 Traditionally, developers implemented authorization within their application by embedding authorization logic directly into application code. This embedded authorization logic is designed to support a few permissions, but as applications evolve, there is often a need to support more complex use cases with additional authorization requirements. Developers incrementally update the embedded authorization logic to support these complex use cases, resulting in code that is complex and difficult to maintain. As code complexity increases, further evolving the security model and performing audits of permissions becomes more challenging, resulting in an application that continuously becomes more difficult to maintain over its lifecycle. 
 
@@ -18,7 +18,7 @@ permit (
     action in [Action::"POST /pets"], 
     resource
 ) when {
-    principal.jobLevel = "employee"
+    principal.jobLevel == "employee"
 };
 ```
 

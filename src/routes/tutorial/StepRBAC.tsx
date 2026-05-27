@@ -99,7 +99,7 @@ export default function StepRBAC() {
                                 'called the entity type {UserGroup}. In order to be able to ' +
                                 'evaluate requests by considering this policy, the evaluation ' +
                                 'engine needs to know whether the principal referenced within ' +
-                                'the authorization request is a  member of this group. ' +
+                                'the authorization request is a member of this group. ' +
                                 'Therefore, your application will need to pass relevant group ' +
                                 'membership information to the evaluation engine as part of the ' +
                                 'authorization request. This is done through the {entities} ' +
@@ -149,7 +149,7 @@ export default function StepRBAC() {
                             }
                             values={{
                                 judges: <code>Role::&quot;vacationPhotoJudges&quot;</code>,
-                                juniorJudges: <code>Role::&quot; juniorPhotographerJudges&quot;</code>,
+                                juniorJudges: <code>Role::&quot;juniorPhotographerJudges&quot;</code>,
                             }}
                         />
                     </p>

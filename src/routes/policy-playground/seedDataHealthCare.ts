@@ -146,7 +146,7 @@ const query1Entities: CedarEntity[] = [
     {
         uid: {
             type: 'HealthCareApp::Info',
-            id: 'apointment003',
+            id: 'appointment003',
         },
         attrs: {
             provider: {
@@ -249,7 +249,7 @@ export const healthCareSampleApp: SampleApp = {
             queryTitle: 'Access example based on admin role',
             principal: { type: 'HealthCareApp::User', id: 'Victor' },
             action: { type: 'HealthCareApp::Action', id: 'createAppointment' },
-            resource: { type: 'HealthCareApp::Info', id: 'apointment003' },
+            resource: { type: 'HealthCareApp::Info', id: 'appointment003' },
             context: context,
             entities: JSON.stringify(query1Entities, null, 4),
         },

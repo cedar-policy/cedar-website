@@ -176,7 +176,7 @@ export default function Learn() {
                             >
                                 <CedarIntl
                                     id="learn.cedarInAction.customerStories.fis.description"
-                                    defaultMessage="Ana from FIS demonstrates how their Prophet application uses Cedar policies to define and role based permissions that are constrained by attribute based conditions."
+                                    defaultMessage="Ana from FIS demonstrates how their Prophet application uses Cedar policies to define role-based permissions that are constrained by attribute-based conditions."
                                 />
                             </LearningPathListItem>
                             <LearningPathListItem
@@ -304,7 +304,7 @@ export default function Learn() {
                             title={
                                 <CedarIntl
                                     id="learn.diveDeeper.whyAwsMadeCedar.title"
-                                    defaultMessage="Cedar 303 - Learn why AWS created Cedar,  and how we went about it"
+                                    defaultMessage="Cedar 303 - Learn why AWS created Cedar, and how we went about it"
                                 />
                             }
                         >

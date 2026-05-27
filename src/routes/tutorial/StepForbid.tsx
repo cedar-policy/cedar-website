@@ -43,7 +43,7 @@ forbid(
                                 'By default, in the absence of an applicable ' +
                                 'permit policy, the authorization decision will be DENY. ' +
                                 'Additionally you can create policies that explicitly forbid ' +
-                                'certain requests. Forbid polices override permit policies. ' +
+                                'certain requests. Forbid policies override permit policies. ' +
                                 'Hence forbid policies can act as guard rails ensuring that ' +
                                 'certain requests will always be denied regardless of any ' +
                                 'permit policies.'
@@ -62,7 +62,7 @@ forbid(
                                 'this point. We see two policies with exactly the same scope, ' +
                                 'but different effects. The first permits alice to view the ' +
                                 'photo `VacationPhoto94.jpg`, the second forbids her. When we ' +
-                                'submit the the authorization request below, we expect ' +
+                                'submit the authorization request below, we expect ' +
                                 'authorization to be denied.'
                             }
                         />

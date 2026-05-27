@@ -129,8 +129,8 @@ export default function Integrations() {
                                     id="integrations.PermitIO.body"
                                     defaultMessage={
                                         '_Permit.io provides access ' +
-                                        'to Cedar as, a SaaS service, as well ' +
-                                        'as via OPAL its open-source project. A ' +
+                                        'to Cedar as a SaaS service, as well ' +
+                                        'as via OPAL, its open-source project. A ' +
                                         'key enabler for this is Cedar-agent, ' +
                                         'an open-source project which provides ' +
                                         'the ability to run Cedar as a ' +

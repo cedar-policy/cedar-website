@@ -185,7 +185,7 @@ Secondly:
 
 ```rust
 println!("Residuals:");
-for residual in answer.non_trivial_residuals() {
+for residual in answer.nontrivial_residuals() {
     println!("{residual}");
 }
 ```

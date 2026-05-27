@@ -4,7 +4,7 @@
 
 *November 03, 2025*
   
-Cedar [4.6.0](https://crates.io/crates/cedar-policy/4.6.0) brings a new capability called [Type-Aware Partial Evaluation](https://github.com/cedar-policy/rfcs/blob/main/text/0095-type-aware-partial-evaluation.md) (TPE). TPE simplifies Cedar policies by incorporating known information about authorization inputs upfront. When you need to run many authorization checks that share common elements, like checking different permissions for the same user, TPE speeds up processing. Instead of evaluating the full policy set each time, it creates streamlined "residual policies" that  incorporate the known information. This optimization is particularly useful in scenarios like determining all resources a specific user can access, or all principals who can access a specific resource.
+Cedar [4.6.0](https://crates.io/crates/cedar-policy/4.6.0) brings a new capability called [Type-Aware Partial Evaluation](https://github.com/cedar-policy/rfcs/blob/main/text/0095-type-aware-partial-evaluation.md) (TPE). TPE simplifies Cedar policies by incorporating known information about authorization inputs upfront. When you need to run many authorization checks that share common elements, like checking different permissions for the same user, TPE speeds up processing. Instead of evaluating the full policy set each time, it creates streamlined "residual policies" that incorporate the known information. This optimization is particularly useful in scenarios like determining all resources a specific user can access, or all principals who can access a specific resource.
 
 ## Why Type-Aware Partial Evaluation?
 

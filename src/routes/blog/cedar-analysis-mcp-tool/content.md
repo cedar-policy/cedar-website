@@ -188,13 +188,13 @@ when {
 To verify this works as expected in practice, let's consider a few scenarios:
 
 * User A  (company: "Amazon") tries to view a private photo owned by User  B (company: "Amazon") 
-    *  Result: ALLOW - Users from the same  company can view each other's private photos
-* User A  (company: "Amazon") tries to view a private photo owned by User  C (company: "ACME"
-    *  Result: DENY - Users from different  companies cannot view each other's private photos
-* User A  (company: "Amazon") tries to view a non-private photo owned by  User C (company: "ACME")
-    *  Result ALLOW - Anyone can view  non-private photos (from the view-public-photos policy)
-* User A  (company: "Amazon") tries to delete a photo owned by User B  (company: "Amazon")
-    * Result: DENY - Same company access only  applies to viewing, not deleting
+    * Result: ALLOW - Users from the same company can view each other's private photos
+* User A (company: "Amazon") tries to view a private photo owned by User C (company: "ACME")
+    * Result: DENY - Users from different companies cannot view each other's private photos
+* User A (company: "Amazon") tries to view a non-private photo owned by User C (company: "ACME")
+    * Result: ALLOW - Anyone can view non-private photos (from the view-public-photos policy)
+* User A (company: "Amazon") tries to delete a photo owned by User B (company: "Amazon")
+    * Result: DENY - Same company access only applies to viewing, not deleting
 
 The policy now behaves as intended, allowing company-based sharing of private photos while maintaining all other existing permissions.
 

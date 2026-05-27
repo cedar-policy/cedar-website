@@ -71,7 +71,7 @@ export default function StepSets() {
                         <CedarIntl
                             id="tutorial.sets.postCode.p1"
                             defaultMessage={
-                                'Does the order of  items in the set affect ' +
+                                'Does the order of items in the set affect ' +
                                 'the authorization decision? What error does the syntax checker ' +
                                 'give if you edit the scope to be a set of Users for the ' +
                                 'principal?'

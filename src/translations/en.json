@@ -104,7 +104,7 @@
                 "note":"A date, shown in bold before the announcement"
             },
             "learnMore":{
-                "text":"To learn more view the Cedar change log here.",
+                "text":"To learn more, view the Cedar change log here.",
                 "note":"Link text"
             }
         },
@@ -215,7 +215,7 @@
                     "note":"Title text for a link to the reporting page."
                 },
                 "body": {
-                    "text": "If you discover a potential security issue in this project we  ask that you notify us directly via email to cedar-policy-security@lists.cncf.io",
+                    "text": "If you discover a potential security issue in this project we ask that you notify us directly via email to cedar-policy-security@lists.cncf.io",
                     "note": "Paragraph text referencing a security contact."
                 }
             }
@@ -372,16 +372,16 @@
                 "note":"Paragraph text that explains static policies"
             },
             "paragraph2":{
-                "text":"However, sometimes you’ll want to use one set of authorization rules and apply them to many different principals and resources. For example, in a photo sharing application, there might be a common action to share a photo with someone. Performing this action creates a policy for the specified principal and the specified resource. Everything else about the policy is identical in all instance, such as these two samples having the exact same list of actions.",
+                "text":"However, sometimes you’ll want to use one set of authorization rules and apply them to many different principals and resources. For example, in a photo sharing application, there might be a common action to share a photo with someone. Performing this action creates a policy for the specified principal and the specified resource. Everything else about the policy is identical in all instances, such as these two samples having the exact same list of actions.",
                 "note":"Paragraph text that explains a case where static policies become very similar"
             },
             "paragraph3":{
-                "text":"Using static policies in this way can result in a lot of redundant policies that differ only in the principal and resource elements. It also introduces a big issue If you ever need to make a change in the underlying business logic of what sharing a photo means. In that case you’d have to update every one of the individual policies.",
+                "text":"Using static policies in this way can result in a lot of redundant policies that differ only in the principal and resource elements. It also introduces a big issue if you ever need to make a change in the underlying business logic of what sharing a photo means. In that case you’d have to update every one of the individual policies.",
                 "note":"Paragraph text that explains the issue with static policies used for very similar cases"
             },
             "paragraph4":{
                 "body":{
-                    "text":"Policy templates solve this issue by letting you create policies from a template that uses {placeholders} for the principal or resource, or both. After creating a policy template, you can instantiate individual policies by referencing the template and providing values for the specific principal and resource to use. This template-linked policy then works just like an static policy.",
+                    "text":"Policy templates solve this issue by letting you create policies from a template that uses {placeholders} for the principal or resource, or both. After creating a policy template, you can instantiate individual policies by referencing the template and providing values for the specific principal and resource to use. This template-linked policy then works just like a static policy.",
                     "note":"Paragraph text that explains"
                 },
                 "italic":{
@@ -444,7 +444,7 @@
                         "note":"List header text"
                     },
                     "p1":{
-                        "text":"The effect specifies whether this a {permit} or a {forbid} policy.",
+                        "text":"The effect specifies whether this is a {permit} or a {forbid} policy.",
                         "note":"A bullet point on the list. Do not translate {permit} or {forbid}."
                     },
                     "p2":{
@@ -477,7 +477,7 @@
             },
             "postCode":{
                 "p1":{
-                    "text":"Now try editing the policy in the first code block on this page. Change the principal, action or resource to so that the scopes don't match and see that the request denied because the policy no longer applies. Is the evaluation logic case sensitive? Add a second policy underneath the first one, note that you only need one {permit} policy to apply for an {allow} authorization decision.",
+                    "text":"Now try editing the policy in the first code block on this page. Change the principal, action, or resource so that the scopes don't match and see that the request denied because the policy no longer applies. Is the evaluation logic case sensitive? Add a second policy underneath the first one, note that you only need one {permit} policy to apply for an {allow} authorization decision.",
                     "note":"Paragraph text for a tutorial step. Do not translate {allow} or {permit}."
                 },
                 "p2":{
@@ -493,19 +493,19 @@
             },
             "prePolicy":{
                 "p1":{
-                    "text":"By default, in the absence of an applicable permit policy, the authorization decision will be DENY. Additionally you can create policies that explicitly forbid certain requests. Forbid polices override permit policies. Hence forbid policies can act as guard rails ensuring that certain requests will always be denied regardless of any permit policies.",
+                    "text":"By default, in the absence of an applicable permit policy, the authorization decision will be DENY. Additionally you can create policies that explicitly forbid certain requests. Forbid policies override permit policies. Hence forbid policies can act as guard rails ensuring that certain requests will always be denied regardless of any permit policies.",
                     "note":"Paragraph text for a tutorial step."
                 }
             },
             "postPolicy":{
                 "p1":{
-                    "text":"The policy set expressed above illustrates this point. We see two policies with exactly the same scope, but different effects. The first permits alice to view the photo `VacationPhoto94.jpg`, the second forbids her. When we submit the the authorization request below, we expect authorization to be denied.",
+                    "text":"The policy set expressed above illustrates this point. We see two policies with exactly the same scope, but different effects. The first permits alice to view the photo `VacationPhoto94.jpg`, the second forbids her. When we submit the authorization request below, we expect authorization to be denied.",
                     "note":"Paragraph text for a tutorial step."
                 }
             },
             "postCode":{
                 "p1":{
-                    "text":"The sequence in which policies are arranged has no impact on the outcome of the evaluation. Try rearranging the order of the policies above, and confirm that the decision is remains the same. For the rest of this tutorial we will use examples of permit policies, but remember that all of the concepts that we introduce using permit policies can also be used with forbid policies.",
+                    "text":"The sequence in which policies are arranged has no impact on the outcome of the evaluation. Try rearranging the order of the policies above, and confirm that the decision remains the same. For the rest of this tutorial we will use examples of permit policies, but remember that all of the concepts that we introduce using permit policies can also be used with forbid policies.",
                     "note":"Paragraph text for a tutorial step."
                 }
             }
@@ -529,7 +529,7 @@
             },
             "postCode":{
                 "p1":{
-                    "text":"Does the order of  items in the set affect the authorization decision? What error does the syntax checker give if you edit the scope to be a set of Users for the principal?",
+                    "text":"Does the order of items in the set affect the authorization decision? What error does the syntax checker give if you edit the scope to be a set of Users for the principal?",
                     "note":"Paragraph text for a tutorial step."
                 }
             }
@@ -541,7 +541,7 @@
             },
             "prePolicy":{
                 "p1":{
-                    "text":"Sets provide one way to broaden the scope of a policy to include more than one action, but they don’t help much for principals and resources, at least within the scope of the policy. There are two ways ways to write a policy with a broader scope for these entities. The first is to leave the scope completely undefined, by not specifying a principal, resource or action. If a scope is undefined it is considered to apply to all entities.",
+                    "text":"Sets provide one way to broaden the scope of a policy to include more than one action, but they don’t help much for principals and resources, at least within the scope of the policy. There are two ways to write a policy with a broader scope for these entities. The first is to leave the scope completely undefined, by not specifying a principal, resource or action. If a scope is undefined it is considered to apply to all entities.",
                     "note":"Paragraph text for a tutorial step."
                 }
             },
@@ -557,7 +557,7 @@
                     "note":"Paragraph text for a tutorial step."
                 },
                 "p2":{
-                    "text":"If we would have left the resource undefined, then the policy would allow all principals to perform those three actions on all resources. Make sure to exercise caution when leaving elements of the scope undefined, as this may result in over permissive policies.",
+                    "text":"If we had left the resource undefined, then the policy would allow all principals to perform those three actions on all resources. Make sure to exercise caution when leaving elements of the scope undefined, as this may result in over permissive policies.",
                     "note":"Paragraph text for a tutorial step."
                 },
                 "p3":{
@@ -579,7 +579,7 @@
             },
             "postPolicy":{
                 "p1":{
-                    "text":"In this example we are modeling the role as a group. The group is itself an entity and so has a type and an ID. {Role} is not a reserved word, we could equally have called the entity type {UserGroup}. In order to be able to evaluate requests by considering this policy, the evaluation engine needs to know whether the principal referenced within the authorization request is a  member of this group. Therefore, your application will need to pass relevant group membership information to the evaluation engine as part of the authorization request. This is done through the {entities} property, which enables you to provide the Cedar evaluation engine with attribute and group membership data for the principal and resource involved in the authorization call. If you look at the code below you will see that group membership is indicated by defining {bob} as having a parent called {bobRole}.",
+                    "text":"In this example we are modeling the role as a group. The group is itself an entity and so has a type and an ID. {Role} is not a reserved word, we could equally have called the entity type {UserGroup}. In order to be able to evaluate requests by considering this policy, the evaluation engine needs to know whether the principal referenced within the authorization request is a member of this group. Therefore, your application will need to pass relevant group membership information to the evaluation engine as part of the authorization request. This is done through the {entities} property, which enables you to provide the Cedar evaluation engine with attribute and group membership data for the principal and resource involved in the authorization call. If you look at the code below you will see that group membership is indicated by defining {bob} as having a parent called {bobRole}.",
                     "note":"Paragraph text for a tutorial step. Do not translate {Role}, {UserGroup}, {entities}, {bob}, or {bobRole}."
                 }
             },
@@ -622,7 +622,7 @@
             "postCode":{
                 "list1":{
                     "header":{
-                        "text":"Experiment by modifying the policy to try out these  other operators:",
+                        "text":"Experiment by modifying the policy to try out these other operators:",
                         "note":"Paragraph text for the top of a list in a tutorial step."
                     },
                     "p1":{
@@ -693,7 +693,7 @@
             },
             "prePolicy":{
                 "p1":{
-                    "text":"In the examples so far we’ve examined policies based on attributes of the principal and/or the resource. But what if you wanted to write a policy that takes takes into account variables that are unrelated to either the principal or the resource? Cedar provides a way for you to do this, using the Context record. Context enables you to pass additional data into the authorization request, which can be referenced in policy conditions.",
+                    "text":"In the examples so far we’ve examined policies based on attributes of the principal and/or the resource. But what if you wanted to write a policy that takes into account variables that are unrelated to either the principal or the resource? Cedar provides a way for you to do this, using the Context record. Context enables you to pass additional data into the authorization request, which can be referenced in policy conditions.",
                     "note":"Paragraph text for a tutorial step."
                 },
                 "p2":{
@@ -794,7 +794,7 @@
                 "note":"Authorization outcome text"
             },
             "parseError":{
-                "text":"An error occured when parsing the result.",
+                "text":"An error occurred when parsing the result.",
                 "note":"Error message for when the JSON parse of the result errors."
             }
         },
@@ -805,7 +805,7 @@
             },
             "validationError": {
                 "text":"Error validating policy semantics against schema",
-                "note":"Error message for when the schema is valid JSON, but not valid semanticly"
+                "note":"Error message for when the schema is valid JSON, but not valid semantically"
             }
         },
         "validate":{

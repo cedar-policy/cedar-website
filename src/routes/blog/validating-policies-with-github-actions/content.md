@@ -47,7 +47,7 @@ To follow along with this walkthrough, make sure to complete the following prere
 
 Cedar has support for type definitions, similar to programming languages like [TypeScript](https://www.typescriptlang.org/). In Cedar, you use a [schema file](https://docs.cedarpolicy.com/schema/schema.html) to define the principals, actions, and resources used for authorization.
 
-Writing a schema is straightforward, but because we want to get stuck into validation you can use one we've prepared earlier. [Create a new GitHub respository based on our Cedar template repository here](https://github.com/new?template_name=cedar-github-actions-testing-example&template_owner=common-fate). Once you've created it, clone the repository to your local machine.
+Writing a schema is straightforward, but because we want to get stuck into validation you can use one we've prepared earlier. [Create a new GitHub repository based on our Cedar template repository here](https://github.com/new?template_name=cedar-github-actions-testing-example&template_owner=common-fate). Once you've created it, clone the repository to your local machine.
 
 The repository contains a demo policy, allowing everyone to view `Document` resources:
 

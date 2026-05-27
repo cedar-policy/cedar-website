@@ -134,8 +134,8 @@ For the time-based conditions, using the `datetime` constructor is likely the si
 We can construct the “one month earlier” `datetime` similarly using `2025-02-02T19:00:00-0500`[^note-alt-datetime]. Our time-based condition just needs to check that the current time falls between these two dates:
 
 ```cedar
-context.now.timestamp >= datetime("2025-02-02T19:00:00-0500") &&
-context.now.timestamp < datetime("2025-03-02T19:00:00-0500")
+context.now.datetime >= datetime("2025-02-02T19:00:00-0500") &&
+context.now.datetime < datetime("2025-03-02T19:00:00-0500")
 ```
 
 So the complete rule is:

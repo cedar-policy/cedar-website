@@ -44,7 +44,7 @@ export default function Overview() {
                             <Button variant={'link'} onClick={() => navigate(`/${locale}/playground`)}>
                                 <CedarIntl
                                     id="overview.intro.playgroundLink"
-                                    defaultMessage="Try it out in playground"
+                                    defaultMessage="Try it out in the playground"
                                 />
                             </Button>
                         </SpaceBetween>
@@ -72,7 +72,7 @@ export default function Overview() {
                         >
                             <CedarIntl
                                 id="overview.announcement.learnMore"
-                                defaultMessage="To learn more view the Cedar change log here."
+                                defaultMessage="To learn more, view the Cedar change log here."
                             />
                         </a>
                     </span>

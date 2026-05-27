@@ -36,7 +36,7 @@ export default function StepUndefinedScopes() {
                                 'Sets provide one way to broaden the scope ' +
                                 'of a policy to include more than one action, but they don’t ' +
                                 'help much for principals and resources, at least within the ' +
-                                'scope of the policy. There are two ways ways to write a ' +
+                                'scope of the policy. There are two ways to write a ' +
                                 'policy with a broader scope for these entities. The first is ' +
                                 'to leave the scope completely undefined, by not specifying a ' +
                                 'principal, resource or action. If a scope is undefined it is ' +
@@ -77,7 +77,7 @@ export default function StepUndefinedScopes() {
                         <CedarIntl
                             id="tutorial.undefinedScopes.postCode.p2"
                             defaultMessage={
-                                'If we would have left the resource undefined, ' +
+                                'If we had left the resource undefined, ' +
                                 'then the policy would allow all principals to perform those ' +
                                 'three actions on all resources. Make sure to exercise caution ' +
                                 'when leaving elements of the scope undefined, as this may ' +

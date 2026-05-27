@@ -68,7 +68,7 @@ when {
                             id="tutorial.context.prePolicy.p3"
                             defaultMessage={
                                 'The policy below permits a User called Alice ' +
-                                'to update and delete a photo called VacationPhoto94.jpg, but ' +
+                                'to update and delete a photo called flower.jpg, but ' +
                                 'only on the condition that she has authenticated using ' +
                                 'multi-factor authentication and is accessing the application ' +
                                 'from a specific IP address.'

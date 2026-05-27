@@ -177,7 +177,7 @@ At its core, however, the principle guiding Cedar's analyzability is fairly stra
 The key lies in restricting Cedar to language features that can be expressed within a decidable fragment of SMT-LIB.
 By ensuring analyzability, Cedar opens the door to powerful error prevention mechanisms.
 These analyses act as a safety net, catching potential issues before they can manifest in real-world scenarios.
-For Cedar users, this translates into a invaluable sense of confidence.
+For Cedar users, this translates into an invaluable sense of confidence.
 When making changes to their policies, users can rest assured that the modifications they're implementing are precisely the ones they intended.
 
 As we continue to explore and develop Cedar, this principle of analyzability will remain a guiding light.

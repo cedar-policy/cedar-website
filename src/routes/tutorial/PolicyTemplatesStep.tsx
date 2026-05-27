@@ -17,13 +17,13 @@ const samplePolicy2 = `permit (
 
 const policyTemplate = `permit(
     principal == ?principal, 
-    action in [Action::"readFile", Action::"writeFile"] 
+    action in [Action::"readFile", Action::"writeFile"],
     resource  == ?resource
   );`;
 
 const instantiatedPolicy = `permit(
     principal == User::"alice", 
-    action in [Action::"readFile", Action::"writeFile"] 
+    action in [Action::"readFile", Action::"writeFile"],
     resource  == Photo::"pic.jpg"
   );`;
 
@@ -54,7 +54,7 @@ export default function PolicyTemplatesStep() {
                         'application, there might be a common action to share a photo ' +
                         'with someone. Performing this action creates a policy for the ' +
                         'specified principal and the specified resource. Everything else ' +
-                        'about the policy is identical in all instance, such as these ' +
+                        'about the policy is identical in all instances, such as these ' +
                         'two samples having the exact same list of actions.'
                     }
                 />
@@ -67,7 +67,7 @@ export default function PolicyTemplatesStep() {
                     defaultMessage={
                         'Using static policies in this way can result in ' +
                         'a lot of redundant policies that differ only in the principal and ' +
-                        'resource elements. It also introduces a big issue If you ever ' +
+                        'resource elements. It also introduces a big issue if you ever ' +
                         'need to make a change in the underlying business logic of what ' +
                         'sharing a photo means. In that case you’d have to update every ' +
                         'one of the individual policies.'
@@ -84,7 +84,7 @@ export default function PolicyTemplatesStep() {
                         'template, you can instantiate individual policies by referencing ' +
                         'the template and providing values for the specific principal ' +
                         'and resource to use. This template-linked policy then works just ' +
-                        'like an static policy.'
+                        'like a static policy.'
                     }
                     values={{
                         placeholders: (
