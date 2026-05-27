@@ -240,7 +240,7 @@ export default function App() {
                                             id: 'tutorial',
                                             text: t('learn.cedarGuide.header'),
                                             external: true,
-                                            href: 'http://docs.cedarpolicy.com',
+                                            href: 'https://docs.cedarpolicy.com',
                                         },
                                     ],
                                     onItemFollow: (e) => {
