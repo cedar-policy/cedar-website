@@ -35,6 +35,15 @@ describe('playground tests', () => {
         await screen.findByTestId('is-success');
     });
 
+    it('should show determining policies with @id names on Allow', async() => {
+        mountPlayground();
+        fireEvent.click(screen.getByTestId('evaluate-button'));
+        await screen.findByTestId('is-success');
+        const alert = screen.getByTestId('is-success');
+        expect(alert.textContent).toContain('Determining policies:');
+        expect(alert.textContent).toContain('alice-view-vacation-photo');
+    });
+
     it('should evaluate to Deny for Simple Access with the wrong user', async() => {
         mountPlayground();
         const principalField = createWrapper(document.querySelector('[data-testid="principal-id"]') || undefined);

@@ -1,7 +1,14 @@
 import type { CedarEntity } from '../../cedar-utils';
 import type { SampleApp } from './types';
 
-export const policy = `// Account owner can do anything with their own photos and albums
+export const policy = `@id("alice-view-vacation-photo")
+permit (
+    principal == PhotoApp::User::"alice",
+    action == PhotoApp::Action::"viewPhoto",
+    resource == PhotoApp::Photo::"vacationPhoto.jpg"
+);
+
+@id("owner-manage-own-photos-and-albums")
 permit (
     principal,
     action,
@@ -10,6 +17,7 @@ permit (
 when { resource in principal.account };
 
 // Account owner can share their albums with other users
+@id("owner-share-albums")
 permit (
     principal,
     action == PhotoApp::Action::"shareAlbum",
@@ -18,6 +26,7 @@ permit (
 when { resource in principal.account };
 
 // Anyone can view non-private photos
+@id("view-non-private-photos")
 permit (
     principal,
     action == PhotoApp::Action::"viewPhoto",
@@ -26,6 +35,7 @@ permit (
 when { !resource.private };
 
 // Forbid unauthenticated access regardless of other policies
+@id("forbid-unauthenticated")
 forbid (
     principal,
     action,
@@ -34,6 +44,7 @@ forbid (
 when { !context.authenticated };
 
 // Example: policy created after alice shared "vacationAlbum" with stacey
+@id("stacey-access-vacation-album")
 permit (
     principal == PhotoApp::User::"stacey",
     action in [PhotoApp::Action::"viewPhoto", PhotoApp::Action::"createPhoto", PhotoApp::Action::"deletePhoto", PhotoApp::Action::"listPhotosInAlbum"],

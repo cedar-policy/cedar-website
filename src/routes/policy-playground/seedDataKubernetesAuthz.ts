@@ -5,6 +5,7 @@ import { query as query2 } from './k8s/query2';
 
 // String of one or more Waterford policies written in the Cedar language
 const policy = `// developers can list configmaps
+@id("developers-list-configmaps")
 permit (
     principal in k8s::Group::"developers",
     action in [k8s::Action::"list", k8s::Action::"watch"],
@@ -16,6 +17,7 @@ permit (
 
 // prevent users in self-configmaps-only from listing configmaps
 // unless they specify a label selector of owner=principal.name
+@id("restrict-self-configmaps-only")
 forbid (
     principal is k8s::User in k8s::Group::"self-configmaps-only",
     action in [k8s::Action::"list", k8s::Action::"watch"],
@@ -32,6 +34,7 @@ forbid (
 };
 
 // A Kubernetes service account can get and update the node status only for the node it runs on
+@id("csi-driver-node-status-access")
 permit (
     principal is k8s::ServiceAccount,
     action in [

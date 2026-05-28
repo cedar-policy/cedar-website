@@ -3,6 +3,7 @@ import type { SampleApp } from './types';
 
 // String of one or more policies written in the Cedar language
 const policy = `// Admins can perform any action
+@id("admin-full-access")
 permit (
     principal in HealthCareApp::Role::"admin",
     action,
@@ -10,6 +11,7 @@ permit (
 );
 
 // Patients can view their own appointments
+@id("patient-view-own-appointments")
 permit (
     principal,
     action == HealthCareApp::Action::"viewAppointment",
@@ -18,6 +20,7 @@ permit (
 when { resource.patient == principal };
 
 // Doctors can view appointments where they are the provider
+@id("doctor-view-provider-appointments")
 permit (
     principal in HealthCareApp::Role::"doctor",
     action == HealthCareApp::Action::"viewAppointment",
@@ -26,6 +29,7 @@ permit (
 when { resource.provider == principal };
 
 // Patients can create appointments when referred by a doctor
+@id("patient-create-appointment-with-referral")
 permit (
     principal,
     action == HealthCareApp::Action::"createAppointment",

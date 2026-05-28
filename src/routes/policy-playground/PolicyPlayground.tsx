@@ -33,6 +33,7 @@ import {
     DecisionAndValidationOutputForUI,
     convertCedarAuthOutputToIntlOutput,
 } from '../../util/outputMappers';
+import { parsePoliciesWithIds } from '../../util/policyHelpers';
 import AuthQuery from './AuthQuery';
 import SchemaAndPolicies from './SchemaAndPolicies';
 import type { SampleAppName } from './types';
@@ -110,13 +111,17 @@ export default function PolicyPlayground() {
             parsedEntities = [];
             parsedContext = {};
         }
+
+        // Parse policies into a record keyed by @id annotations for meaningful determining policy names
+        const staticPolicies = parsePoliciesWithIds(policy);
+
         const result = isAuthorized({
             principal,
             action,
             resource,
             context: parsedContext,
             entities: parsedEntities,
-            policies: { staticPolicies: policy },
+            policies: { staticPolicies },
             schema: schema || undefined,
             validateRequest: !!schema,
         });

@@ -9,6 +9,7 @@ import {
     DecisionAndValidationOutputForUI,
     convertCedarValidationOutputToIntlOutput,
 } from '../../util/outputMappers';
+import { parsePoliciesWithIds } from '../../util/policyHelpers';
 
 const EDITOR_LINE_HEIGHT_PX = 19;
 
@@ -50,7 +51,7 @@ export default function SchemaAndPolicies(props: SchemaAndPoliciesProps) {
                                         const validationResult = validate({
                                             validationSettings: { mode: 'strict' },
                                             schema: props.schema,
-                                            policies: { staticPolicies: props.policyBody },
+                                            policies: { staticPolicies: parsePoliciesWithIds(props.policyBody) },
                                         });
                                         setOutput(convertCedarValidationOutputToIntlOutput(validationResult, t));
                                     }

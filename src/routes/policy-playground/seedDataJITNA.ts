@@ -42,16 +42,19 @@ namespace AWS::SSM {
   };
 }`;
 
-const policy = `permit (principal in AWS::IdentityStore::Group::"90677fa0fb-5513f9a2-9916-4fc2-aec5-0358ce119215", action == AWS::SSM::Action::"getTokenForInstanceAccess", resource)
+const policy = `@id("prod-admin-group-access")
+permit (principal in AWS::IdentityStore::Group::"90677fa0fb-5513f9a2-9916-4fc2-aec5-0358ce119215", action == AWS::SSM::Action::"getTokenForInstanceAccess", resource)
 when {
     resource.hasTag("Prod") && resource.getTag("Prod") == "Database"
 };
 
+@id("admin-role-principal-tag-access")
 permit(principal, action == AWS::SSM::Action::"getTokenForInstanceAccess", resource)
 when { 
     context.iam.principalTags.hasTag("Role") && context.iam.principalTags.getTag("Role") == "Admin" 
 };
 
+@id("development-environment-access")
 permit(principal, action == AWS::SSM::Action::"getTokenForInstanceAccess", resource)
 when {
     resource.hasTag("Environment") &&

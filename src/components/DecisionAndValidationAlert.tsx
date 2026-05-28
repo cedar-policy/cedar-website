@@ -5,7 +5,7 @@ import { DecisionAndValidationOutputForUI } from '../util/outputMappers';
 export default function DecisionAndValidationAlert(props: { output: DecisionAndValidationOutputForUI }) {
     const { output } = props;
 
-    const { status, message, errors, warnings } = output;
+    const { status, message, errors, warnings, reason } = output;
 
     const hasErrors = status === 'error' || errors.length > 0;
 
@@ -32,6 +32,17 @@ export default function DecisionAndValidationAlert(props: { output: DecisionAndV
         </Box>
     );
 
+    const reasonMessages = reason && reason.length > 0 && (
+        <Box margin={{ top: 's' }}>
+            <strong>Determining policies:</strong>
+            <ul>
+                {reason.map((r, i) => (
+                    <li key={i}>{r}</li>
+                ))}
+            </ul>
+        </Box>
+    );
+
     let alertType: AlertProps.Type = 'error';
     let dataTestId = 'is-failure';
 
@@ -42,9 +53,10 @@ export default function DecisionAndValidationAlert(props: { output: DecisionAndV
 
     // `<Alert>` leaves extra vertical space if `errorMessages` & `warningMessages` are empty
     // So, an extra check if everything is required
-    if (hasErrors || hasWarnings) {
+    if (hasErrors || hasWarnings || reasonMessages) {
         return (
             <Alert type={alertType} header={message} data-testid={dataTestId}>
+                {reasonMessages}
                 {errorMessages}
                 {warningMessages}
             </Alert>

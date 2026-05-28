@@ -9,6 +9,7 @@ export interface DecisionAndValidationOutputForUI {
     message: string;
     errors: string[];
     warnings: string[];
+    reason?: string[];
 }
 
 // Local status keys — previously sourced from cedar-editor/code-editor/errorUtils.
@@ -70,6 +71,7 @@ export function convertCedarAuthOutputToIntlOutput(
             ({ policyId, error }) => `${error.code || 'Error'} at ${policyId}: ${error.message}; ${error.help || ''}`,
         ),
         warnings: [],
+        reason: response.diagnostics.reason,
     };
 }
 
