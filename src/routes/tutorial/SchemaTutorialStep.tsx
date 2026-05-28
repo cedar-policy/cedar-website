@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useTranslations } from '../../hooks/useTranslations';
 import { CedarPolicyEditor, CedarSchemaEditor } from '@cedar-policy/cedar-monaco-editor';
 import { validate } from '@cedar-policy/cedar-wasm';
+import type { SchemaJson } from '@cedar-policy/cedar-wasm';
 import DecisionAndValidationAlert from '../../components/DecisionAndValidationAlert';
 import { Box, Button, Container, Header, Link } from '@cloudscape-design/components';
 import CedarIntl from '../../components/CedarIntl';
@@ -246,10 +247,10 @@ export default function SchemaTutorialStep() {
                                 <Button
                                     variant={'primary'}
                                     onClick={() => {
-                                        let parsedSchema;
+                                        let parsedSchema: SchemaJson<string>;
                                         try {
-                                            parsedSchema = JSON.parse(schema);
-                                        } catch (e) {
+                                            parsedSchema = JSON.parse(schema) as SchemaJson<string>;
+                                        } catch (_e) {
                                             setOutput(getSchemaParseError(t));
                                             return;
                                         }

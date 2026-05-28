@@ -5,12 +5,12 @@ import reactHooks from 'eslint-plugin-react-hooks';
 import jsxA11y from 'eslint-plugin-jsx-a11y';
 import compat from 'eslint-plugin-compat';
 import importPlugin from 'eslint-plugin-import';
-import prettier from 'eslint-plugin-prettier/recommended';
+import stylistic from '@stylistic/eslint-plugin';
 
 export default tseslint.config(
     // Global ignores (replaces .eslintignore)
     {
-        ignores: ['build/**', 'node_modules/**', 'webpack.config.ts', 'eslint.config.mjs', '**/*.test.tsx', '**/*.test.ts', '**/setupTests.ts'],
+        ignores: ['build/**', 'node_modules/**', 'webpack.config.ts', 'vitest.config.ts', 'eslint.config.mjs', '**/*.test.tsx', '**/*.test.ts', '**/setupTests.ts'],
     },
     // Base configs
     js.configs.recommended,
@@ -27,10 +27,11 @@ export default tseslint.config(
     // Import
     importPlugin.flatConfigs.recommended,
     importPlugin.flatConfigs.typescript,
-    // Prettier (must be last)
-    prettier,
     // Project-specific overrides
     {
+        plugins: {
+            '@stylistic': stylistic,
+        },
         languageOptions: {
             parserOptions: {
                 projectService: true,
@@ -48,6 +49,13 @@ export default tseslint.config(
             quotes: ['warn', 'single', { avoidEscape: true }],
             semi: ['warn', 'always'],
             'comma-dangle': ['warn', 'always-multiline'],
+            // @stylistic formatting rules
+            '@stylistic/indent': ['warn', 4],
+            '@stylistic/no-trailing-spaces': 'warn',
+            '@stylistic/eol-last': ['warn', 'always'],
+            '@stylistic/no-multiple-empty-lines': ['warn', { max: 1, maxEOF: 0 }],
+            '@stylistic/object-curly-spacing': ['warn', 'always'],
+            '@stylistic/arrow-parens': ['warn', 'always'],
             // Disabled checks (from original .eslintrc)
             camelcase: 'off',
             'no-use-before-define': 'off',
@@ -56,6 +64,7 @@ export default tseslint.config(
             '@typescript-eslint/restrict-template-expressions': 'off',
             '@typescript-eslint/no-empty-function': 'off',
             '@typescript-eslint/no-floating-promises': 'off',
+            '@typescript-eslint/no-unused-vars': ['error', { argsIgnorePattern: '^_', varsIgnorePattern: '^_', caughtErrorsIgnorePattern: '^_' }],
             'react-hooks/exhaustive-deps': 'off',
             'react/prop-types': 'off',
             'react/display-name': 'off',

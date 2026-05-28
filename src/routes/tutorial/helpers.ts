@@ -11,7 +11,7 @@ export function renderEntitiesString(entities: EntityJson[], extraIndentSpaces =
     return stringifiedEntitiesLinesWithPadding.join('\n');
 }
 
-export function renderContextString(context: any, extraIndentSpaces = 4) {
+export function renderContextString(context: Context, extraIndentSpaces = 4) {
     const padString = new Array(extraIndentSpaces).fill(' ').join('');
     const stringifiedEntityLines = JSON.stringify(context, null, 4).split('\n');
     const stringifiedEntityLinesWithPadding = [
@@ -60,7 +60,7 @@ export function renderRustCodeUsingJson(
     principal: string,
     action: string,
     resource: string,
-    context: any,
+    context: Context,
     policies: string,
     entities: EntityJson[],
 ) {

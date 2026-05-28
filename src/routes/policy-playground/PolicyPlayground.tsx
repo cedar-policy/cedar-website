@@ -10,7 +10,6 @@ import {
     NonCancelableCustomEvent,
     Popover,
     Select,
-    SelectProps,
     SpaceBetween,
     StatusIndicator,
     Tabs,
@@ -26,6 +25,7 @@ import {
 } from '../../playground-helpers';
 import { avpAttributesToCedarRecord, avpEntitiesToCedarEntities } from '../../cedar-utils';
 import { isAuthorized, getCedarVersion } from '@cedar-policy/cedar-wasm';
+import type { SchemaJson, Context, EntityJson } from '@cedar-policy/cedar-wasm';
 import { useTranslations } from '../../hooks/useTranslations';
 import CedarIntl from '../../components/CedarIntl';
 import type { ContextMap, EntityItem } from '../../types/cedar-data-types';
@@ -101,19 +101,19 @@ export default function PolicyPlayground() {
     const evaluateInput = () => {
         const { policy, entities, context, principal, action, resource, schema } = uiState;
         const start = performance.now();
-        let parsedSchema; // cedar-wasm Schema (JSON form)
-        let parsedEntities;
-        let parsedContext;
+        let parsedSchema: SchemaJson<string> | undefined;
+        let parsedEntities: EntityJson[] = [];
+        let parsedContext: Context = {};
         try {
-            parsedSchema = JSON.parse(schema);
-        } catch (e) {
+            parsedSchema = JSON.parse(schema) as SchemaJson<string>;
+        } catch (_e) {
             setOutput(getSchemaParseError(t));
             return;
         }
         try {
-            parsedEntities = JSON.parse(entities);
-            parsedContext = JSON.parse(context);
-        } catch (e) {
+            parsedEntities = JSON.parse(entities) as EntityJson[];
+            parsedContext = JSON.parse(context) as Context;
+        } catch (_e) {
             // Fall through: let wasm produce the error if JSON is invalid.
             parsedEntities = [];
             parsedContext = {};
@@ -303,9 +303,9 @@ export default function PolicyPlayground() {
                                             entities={uiState.entities}
                                             schema={uiState.schema}
                                             onChangePAR={(
-                                                    property: 'principal' | 'action' | 'resource',
-                                                    field: 'type' | 'id',
-                                                ) =>
+                                                property: 'principal' | 'action' | 'resource',
+                                                field: 'type' | 'id',
+                                            ) =>
                                                 (e: NonCancelableCustomEvent<InputProps.ChangeDetail>) => {
                                                     updateStateWithMerge({
                                                         [property]: {
@@ -353,21 +353,21 @@ function convertStringifiedAVPEntitiesAndContextToCedar(
     stringifiedAVPEntities: string,
     stringifiedAVPContext: string,
 ): { entities: string; context: string } | undefined {
-    let errorKey = 'entityHelpers.conversion.entityJsonError';
+    let _errorKey = 'entityHelpers.conversion.entityJsonError';
     try {
         const avpEntitiesObj = JSON.parse(stringifiedAVPEntities) as EntityItem[];
-        errorKey = 'entityHelpers.conversion.contextJsonError';
+        _errorKey = 'entityHelpers.conversion.contextJsonError';
         const avpContextObj = JSON.parse(stringifiedAVPContext) as ContextMap;
-        errorKey = 'entityHelpers.conversion.entityError';
+        _errorKey = 'entityHelpers.conversion.entityError';
         const simplifiedEntities = avpEntitiesToCedarEntities(avpEntitiesObj);
-        errorKey = 'entityHelpers.conversion.contextError';
+        _errorKey = 'entityHelpers.conversion.contextError';
         const simplifiedContext = avpAttributesToCedarRecord(avpContextObj);
         return {
             entities: JSON.stringify(simplifiedEntities, null, 4),
             context: JSON.stringify(simplifiedContext, null, 4),
         };
     } catch (e) {
-        toast.error('Error converting Entities or Context: ' + e);
+        toast.error('Error converting Entities or Context: ' + String(e));
     }
 }
 
@@ -405,7 +405,8 @@ function getStateFromHashOrDefault(): PolicyPlaygroundState {
 
     switch (dataTransferObject.interfaceVersion) {
         case 1: {
-            let { entities, context, isAVPFormat } = dataTransferObject.playgroundData;
+            let { entities, context } = dataTransferObject.playgroundData;
+            const { isAVPFormat } = dataTransferObject.playgroundData;
             if (isAVPFormat) {
                 // Attempt to convert from AVP to Cedar
                 const conversion = convertStringifiedAVPEntitiesAndContextToCedar(entities, context);

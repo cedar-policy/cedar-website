@@ -10,7 +10,7 @@ import { flattenMessages } from './util/flattenMessages';
 
 async function importTranslations(locale: Locale): Promise<Record<string, string>> {
     const response = await fetch(languagePath(locale));
-    const nested = await response.json();
+    const nested = await response.json() as Record<string, unknown>;
     return flattenMessages(nested);
 }
 

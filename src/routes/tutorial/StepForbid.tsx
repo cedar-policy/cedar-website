@@ -3,12 +3,13 @@ import TutorialStep from './TutorialStep';
 import { Header } from '@cloudscape-design/components';
 import CedarIntl from '../../components/CedarIntl';
 import type { CedarEntity } from '../../cedar-utils';
+import type { Context } from '@cedar-policy/cedar-wasm';
 
 export default function StepForbid() {
     const principal = { type: 'User', id: 'alice' };
     const action = { type: 'Action', id: 'view' };
     const resource = { type: 'Photo', id: 'VacationPhoto94.jpg' };
-    const context: Record<string, any> = {};
+    const context: Context = {};
     const policy = `permit(
   principal == User::"alice", 
   action    == Action::"view", 

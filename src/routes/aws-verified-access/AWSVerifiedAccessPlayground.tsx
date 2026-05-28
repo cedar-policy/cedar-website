@@ -24,6 +24,7 @@ import { useTranslations } from '../../hooks/useTranslations';
 import CedarIntl from '../../components/CedarIntl';
 import { CedarPolicyEditor, CedarJsonEditor } from '@cedar-policy/cedar-monaco-editor';
 import { isAuthorized, getCedarVersion } from '@cedar-policy/cedar-wasm';
+import type { Context } from '@cedar-policy/cedar-wasm';
 
 const EDITOR_LINE_HEIGHT_PX = 19;
 
@@ -47,10 +48,10 @@ export default function AWSVerifiedAccessPlayground() {
     }, [policy, authContext]);
 
     const evaluateInput = () => {
-        let parsedContext;
+        let parsedContext: Context = {};
         try {
-            parsedContext = JSON.parse(authContext);
-        } catch (e) {
+            parsedContext = JSON.parse(authContext) as Context;
+        } catch (_e) {
             parsedContext = {};
         }
         const result = isAuthorized({

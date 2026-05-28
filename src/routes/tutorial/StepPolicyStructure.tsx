@@ -3,6 +3,7 @@ import TutorialStep from './TutorialStep';
 import { Header } from '@cloudscape-design/components';
 import CedarIntl from '../../components/CedarIntl';
 import type { CedarEntity } from '../../cedar-utils';
+import type { Context } from '@cedar-policy/cedar-wasm';
 
 export default function StepPolicyStructure() {
     const principal = { type: 'User', id: 'alice' };
@@ -13,7 +14,7 @@ export default function StepPolicyStructure() {
   action    == Action::"update", 
   resource  == Photo::"VacationPhoto94.jpg"
 );`;
-    const context: Record<string, any> = {};
+    const context: Context = {};
     const entities: CedarEntity[] = [];
     return (
         <TutorialStep

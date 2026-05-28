@@ -3,6 +3,7 @@ import TutorialStep from './TutorialStep';
 import { Header } from '@cloudscape-design/components';
 import CedarIntl from '../../components/CedarIntl';
 import type { CedarEntity } from '../../cedar-utils';
+import type { Context } from '@cedar-policy/cedar-wasm';
 
 export default function StepRBAC() {
     const principal = { type: 'User', id: 'Bob' };
@@ -49,7 +50,7 @@ export default function StepRBAC() {
   resource == Photo::"vacationPhoto94.jpg"
 );
 `;
-    const context: Record<string, any> = {};
+    const context: Context = {};
 
     return (
         <TutorialStep

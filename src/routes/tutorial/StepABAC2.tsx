@@ -3,6 +3,7 @@ import TutorialStep from './TutorialStep';
 import { Header } from '@cloudscape-design/components';
 import CedarIntl from '../../components/CedarIntl';
 import type { CedarEntity } from '../../cedar-utils';
+import type { Context } from '@cedar-policy/cedar-wasm';
 
 export default function StepABAC2() {
     const principal = { type: 'User', id: 'alice' };
@@ -41,7 +42,7 @@ when {
   resource.owner == principal.id
 };
 `;
-    const context: Record<string, any> = {};
+    const _context: Context = {};
     return (
         <TutorialStep
             waterfordEditorHeight={160}

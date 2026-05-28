@@ -5,6 +5,7 @@ import DecisionAndValidationAlert from '../../components/DecisionAndValidationAl
 import { useTranslations } from '../../hooks/useTranslations';
 import { CedarPolicyEditor, CedarJsonEditor } from '@cedar-policy/cedar-monaco-editor';
 import { checkParsePolicySet, validate } from '@cedar-policy/cedar-wasm';
+import type { SchemaJson } from '@cedar-policy/cedar-wasm';
 import {
     DecisionAndValidationOutputForUI,
     convertCedarValidationOutputToIntlOutput,
@@ -48,10 +49,10 @@ export default function SchemaAndPolicies(props: SchemaAndPoliciesProps) {
                                             warnings: [],
                                         });
                                     } else {
-                                        let parsedSchema;
+                                        let parsedSchema: SchemaJson<string>;
                                         try {
-                                            parsedSchema = JSON.parse(props.schema);
-                                        } catch (e) {
+                                            parsedSchema = JSON.parse(props.schema) as SchemaJson<string>;
+                                        } catch (_e) {
                                             setOutput(getSchemaParseError(t));
                                             return;
                                         }

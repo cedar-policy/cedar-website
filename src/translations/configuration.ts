@@ -7,6 +7,7 @@ export const supportedLocales: Locale[] = ['en'];
 // translation map during runtime.
 const data = supportedLocales.reduce(
     (result, item) => {
+        // eslint-disable-next-line @typescript-eslint/no-require-imports, @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access
         result[item] = require(`./${item}.json`).default;
         return result;
     },
