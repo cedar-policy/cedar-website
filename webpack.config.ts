@@ -27,6 +27,7 @@ const config = (env: any, args: any) => {
         output: {
             filename: '[name].js',
             path: path.resolve(__dirname, 'build', 'public'),
+            publicPath: '/',
         },
         resolve: {
             extensions: ['.tsx', '.ts', '.js'],
@@ -95,11 +96,11 @@ const config = (env: any, args: any) => {
         optimization: {
             splitChunks: {
                 cacheGroups: {
-                    vendors: {
-                        test: /\/node_modules\//,
-                        name: 'vendors',
-                        chunks: 'all',
-                    },
+                    // Disable the default vendors group — it creates a shared chunk
+                    // that web workers attempt to load via importScripts(), which
+                    // fails in the dev server environment.
+                    defaultVendors: false,
+                    vendors: false,
                 },
             },
         },

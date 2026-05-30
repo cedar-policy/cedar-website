@@ -1,0 +1,11 @@
+#!/bin/sh
+
+npm run lint
+npm test
+
+echo ""
+echo "Run Cypress E2E tests? [y/N]"
+read -r answer < /dev/tty
+if [ "$answer" = "y" ] || [ "$answer" = "Y" ]; then
+  npx start-server-and-test 'npm start' http://localhost:3000 'npx cypress run'
+fi

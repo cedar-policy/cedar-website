@@ -4,3 +4,8 @@
 coverage
 build
 .sisyphus
+
+# Cypress
+cypress/screenshots/
+cypress/videos/
+cypress/downloads/
