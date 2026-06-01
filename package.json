@@ -15,7 +15,6 @@
     "build+test": "npm run build && npm run test",
     "cy:open": "cypress open",
     "cy:run": "cypress run",
-    "prepare": "husky",
     "createBlog": "ts-node scripts/createBlogEntry.ts"
   },
   "dependencies": {
