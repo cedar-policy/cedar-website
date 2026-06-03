@@ -54,14 +54,13 @@ const query1Entities: CedarEntity[] = [
         },
         attrs: {
             private: false,
-            account: {
-                __entity: {
-                    type: 'PhotoApp::Account',
-                    id: 'ahmad',
-                },
-            },
         },
-        parents: [],
+        parents: [
+            {
+                type: 'PhotoApp::Account',
+                id: 'ahmad',
+            },
+        ],
     },
     {
         uid: {
@@ -75,6 +74,14 @@ const query1Entities: CedarEntity[] = [
         uid: {
             type: 'PhotoApp::UserGroup',
             id: 'AVTeam',
+        },
+        attrs: {},
+        parents: [],
+    },
+    {
+        uid: {
+            type: 'PhotoApp::Account',
+            id: 'ahmad',
         },
         attrs: {},
         parents: [],
@@ -103,12 +110,6 @@ const query2Entities: CedarEntity[] = [
         },
         attrs: {
             private: false,
-            account: {
-                __entity: {
-                    type: 'PhotoApp::Account',
-                    id: 'stacey',
-                },
-            },
         },
         parents: [
             {
@@ -117,50 +118,57 @@ const query2Entities: CedarEntity[] = [
             },
         ],
     },
+    {
+        uid: {
+            type: 'PhotoApp::Account',
+            id: 'stacey',
+        },
+        attrs: {},
+        parents: [],
+    },
 ];
 
 const photoFlashSchema = `namespace PhotoApp {
-  type ContextType = {
-    authenticated: Bool,
-    ip?: ipaddr
-  };
-
   type PersonType = {
     age: Long,
     name: String
   };
 
-  entity Account;
-
-  entity Album;
-
-  entity Photo in [Album, Account] = {
-    account: Account,
-    private: Bool
+  type ContextType = {
+    authenticated: Bool,
+    ip?: ipaddr
   };
 
-  entity User in [UserGroup] = {
-    personInformation: PersonType,
-    userId: String
+  entity Account;
+
+  entity Album in [Account];
+
+  entity Photo in [Album, Account] = {
+    private: Bool
   };
 
   entity UserGroup;
 
-  action "createPhoto" appliesTo {
+  entity User in [UserGroup] = {
+    userId: String,
+    personInformation: PersonType
+  };
+
+  action viewPhoto appliesTo {
     principal: [User, UserGroup],
     resource: [Photo],
     context: ContextType
   };
 
-  action "listPhotos" appliesTo {
+  action createPhoto appliesTo {
     principal: [User, UserGroup],
-    resource: [Photo],
+    resource: [Account],
     context: ContextType
   };
 
-  action "viewPhoto" appliesTo {
+  action listPhotos appliesTo {
     principal: [User, UserGroup],
-    resource: [Photo],
+    resource: [Account],
     context: ContextType
   };
 }`;
