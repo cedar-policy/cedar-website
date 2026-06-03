@@ -3,13 +3,11 @@ import { Button, Container, Header, SpaceBetween } from '@cloudscape-design/comp
 import CedarIntl from '../../components/CedarIntl';
 import DecisionAndValidationAlert from '../../components/DecisionAndValidationAlert';
 import { useTranslations } from '../../hooks/useTranslations';
-import { CedarPolicyEditor, CedarJsonEditor } from '@cedar-policy/cedar-monaco-editor';
+import { CedarPolicyEditor, CedarSchemaEditor } from '@cedar-policy/cedar-monaco-editor';
 import { checkParsePolicySet, validate } from '@cedar-policy/cedar-wasm';
-import type { SchemaJson } from '@cedar-policy/cedar-wasm';
 import {
     DecisionAndValidationOutputForUI,
     convertCedarValidationOutputToIntlOutput,
-    getSchemaParseError,
 } from '../../util/outputMappers';
 
 const EDITOR_LINE_HEIGHT_PX = 19;
@@ -49,16 +47,9 @@ export default function SchemaAndPolicies(props: SchemaAndPoliciesProps) {
                                             warnings: [],
                                         });
                                     } else {
-                                        let parsedSchema: SchemaJson<string>;
-                                        try {
-                                            parsedSchema = JSON.parse(props.schema) as SchemaJson<string>;
-                                        } catch (_e) {
-                                            setOutput(getSchemaParseError(t));
-                                            return;
-                                        }
                                         const validationResult = validate({
                                             validationSettings: { mode: 'strict' },
-                                            schema: parsedSchema,
+                                            schema: props.schema,
                                             policies: { staticPolicies: props.policyBody },
                                         });
                                         setOutput(convertCedarValidationOutputToIntlOutput(validationResult, t));
@@ -99,9 +90,8 @@ export default function SchemaAndPolicies(props: SchemaAndPoliciesProps) {
                     </Header>
                 }
             >
-                <CedarJsonEditor
+                <CedarSchemaEditor
                     value={props.schema}
-                    mode={{ type: 'schema' }}
                     onChange={(newSchema: string) => {
                         setOutput(undefined);
                         props.updateSchema(newSchema);

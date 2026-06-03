@@ -1,343 +1,179 @@
-import { SchemaJson } from '@cedar-policy/cedar-wasm';
+export const schema = `namespace k8s {
+  type ExtraAttribute = {
+    key: String,
+    values: Set<String>
+  };
 
-export const schema: SchemaJson<string> = {
-    k8s: {
-        entityTypes: {
-            Extra: {
-                shape: {
-                    type: 'Record',
-                    attributes: {
-                        key: {
-                            type: 'String',
-                            required: true,
-                        },
-                        values: {
-                            type: 'Set',
-                            required: false,
-                            element: {
-                                type: 'String',
-                            },
-                        },
-                    },
-                },
-            },
-            Group: {
-                shape: {
-                    type: 'Record',
-                    attributes: {
-                        name: {
-                            type: 'String',
-                            required: true,
-                        },
-                    },
-                },
-            },
-            Node: {
-                shape: {
-                    type: 'Record',
-                    attributes: {
-                        extra: {
-                            type: 'Set',
-                            required: false,
-                            element: {
-                                type: 'ExtraAttribute',
-                            },
-                        },
-                        name: {
-                            type: 'String',
-                            required: true,
-                        },
-                    },
-                },
-                memberOfTypes: ['Group'],
-            },
-            NonResourceURL: {
-                shape: {
-                    type: 'Record',
-                    attributes: {
-                        path: {
-                            type: 'String',
-                            required: true,
-                        },
-                    },
-                },
-            },
-            PrincipalUID: {
-                shape: {
-                    type: 'Record',
-                    attributes: {},
-                },
-            },
-            Resource: {
-                shape: {
-                    type: 'Record',
-                    attributes: {
-                        apiGroup: {
-                            type: 'String',
-                            required: true,
-                        },
-                        fieldSelector: {
-                            type: 'Set',
-                            required: false,
-                            element: {
-                                type: 'FieldRequirement',
-                            },
-                        },
-                        labelSelector: {
-                            type: 'Set',
-                            required: false,
-                            element: {
-                                type: 'LabelRequirement',
-                            },
-                        },
-                        name: {
-                            type: 'String',
-                            required: false,
-                        },
-                        namespace: {
-                            type: 'String',
-                            required: false,
-                        },
-                        resource: {
-                            type: 'String',
-                            required: true,
-                        },
-                        subresource: {
-                            type: 'String',
-                            required: false,
-                        },
-                    },
-                },
-            },
-            ServiceAccount: {
-                shape: {
-                    type: 'Record',
-                    attributes: {
-                        extra: {
-                            type: 'Set',
-                            required: false,
-                            element: {
-                                type: 'ExtraAttribute',
-                            },
-                        },
-                        name: {
-                            type: 'String',
-                            required: true,
-                        },
-                        namespace: {
-                            type: 'String',
-                            required: true,
-                        },
-                    },
-                },
-                memberOfTypes: ['Group'],
-            },
-            User: {
-                shape: {
-                    type: 'Record',
-                    attributes: {
-                        extra: {
-                            type: 'Set',
-                            required: false,
-                            element: {
-                                type: 'ExtraAttribute',
-                            },
-                        },
-                        name: {
-                            type: 'String',
-                            required: true,
-                        },
-                    },
-                },
-                memberOfTypes: ['Group'],
-            },
-        },
-        actions: {
-            approve: {
-                appliesTo: {
-                    principalTypes: ['Group', 'Node', 'ServiceAccount', 'User'],
-                    resourceTypes: ['Resource'],
-                },
-            },
-            attest: {
-                appliesTo: {
-                    principalTypes: ['Group', 'Node', 'ServiceAccount', 'User'],
-                    resourceTypes: ['Resource'],
-                },
-            },
-            bind: {
-                appliesTo: {
-                    principalTypes: ['Group', 'Node', 'ServiceAccount', 'User'],
-                    resourceTypes: ['Resource'],
-                },
-            },
-            create: {
-                appliesTo: {
-                    principalTypes: ['Group', 'Node', 'ServiceAccount', 'User'],
-                    resourceTypes: ['Resource'],
-                },
-            },
-            delete: {
-                appliesTo: {
-                    principalTypes: ['Group', 'Node', 'ServiceAccount', 'User'],
-                    resourceTypes: ['NonResourceURL', 'Resource'],
-                },
-            },
-            deletecollection: {
-                appliesTo: {
-                    principalTypes: ['Group', 'Node', 'ServiceAccount', 'User'],
-                    resourceTypes: ['Resource'],
-                },
-            },
-            escalate: {
-                appliesTo: {
-                    principalTypes: ['Group', 'Node', 'ServiceAccount', 'User'],
-                    resourceTypes: ['Resource'],
-                },
-            },
-            get: {
-                appliesTo: {
-                    principalTypes: ['Group', 'Node', 'ServiceAccount', 'User'],
-                    resourceTypes: ['NonResourceURL', 'Resource'],
-                },
-                memberOf: [
-                    {
-                        id: 'readOnly',
-                    },
-                ],
-            },
-            head: {
-                appliesTo: {
-                    principalTypes: ['Group', 'Node', 'ServiceAccount', 'User'],
-                    resourceTypes: ['NonResourceURL'],
-                },
-            },
-            impersonate: {
-                appliesTo: {
-                    principalTypes: ['Group', 'Node', 'ServiceAccount', 'User'],
-                    resourceTypes: ['Extra', 'Group', 'Node', 'PrincipalUID', 'ServiceAccount', 'User'],
-                },
-            },
-            list: {
-                appliesTo: {
-                    principalTypes: ['Group', 'Node', 'ServiceAccount', 'User'],
-                    resourceTypes: ['Resource'],
-                },
-                memberOf: [
-                    {
-                        id: 'readOnly',
-                    },
-                ],
-            },
-            options: {
-                appliesTo: {
-                    principalTypes: ['Group', 'Node', 'ServiceAccount', 'User'],
-                    resourceTypes: ['NonResourceURL'],
-                },
-            },
-            patch: {
-                appliesTo: {
-                    principalTypes: ['Group', 'Node', 'ServiceAccount', 'User'],
-                    resourceTypes: ['NonResourceURL', 'Resource'],
-                },
-            },
-            post: {
-                appliesTo: {
-                    principalTypes: ['Group', 'Node', 'ServiceAccount', 'User'],
-                    resourceTypes: ['NonResourceURL'],
-                },
-            },
-            put: {
-                appliesTo: {
-                    principalTypes: ['Group', 'Node', 'ServiceAccount', 'User'],
-                    resourceTypes: ['NonResourceURL'],
-                },
-            },
-            readOnly: {
-                appliesTo: {
-                    principalTypes: ['Group', 'Node', 'ServiceAccount', 'User'],
-                    resourceTypes: ['Resource'],
-                },
-            },
-            sign: {
-                appliesTo: {
-                    principalTypes: ['Group', 'Node', 'ServiceAccount', 'User'],
-                    resourceTypes: ['Resource'],
-                },
-            },
-            update: {
-                appliesTo: {
-                    principalTypes: ['Group', 'Node', 'ServiceAccount', 'User'],
-                    resourceTypes: ['Resource'],
-                },
-            },
-            use: {
-                appliesTo: {
-                    principalTypes: ['Group', 'Node', 'ServiceAccount', 'User'],
-                    resourceTypes: ['Resource'],
-                },
-            },
-            watch: {
-                appliesTo: {
-                    principalTypes: ['Group', 'Node', 'ServiceAccount', 'User'],
-                    resourceTypes: ['Resource'],
-                },
-            },
-        },
-        commonTypes: {
-            ExtraAttribute: {
-                type: 'Record',
-                attributes: {
-                    key: {
-                        type: 'String',
-                        required: true,
-                    },
-                    values: {
-                        type: 'Set',
-                        required: false,
-                        element: {
-                            type: 'String',
-                        },
-                    },
-                },
-            },
-            FieldRequirement: {
-                type: 'Record',
-                attributes: {
-                    field: {
-                        type: 'String',
-                        required: true,
-                    },
-                    operator: {
-                        type: 'String',
-                        required: true,
-                    },
-                    value: {
-                        type: 'String',
-                        required: true,
-                    },
-                },
-            },
-            LabelRequirement: {
-                type: 'Record',
-                attributes: {
-                    key: {
-                        type: 'String',
-                        required: true,
-                    },
-                    operator: {
-                        type: 'String',
-                        required: true,
-                    },
-                    values: {
-                        type: 'Set',
-                        required: true,
-                        element: {
-                            type: 'String',
-                        },
-                    },
-                },
-            },
-        },
-    },
-};
+  type FieldRequirement = {
+    field: String,
+    operator: String,
+    value: String
+  };
+
+  type LabelRequirement = {
+    key: String,
+    operator: String,
+    values: Set<String>
+  };
+
+  entity Extra = {
+    key: String,
+    values?: Set<String>
+  };
+
+  entity Group = {
+    name: String
+  };
+
+  entity Node in [Group] = {
+    extra?: Set<ExtraAttribute>,
+    name: String
+  };
+
+  entity NonResourceURL = {
+    path: String
+  };
+
+  entity PrincipalUID;
+
+  entity Resource = {
+    apiGroup: String,
+    fieldSelector?: Set<FieldRequirement>,
+    labelSelector?: Set<LabelRequirement>,
+    name?: String,
+    namespace?: String,
+    resource: String,
+    subresource?: String
+  };
+
+  entity ServiceAccount in [Group] = {
+    extra?: Set<ExtraAttribute>,
+    name: String,
+    namespace: String
+  };
+
+  entity User in [Group] = {
+    extra?: Set<ExtraAttribute>,
+    name: String
+  };
+
+  action "approve" appliesTo {
+    principal: [Group, Node, ServiceAccount, User],
+    resource: [Resource],
+    context: {}
+  };
+
+  action "attest" appliesTo {
+    principal: [Group, Node, ServiceAccount, User],
+    resource: [Resource],
+    context: {}
+  };
+
+  action "bind" appliesTo {
+    principal: [Group, Node, ServiceAccount, User],
+    resource: [Resource],
+    context: {}
+  };
+
+  action "create" appliesTo {
+    principal: [Group, Node, ServiceAccount, User],
+    resource: [Resource],
+    context: {}
+  };
+
+  action "delete" appliesTo {
+    principal: [Group, Node, ServiceAccount, User],
+    resource: [NonResourceURL, Resource],
+    context: {}
+  };
+
+  action "deletecollection" appliesTo {
+    principal: [Group, Node, ServiceAccount, User],
+    resource: [Resource],
+    context: {}
+  };
+
+  action "escalate" appliesTo {
+    principal: [Group, Node, ServiceAccount, User],
+    resource: [Resource],
+    context: {}
+  };
+
+  action "get" in [Action::"readOnly"] appliesTo {
+    principal: [Group, Node, ServiceAccount, User],
+    resource: [NonResourceURL, Resource],
+    context: {}
+  };
+
+  action "head" appliesTo {
+    principal: [Group, Node, ServiceAccount, User],
+    resource: [NonResourceURL],
+    context: {}
+  };
+
+  action "impersonate" appliesTo {
+    principal: [Group, Node, ServiceAccount, User],
+    resource: [Extra, Group, Node, PrincipalUID, ServiceAccount, User],
+    context: {}
+  };
+
+  action "list" in [Action::"readOnly"] appliesTo {
+    principal: [Group, Node, ServiceAccount, User],
+    resource: [Resource],
+    context: {}
+  };
+
+  action "options" appliesTo {
+    principal: [Group, Node, ServiceAccount, User],
+    resource: [NonResourceURL],
+    context: {}
+  };
+
+  action "patch" appliesTo {
+    principal: [Group, Node, ServiceAccount, User],
+    resource: [NonResourceURL, Resource],
+    context: {}
+  };
+
+  action "post" appliesTo {
+    principal: [Group, Node, ServiceAccount, User],
+    resource: [NonResourceURL],
+    context: {}
+  };
+
+  action "put" appliesTo {
+    principal: [Group, Node, ServiceAccount, User],
+    resource: [NonResourceURL],
+    context: {}
+  };
+
+  action "readOnly" appliesTo {
+    principal: [Group, Node, ServiceAccount, User],
+    resource: [Resource],
+    context: {}
+  };
+
+  action "sign" appliesTo {
+    principal: [Group, Node, ServiceAccount, User],
+    resource: [Resource],
+    context: {}
+  };
+
+  action "update" appliesTo {
+    principal: [Group, Node, ServiceAccount, User],
+    resource: [Resource],
+    context: {}
+  };
+
+  action "use" appliesTo {
+    principal: [Group, Node, ServiceAccount, User],
+    resource: [Resource],
+    context: {}
+  };
+
+  action "watch" appliesTo {
+    principal: [Group, Node, ServiceAccount, User],
+    resource: [Resource],
+    context: {}
+  };
+}`;

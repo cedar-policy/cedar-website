@@ -55,7 +55,6 @@ export function exportCedarPlaygroundDataToBase64(
             ...dataTransferObject,
             playgroundData: {
                 ...dataTransferObject.playgroundData,
-                schema: minifyJson(dataTransferObject.playgroundData.schema),
                 context: minifyJson(dataTransferObject.playgroundData.context),
                 entities: minifyJson(dataTransferObject.playgroundData.entities),
             },
@@ -95,7 +94,7 @@ export function importCedarPlaygroundDataFromBase64(
                         policy: playgroundState.playgroundData.policy,
                         sampleApp: playgroundState.playgroundData.sampleApp,
                         sampleQueryIndex: playgroundState.playgroundData.sampleQueryIndex,
-                        schema: formatJson(playgroundState.playgroundData.schema),
+                        schema: playgroundState.playgroundData.schema,
                         context: formatJson(playgroundState.playgroundData.context, 2),
                         entities: formatJson(playgroundState.playgroundData.entities),
                     },

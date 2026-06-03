@@ -119,120 +119,56 @@ const query2Entities: CedarEntity[] = [
     },
 ];
 
-const photoFlashSchema = {
-    PhotoApp: {
-        commonTypes: {
-            PersonType: {
-                type: 'Record',
-                attributes: {
-                    age: {
-                        type: 'Long',
-                    },
-                    name: {
-                        type: 'String',
-                    },
-                },
-            },
-            ContextType: {
-                type: 'Record',
-                attributes: {
-                    ip: {
-                        type: 'Extension',
-                        name: 'ipaddr',
-                        required: false,
-                    },
-                    authenticated: {
-                        type: 'Boolean',
-                        required: true,
-                    },
-                },
-            },
-        },
-        entityTypes: {
-            User: {
-                shape: {
-                    type: 'Record',
-                    attributes: {
-                        userId: {
-                            type: 'String',
-                        },
-                        personInformation: { type: 'PersonType' },
-                    },
-                },
-                memberOfTypes: ['UserGroup'],
-            },
-            UserGroup: {
-                shape: {
-                    type: 'Record',
-                    attributes: {},
-                },
-            },
-            Photo: {
-                shape: {
-                    type: 'Record',
-                    attributes: {
-                        account: {
-                            type: 'Entity',
-                            name: 'Account',
-                            required: true,
-                        },
-                        private: {
-                            type: 'Boolean',
-                            required: true,
-                        },
-                    },
-                },
-                memberOfTypes: ['Album', 'Account'],
-            },
-            Album: {
-                shape: {
-                    type: 'Record',
-                    attributes: {},
-                },
-            },
-            Account: {
-                shape: {
-                    type: 'Record',
-                    attributes: {},
-                },
-            },
-        },
-        actions: {
-            viewPhoto: {
-                appliesTo: {
-                    principalTypes: ['User', 'UserGroup'],
-                    resourceTypes: ['Photo'],
-                    context: {
-                        type: 'ContextType',
-                    },
-                },
-            },
-            createPhoto: {
-                appliesTo: {
-                    principalTypes: ['User', 'UserGroup'],
-                    resourceTypes: ['Photo'],
-                    context: {
-                        type: 'ContextType',
-                    },
-                },
-            },
-            listPhotos: {
-                appliesTo: {
-                    principalTypes: ['User', 'UserGroup'],
-                    resourceTypes: ['Photo'],
-                    context: {
-                        type: 'ContextType',
-                    },
-                },
-            },
-        },
-    },
-};
+const photoFlashSchema = `namespace PhotoApp {
+  type ContextType = {
+    authenticated: Bool,
+    ip?: ipaddr
+  };
+
+  type PersonType = {
+    age: Long,
+    name: String
+  };
+
+  entity Account;
+
+  entity Album;
+
+  entity Photo in [Album, Account] = {
+    account: Account,
+    private: Bool
+  };
+
+  entity User in [UserGroup] = {
+    personInformation: PersonType,
+    userId: String
+  };
+
+  entity UserGroup;
+
+  action "createPhoto" appliesTo {
+    principal: [User, UserGroup],
+    resource: [Photo],
+    context: ContextType
+  };
+
+  action "listPhotos" appliesTo {
+    principal: [User, UserGroup],
+    resource: [Photo],
+    context: ContextType
+  };
+
+  action "viewPhoto" appliesTo {
+    principal: [User, UserGroup],
+    resource: [Photo],
+    context: ContextType
+  };
+}`;
 
 export const photoFlashSampleApp: SampleApp = {
     name: 'PhotoFlash',
     policy,
-    schema: JSON.stringify(photoFlashSchema, null, 4),
+    schema: photoFlashSchema,
     queries: [
         {
             queryTitle: 'Simple access example',

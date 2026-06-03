@@ -38,96 +38,44 @@ when {
 };
 `;
 
-const schema = {
-    HealthCareApp: {
-        entityTypes: {
-            User: {
-                shape: {
-                    type: 'Record',
-                    attributes: {},
-                },
-                memberOfTypes: ['Role'],
-            },
-            Role: {
-                shape: {
-                    type: 'Record',
-                    attributes: {},
-                },
-                memberOfTypes: [],
-            },
-            Info: {
-                shape: {
-                    type: 'Record',
-                    attributes: {
-                        provider: {
-                            type: 'Entity',
-                            name: 'User',
-                        },
-                        patient: {
-                            type: 'Entity',
-                            name: 'User',
-                        },
-                    },
-                },
-                memberOfTypes: ['InfoType'],
-            },
-            InfoType: {
-                shape: {
-                    type: 'Record',
-                    attributes: {},
-                },
-                memberOfTypes: [],
-            },
-        },
-        actions: {
-            createAppointment: {
-                appliesTo: {
-                    principalTypes: ['User'],
-                    resourceTypes: ['Info'],
-                    context: {
-                        type: 'Record',
-                        attributes: {
-                            referrer: {
-                                type: 'Entity',
-                                name: 'User',
-                            },
-                        },
-                    },
-                },
-            },
-            updateAppointment: {
-                appliesTo: {
-                    principalTypes: ['User'],
-                    resourceTypes: ['Info'],
-                    context: {
-                        type: 'Record',
-                        attributes: {},
-                    },
-                },
-            },
-            deleteAppointment: {
-                appliesTo: {
-                    principalTypes: ['User'],
-                    resourceTypes: ['Info'],
-                    context: {
-                        type: 'Record',
-                        attributes: {},
-                    },
-                },
-            },
-            listAppointments: {
-                appliesTo: {
-                    principalTypes: ['User'],
-                    resourceTypes: ['Info'],
-                    context: {
-                        type: 'Record',
-                        attributes: {},
-                    },
-                },
-            },
-        },
-    },
-};
+const schema = `namespace HealthCareApp {
+  entity Info in [InfoType] = {
+    patient: User,
+    provider: User
+  };
+
+  entity InfoType;
+
+  entity Role;
+
+  entity User in [Role];
+
+  action "createAppointment" appliesTo {
+    principal: [User],
+    resource: [Info],
+    context: {
+      referrer: User
+    }
+  };
+
+  action "deleteAppointment" appliesTo {
+    principal: [User],
+    resource: [Info],
+    context: {}
+  };
+
+  action "listAppointments" appliesTo {
+    principal: [User],
+    resource: [Info],
+    context: {}
+  };
+
+  action "updateAppointment" appliesTo {
+    principal: [User],
+    resource: [Info],
+    context: {}
+  };
+}`;
 
 const query1Entities: CedarEntity[] = [
     {
@@ -243,7 +191,7 @@ const query2Entities: CedarEntity[] = [
 export const healthCareSampleApp: SampleApp = {
     name: 'HealthCare',
     policy,
-    schema: JSON.stringify(schema, null, 4),
+    schema: schema,
     queries: [
         {
             queryTitle: 'Access example based on admin role',

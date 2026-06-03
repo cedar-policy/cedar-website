@@ -25,14 +25,13 @@ import {
 } from '../../playground-helpers';
 import { avpAttributesToCedarRecord, avpEntitiesToCedarEntities } from '../../cedar-utils';
 import { isAuthorized, getCedarVersion } from '@cedar-policy/cedar-wasm';
-import type { SchemaJson, Context, EntityJson } from '@cedar-policy/cedar-wasm';
+import type { Context, EntityJson } from '@cedar-policy/cedar-wasm';
 import { useTranslations } from '../../hooks/useTranslations';
 import CedarIntl from '../../components/CedarIntl';
 import type { ContextMap, EntityItem } from '../../types/cedar-data-types';
 import {
     DecisionAndValidationOutputForUI,
     convertCedarAuthOutputToIntlOutput,
-    getSchemaParseError,
 } from '../../util/outputMappers';
 import AuthQuery from './AuthQuery';
 import SchemaAndPolicies from './SchemaAndPolicies';
@@ -101,15 +100,8 @@ export default function PolicyPlayground() {
     const evaluateInput = () => {
         const { policy, entities, context, principal, action, resource, schema } = uiState;
         const start = performance.now();
-        let parsedSchema: SchemaJson<string> | undefined;
         let parsedEntities: EntityJson[] = [];
         let parsedContext: Context = {};
-        try {
-            parsedSchema = JSON.parse(schema) as SchemaJson<string>;
-        } catch (_e) {
-            setOutput(getSchemaParseError(t));
-            return;
-        }
         try {
             parsedEntities = JSON.parse(entities) as EntityJson[];
             parsedContext = JSON.parse(context) as Context;
@@ -125,8 +117,8 @@ export default function PolicyPlayground() {
             context: parsedContext,
             entities: parsedEntities,
             policies: { staticPolicies: policy },
-            schema: parsedSchema,
-            validateRequest: !!parsedSchema,
+            schema: schema || undefined,
+            validateRequest: !!schema,
         });
         console.log('Finished isAuthorized. Duration:', performance.now() - start);
         console.log('Result:', result);

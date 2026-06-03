@@ -56,6 +56,6 @@ permit (
 export const kubernetesApp: SampleApp = {
     name: 'Kubernetes',
     policy: policy,
-    schema: JSON.stringify(schema, null, 4),
+    schema: schema,
     queries: [query1, query2],
 };

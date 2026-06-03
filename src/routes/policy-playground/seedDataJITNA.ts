@@ -1,113 +1,46 @@
 import type { CedarEntity } from '../../cedar-utils';
-import type { SchemaJson } from '@cedar-policy/cedar-wasm';
 import type { SampleApp } from './types';
 
 interface CedarEntityWithTags extends CedarEntity {
     tags?: Record<string, string>;
 }
 
-const schema: SchemaJson<string> = {
-    'AWS::IdentityStore': {
-        entityTypes: {
-            Group: {},
-            User: {
-                memberOfTypes: ['Group'],
-                shape: {
-                    type: 'Record',
-                    attributes: {
-                        costCenter: {
-                            type: 'EntityOrCommon',
-                            name: 'String',
-                            required: false,
-                        },
-                        division: {
-                            type: 'EntityOrCommon',
-                            name: 'String',
-                            required: false,
-                        },
-                        employeeNumber: {
-                            type: 'EntityOrCommon',
-                            name: 'String',
-                            required: false,
-                        },
-                        organization: {
-                            type: 'EntityOrCommon',
-                            name: 'String',
-                            required: false,
-                        },
-                    },
-                },
-            },
-        },
-        actions: {},
-    },
-    'AWS::SSM': {
-        entityTypes: {
-            ManagedInstance: {
-                tags: {
-                    type: 'EntityOrCommon',
-                    name: 'String',
-                },
-            },
-        },
-        actions: {
-            getTokenForInstanceAccess: {
-                appliesTo: {
-                    resourceTypes: ['AWS::EC2::Instance', 'AWS::SSM::ManagedInstance'],
-                    principalTypes: ['AWS::IdentityStore::User'],
-                    context: {
-                        type: 'Record',
-                        attributes: {
-                            iam: {
-                                type: 'EntityOrCommon',
-                                name: 'AWS::IAM::AuthorizationContext',
-                            },
-                        },
-                    },
-                },
-            },
-        },
-    },
-    'AWS::EC2': {
-        entityTypes: {
-            Instance: {
-                tags: {
-                    type: 'EntityOrCommon',
-                    name: 'String',
-                },
-            },
-        },
-        actions: {},
-    },
-    'AWS::IAM': {
-        commonTypes: {
-            AuthorizationContext: {
-                type: 'Record',
-                attributes: {
-                    principalTags: {
-                        type: 'EntityOrCommon',
-                        name: 'PrincipalTags',
-                    },
-                },
-            },
-        },
-        entityTypes: {
-            PrincipalTags: {
-                tags: {
-                    type: 'EntityOrCommon',
-                    name: 'String',
-                },
-            },
-            Role: {
-                tags: {
-                    type: 'EntityOrCommon',
-                    name: 'String',
-                },
-            },
-        },
-        actions: {},
-    },
-};
+const schema = `namespace AWS::EC2 {
+  entity Instance tags String;
+}
+
+namespace AWS::IAM {
+  type AuthorizationContext = {
+    principalTags: PrincipalTags
+  };
+
+  entity PrincipalTags tags String;
+
+  entity Role tags String;
+}
+
+namespace AWS::IdentityStore {
+  entity Group;
+
+  entity User in [Group] = {
+    costCenter?: String,
+    division?: String,
+    employeeNumber?: String,
+    organization?: String
+  };
+}
+
+namespace AWS::SSM {
+  entity ManagedInstance tags String;
+
+  action "getTokenForInstanceAccess" appliesTo {
+    principal: [AWS::IdentityStore::User],
+    resource: [AWS::EC2::Instance, AWS::SSM::ManagedInstance],
+    context: {
+      iam: AWS::IAM::AuthorizationContext
+    }
+  };
+}`;
 
 const policy = `permit (principal in AWS::IdentityStore::Group::"90677fa0fb-5513f9a2-9916-4fc2-aec5-0358ce119215", action == AWS::SSM::Action::"getTokenForInstanceAccess", resource)
 when {
@@ -214,7 +147,7 @@ const query3Entities: CedarEntityWithTags[] = [
 export const jitnaApp: SampleApp = {
     name: 'JITNA',
     policy,
-    schema: JSON.stringify(schema, null, 4),
+    schema: schema,
     queries: [
         {
             queryTitle: 'Access for prod admin group member',
