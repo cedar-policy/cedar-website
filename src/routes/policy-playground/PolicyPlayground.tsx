@@ -373,8 +373,10 @@ function getSampleApp(sampleApp = ''): SampleAppName {
 }
 
 /**
- * The data format for compressed playground data may change. This helper should take whatever is decoded from the hash
- * and handle the distinctions between the different versions of the DTO, converting them into an update for the playground UI state.
+ * The data format for compressed playground data may change. This helper
+ * should take whatever is decoded from the hash and handle the distinctions
+ * between the different versions of the DTO, converting them into an update
+ * for the playground UI state.
  */
 function getStateFromHashOrDefault(): PolicyPlaygroundState {
     const defaultApp = getSeedDataForApp('PhotoFlash', 0);

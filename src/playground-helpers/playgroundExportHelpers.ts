@@ -1,5 +1,6 @@
 import { gzip, ungzip } from 'pako';
 import { schemaToText } from '@cedar-policy/cedar-wasm';
+import type { Schema } from '@cedar-policy/cedar-wasm';
 
 interface Identifier {
     type: string;
@@ -69,7 +70,10 @@ export function exportCedarPlaygroundDataToBase64(
     }
 }
 
-/** Convert base64 string to Uint8Array, decompress with gzip, convert to UTF-8, parse JSON and check fields are valid, then returns state object. */
+/**
+ * Convert base64 string to Uint8Array, decompress with gzip, convert to UTF-8,
+ * parse JSON and check fields are valid, then returns state object.
+ */
 export function importCedarPlaygroundDataFromBase64(
     base64: string,
 ): PlaygroundImportResult {
@@ -83,7 +87,8 @@ export function importCedarPlaygroundDataFromBase64(
         validateCedarPlaygroundDTO(playgroundState);
         switch (playgroundState.interfaceVersion) {
             case 1: {
-                // Set each field of returned data directly instead of using spread operator, as user-supplied state string could contain extra attributes
+                // Set each field directly instead of spread,
+                // as user-supplied state could contain extra attributes
                 const formattedState: CedarPlaygroundDataTransferObject = {
                     interfaceVersion: 1,
                     cedarVersion: playgroundState.cedarVersion,
@@ -186,7 +191,7 @@ function validatePlaygroundDataV1(playgroundData: PlaygroundDataV1) {
 /** If schema is JSON, convert to Cedar text format. If already Cedar text or conversion fails, return as-is. */
 function jsonSchemaToCedarText(schema: string): string {
     try {
-        const parsed = JSON.parse(schema);
+        const parsed = JSON.parse(schema) as Schema;
         const result = schemaToText(parsed);
         if (result.type === 'success') return result.text;
         return schema;
