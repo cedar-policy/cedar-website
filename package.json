@@ -18,7 +18,7 @@
     "createBlog": "ts-node scripts/createBlogEntry.ts"
   },
   "dependencies": {
-    "@cedar-policy/cedar-monaco-editor": "^0.2.0",
+    "@cedar-policy/cedar-monaco-editor": "^0.3.0",
     "@cedar-policy/cedar-wasm": "4.11.0",
     "@cloudscape-design/components": "^3.0.0",
     "@cloudscape-design/design-tokens": "^3.0.0",

@@ -13,7 +13,7 @@ import CedarIntl from '../../components/CedarIntl';
 import { useTranslations } from '../../hooks/useTranslations';
 import { DecisionAndValidationOutputForUI } from '../../util/outputMappers';
 import DecisionAndValidationAlert from '../../components/DecisionAndValidationAlert';
-import { CedarJsonEditor } from '@cedar-policy/cedar-monaco-editor';
+import { CedarJsonEditor, SchemaInput } from '@cedar-policy/cedar-monaco-editor';
 import type { CedarEntityIdObj } from '../../cedar-utils';
 import { NonCancelableEventHandler } from '@cloudscape-design/components/internal/events';
 
@@ -26,7 +26,7 @@ interface AuthQuerySectionProps {
     resource: CedarEntityIdObj;
     context: string;
     entities: string;
-    schema: string;
+    schema: SchemaInput;
     onChangePAR: (
         property: 'principal' | 'action' | 'resource',
         field: 'type' | 'id',

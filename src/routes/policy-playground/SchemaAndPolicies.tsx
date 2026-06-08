@@ -76,7 +76,7 @@ export default function SchemaAndPolicies(props: SchemaAndPoliciesProps) {
                             setOutput(undefined);
                             props.updatePolicy(p);
                         }}
-                        schema={props.schema}
+                        schema={{ type: 'cedarFormat', value: props.schema }}
                         height={`${12 * EDITOR_LINE_HEIGHT_PX}px`}
                     />
                 </SpaceBetween>

@@ -1,19 +1,44 @@
 import type { CedarEntity } from '../../cedar-utils';
 import type { SampleApp } from './types';
 
-// String of one or more Waterford policies written in the Cedar language
-export const policy = `permit (
-    principal == PhotoApp::User::"alice",
-    action == PhotoApp::Action::"viewPhoto",
-    resource == PhotoApp::Photo::"vacationPhoto.jpg"
-);
-
+export const policy = `// Account owner can do anything with their own photos and albums
 permit (
-    principal == PhotoApp::User::"stacey",
+    principal,
+    action,
+    resource
+)
+when { resource in principal.account };
+
+// Account owner can share their albums with other users
+permit (
+    principal,
+    action == PhotoApp::Action::"shareAlbum",
+    resource
+)
+when { resource in principal.account };
+
+// Anyone can view non-private photos
+permit (
+    principal,
     action == PhotoApp::Action::"viewPhoto",
     resource
 )
-when { resource in PhotoApp::Account::"stacey" };`;
+when { !resource.private };
+
+// Forbid unauthenticated access regardless of other policies
+forbid (
+    principal,
+    action,
+    resource
+)
+when { !context.authenticated };
+
+// Example: policy created after alice shared "vacationAlbum" with stacey
+permit (
+    principal == PhotoApp::User::"stacey",
+    action in [PhotoApp::Action::"viewPhoto", PhotoApp::Action::"createPhoto", PhotoApp::Action::"deletePhoto", PhotoApp::Action::"listPhotosInAlbum"],
+    resource in PhotoApp::Album::"alice/vacationAlbum"
+);`;
 
 export const context: string = JSON.stringify(
     {
@@ -25,64 +50,31 @@ export const context: string = JSON.stringify(
 
 const query1Entities: CedarEntity[] = [
     {
-        uid: {
-            type: 'PhotoApp::User',
-            id: 'alice',
-        },
+        uid: { type: 'PhotoApp::User', id: 'alice' },
         attrs: {
             userId: '897345789237492878',
-            personInformation: {
-                age: 25,
-                name: 'alice',
-            },
+            personInformation: { age: 25, name: 'alice' },
+            account: { __entity: { type: 'PhotoApp::Account', id: 'alice' } },
         },
-        parents: [
-            {
-                type: 'PhotoApp::UserGroup',
-                id: 'alice_friends',
-            },
-            {
-                type: 'PhotoApp::UserGroup',
-                id: 'AVTeam',
-            },
-        ],
+        parents: [{ type: 'PhotoApp::UserGroup', id: 'AVTeam' }],
     },
     {
-        uid: {
-            type: 'PhotoApp::Photo',
-            id: 'vacationPhoto.jpg',
-        },
-        attrs: {
-            private: false,
-        },
-        parents: [
-            {
-                type: 'PhotoApp::Account',
-                id: 'ahmad',
-            },
-        ],
-    },
-    {
-        uid: {
-            type: 'PhotoApp::UserGroup',
-            id: 'alice_friends',
-        },
+        uid: { type: 'PhotoApp::Account', id: 'alice' },
         attrs: {},
         parents: [],
     },
     {
-        uid: {
-            type: 'PhotoApp::UserGroup',
-            id: 'AVTeam',
-        },
+        uid: { type: 'PhotoApp::Album', id: 'alice/vacationAlbum' },
         attrs: {},
-        parents: [],
+        parents: [{ type: 'PhotoApp::Account', id: 'alice' }],
     },
     {
-        uid: {
-            type: 'PhotoApp::Account',
-            id: 'ahmad',
-        },
+        uid: { type: 'PhotoApp::Photo', id: 'vacationPhoto.jpg' },
+        attrs: { private: true },
+        parents: [{ type: 'PhotoApp::Album', id: 'alice/vacationAlbum' }],
+    },
+    {
+        uid: { type: 'PhotoApp::UserGroup', id: 'AVTeam' },
         attrs: {},
         parents: [],
     },
@@ -90,41 +82,33 @@ const query1Entities: CedarEntity[] = [
 
 const query2Entities: CedarEntity[] = [
     {
-        uid: {
-            type: 'PhotoApp::User',
-            id: 'stacey',
-        },
+        uid: { type: 'PhotoApp::User', id: 'stacey' },
         attrs: {
             userId: '345623462345',
-            personInformation: {
-                age: 18,
-                name: 'stacey',
-            },
+            personInformation: { age: 18, name: 'stacey' },
+            account: { __entity: { type: 'PhotoApp::Account', id: 'stacey' } },
         },
         parents: [],
     },
     {
-        uid: {
-            type: 'PhotoApp::Photo',
-            id: 'birthdaySelfie.jpg',
-        },
-        attrs: {
-            private: false,
-        },
-        parents: [
-            {
-                type: 'PhotoApp::Account',
-                id: 'stacey',
-            },
-        ],
-    },
-    {
-        uid: {
-            type: 'PhotoApp::Account',
-            id: 'stacey',
-        },
+        uid: { type: 'PhotoApp::Account', id: 'stacey' },
         attrs: {},
         parents: [],
+    },
+    {
+        uid: { type: 'PhotoApp::Album', id: 'alice/vacationAlbum' },
+        attrs: {},
+        parents: [{ type: 'PhotoApp::Account', id: 'alice' }],
+    },
+    {
+        uid: { type: 'PhotoApp::Account', id: 'alice' },
+        attrs: {},
+        parents: [],
+    },
+    {
+        uid: { type: 'PhotoApp::Photo', id: 'beach.jpg' },
+        attrs: { private: true },
+        parents: [{ type: 'PhotoApp::Album', id: 'alice/vacationAlbum' }],
     },
 ];
 
@@ -151,24 +135,43 @@ const photoFlashSchema = `namespace PhotoApp {
 
   entity User in [UserGroup] = {
     userId: String,
-    personInformation: PersonType
+    personInformation: PersonType,
+    account: Account
   };
 
   action viewPhoto appliesTo {
-    principal: [User, UserGroup],
+    principal: [User],
     resource: [Photo],
     context: ContextType
   };
 
   action createPhoto appliesTo {
-    principal: [User, UserGroup],
-    resource: [Account],
+    principal: [User],
+    resource: [Album, Account],
+    context: ContextType
+  };
+
+  action deletePhoto appliesTo {
+    principal: [User],
+    resource: [Photo],
     context: ContextType
   };
 
   action listPhotos appliesTo {
-    principal: [User, UserGroup],
+    principal: [User],
     resource: [Account],
+    context: ContextType
+  };
+
+  action listPhotosInAlbum appliesTo {
+    principal: [User],
+    resource: [Album],
+    context: ContextType
+  };
+
+  action shareAlbum appliesTo {
+    principal: [User],
+    resource: [Album],
     context: ContextType
   };
 }`;
@@ -179,7 +182,7 @@ export const photoFlashSampleApp: SampleApp = {
     schema: photoFlashSchema,
     queries: [
         {
-            queryTitle: 'Simple access example',
+            queryTitle: 'Owner views their own photo',
             principal: { type: 'PhotoApp::User', id: 'alice' },
             action: { type: 'PhotoApp::Action', id: 'viewPhoto' },
             resource: { type: 'PhotoApp::Photo', id: 'vacationPhoto.jpg' },
@@ -187,10 +190,10 @@ export const photoFlashSampleApp: SampleApp = {
             entities: JSON.stringify(query1Entities, null, 4),
         },
         {
-            queryTitle: 'Resource group access example',
+            queryTitle: 'Shared user views private photo in shared album',
             principal: { type: 'PhotoApp::User', id: 'stacey' },
             action: { type: 'PhotoApp::Action', id: 'viewPhoto' },
-            resource: { type: 'PhotoApp::Photo', id: 'birthdaySelfie.jpg' },
+            resource: { type: 'PhotoApp::Photo', id: 'beach.jpg' },
             context: context,
             entities: JSON.stringify(query2Entities, null, 4),
         },

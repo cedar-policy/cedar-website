@@ -293,7 +293,7 @@ export default function PolicyPlayground() {
                                             resource={uiState.resource}
                                             context={uiState.context}
                                             entities={uiState.entities}
-                                            schema={uiState.schema}
+                                            schema={{ type: 'cedarFormat', value: uiState.schema }}
                                             onChangePAR={(
                                                 property: 'principal' | 'action' | 'resource',
                                                 field: 'type' | 'id',
