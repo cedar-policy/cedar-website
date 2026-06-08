@@ -1,4 +1,5 @@
 import { gzip, ungzip } from 'pako';
+import { schemaToText } from '@cedar-policy/cedar-wasm';
 
 interface Identifier {
     type: string;
@@ -94,7 +95,7 @@ export function importCedarPlaygroundDataFromBase64(
                         policy: playgroundState.playgroundData.policy,
                         sampleApp: playgroundState.playgroundData.sampleApp,
                         sampleQueryIndex: playgroundState.playgroundData.sampleQueryIndex,
-                        schema: playgroundState.playgroundData.schema,
+                        schema: jsonSchemaToCedarText(playgroundState.playgroundData.schema),
                         context: formatJson(playgroundState.playgroundData.context, 2),
                         entities: formatJson(playgroundState.playgroundData.entities),
                     },
@@ -179,6 +180,18 @@ function validatePlaygroundDataV1(playgroundData: PlaygroundDataV1) {
         throw new TypeError(
             `Expected 'playgroundData.isAVPFormat' to be of type 'boolean' got: ${typeof playgroundData.isAVPFormat}`,
         );
+    }
+}
+
+/** If schema is JSON, convert to Cedar text format. If already Cedar text or conversion fails, return as-is. */
+function jsonSchemaToCedarText(schema: string): string {
+    try {
+        const parsed = JSON.parse(schema);
+        const result = schemaToText(parsed);
+        if (result.type === 'success') return result.text;
+        return schema;
+    } catch {
+        return schema;
     }
 }
 
