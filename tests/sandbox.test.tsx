@@ -108,12 +108,13 @@ describe('playground tests', () => {
         const exported = exportCedarPlaygroundDataToBase64(dto);
         if ('error' in exported) throw new Error(exported.error);
         window.location.hash = `#${PLAYGROUND_URL_FRAG_PREFIX}${exported.result}`;
-
-        mountPlayground();
-        fireEvent.click(screen.getByTestId('evaluate-button'));
-        await screen.findByText(/Invalid context or entities input/);
-
-        window.location.hash = '';
+        try {
+            mountPlayground();
+            fireEvent.click(screen.getByTestId('evaluate-button'));
+            await screen.findByText(/Invalid context or entities input/);
+        } finally {
+            window.location.hash = '';
+        }
     });
 
     it('should show error when context JSON is invalid', async () => {
@@ -134,11 +135,12 @@ describe('playground tests', () => {
         const exported = exportCedarPlaygroundDataToBase64(dto);
         if ('error' in exported) throw new Error(exported.error);
         window.location.hash = `#${PLAYGROUND_URL_FRAG_PREFIX}${exported.result}`;
-
-        mountPlayground();
-        fireEvent.click(screen.getByTestId('evaluate-button'));
-        await screen.findByText(/Invalid context or entities input/);
-
-        window.location.hash = '';
+        try {
+            mountPlayground();
+            fireEvent.click(screen.getByTestId('evaluate-button'));
+            await screen.findByText(/Invalid context or entities input/);
+        } finally {
+            window.location.hash = '';
+        }
     });
 });
