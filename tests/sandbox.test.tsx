@@ -108,11 +108,12 @@ describe('playground tests', () => {
         const exported = exportCedarPlaygroundDataToBase64(dto);
         if ('error' in exported) throw new Error(exported.error);
         window.location.hash = `#${PLAYGROUND_URL_FRAG_PREFIX}${exported.result}`;
+        const { unmount } = mountPlayground();
         try {
-            mountPlayground();
             fireEvent.click(screen.getByTestId('evaluate-button'));
             await screen.findByText(/Invalid context or entities input/);
         } finally {
+            unmount();
             window.location.hash = '';
         }
     });
@@ -135,11 +136,12 @@ describe('playground tests', () => {
         const exported = exportCedarPlaygroundDataToBase64(dto);
         if ('error' in exported) throw new Error(exported.error);
         window.location.hash = `#${PLAYGROUND_URL_FRAG_PREFIX}${exported.result}`;
+        const { unmount } = mountPlayground();
         try {
-            mountPlayground();
             fireEvent.click(screen.getByTestId('evaluate-button'));
             await screen.findByText(/Invalid context or entities input/);
         } finally {
+            unmount();
             window.location.hash = '';
         }
     });
