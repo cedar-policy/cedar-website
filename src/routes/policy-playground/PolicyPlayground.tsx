@@ -100,15 +100,26 @@ export default function PolicyPlayground() {
     const evaluateInput = () => {
         const { policy, entities, context, principal, action, resource, schema } = uiState;
         const start = performance.now();
-        let parsedEntities: EntityJson[] = [];
-        let parsedContext: Context = {};
+        const setParseError = (e: unknown) =>
+            setOutput({
+                status: 'error',
+                message: t('issueAuthRequest.parseError'),
+                errors: [(e as Error).message],
+                warnings: [],
+            });
+        let parsedEntities: EntityJson[];
+        let parsedContext: Context;
         try {
             parsedEntities = JSON.parse(entities) as EntityJson[];
+        } catch (e) {
+            setParseError(e);
+            return;
+        }
+        try {
             parsedContext = JSON.parse(context) as Context;
-        } catch (_e) {
-            // Fall through: let wasm produce the error if JSON is invalid.
-            parsedEntities = [];
-            parsedContext = {};
+        } catch (e) {
+            setParseError(e);
+            return;
         }
         const result = isAuthorized({
             principal,

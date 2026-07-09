@@ -7,6 +7,11 @@ import { IntlProvider } from 'react-intl';
 import nestedMessages from '../src/translations/en.json';
 import { flattenMessages } from '../src/util/flattenMessages';
 import { getCedarVersion } from '@cedar-policy/cedar-wasm';
+import {
+    exportCedarPlaygroundDataToBase64,
+    PLAYGROUND_URL_FRAG_PREFIX,
+    CedarPlaygroundDataTransferObject,
+} from '../src/playground-helpers';
 
 const messages = flattenMessages(nestedMessages);
 
@@ -83,5 +88,57 @@ describe('playground tests', () => {
         const cedarVersion = getCedarVersion();
         expect(cedarVersion).toBeDefined();
         expect(cedarVersion).toEqual(expect.any(String));
+    });
+
+    it('should show error when entities JSON is invalid', async () => {
+        const dto: CedarPlaygroundDataTransferObject = {
+            interfaceVersion: 1,
+            cedarVersion: getCedarVersion(),
+            playgroundData: {
+                policy: 'permit(principal, action, resource);',
+                schema: '',
+                principal: { type: 'User', id: 'alice' },
+                action: { type: 'Action', id: 'view' },
+                resource: { type: 'Photo', id: 'photo1' },
+                entities: 'not valid json [[[',
+                context: '{}',
+                isAVPFormat: false,
+            },
+        };
+        const exported = exportCedarPlaygroundDataToBase64(dto);
+        if ('error' in exported) throw new Error(exported.error);
+        window.location.hash = `#${PLAYGROUND_URL_FRAG_PREFIX}${exported.result}`;
+
+        mountPlayground();
+        fireEvent.click(screen.getByTestId('evaluate-button'));
+        await screen.findByText(/Invalid context or entities input/);
+
+        window.location.hash = '';
+    });
+
+    it('should show error when context JSON is invalid', async () => {
+        const dto: CedarPlaygroundDataTransferObject = {
+            interfaceVersion: 1,
+            cedarVersion: getCedarVersion(),
+            playgroundData: {
+                policy: 'permit(principal, action, resource);',
+                schema: '',
+                principal: { type: 'User', id: 'alice' },
+                action: { type: 'Action', id: 'view' },
+                resource: { type: 'Photo', id: 'photo1' },
+                entities: '[]',
+                context: '{invalid context}',
+                isAVPFormat: false,
+            },
+        };
+        const exported = exportCedarPlaygroundDataToBase64(dto);
+        if ('error' in exported) throw new Error(exported.error);
+        window.location.hash = `#${PLAYGROUND_URL_FRAG_PREFIX}${exported.result}`;
+
+        mountPlayground();
+        fireEvent.click(screen.getByTestId('evaluate-button'));
+        await screen.findByText(/Invalid context or entities input/);
+
+        window.location.hash = '';
     });
 });
