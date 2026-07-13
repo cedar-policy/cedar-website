@@ -9,14 +9,6 @@ permit (
 )
 when { resource in principal.account };
 
-// Account owner can share their albums with other users
-permit (
-    principal,
-    action == PhotoApp::Action::"shareAlbum",
-    resource
-)
-when { resource in principal.account };
-
 // Anyone can view non-private photos
 permit (
     principal,
