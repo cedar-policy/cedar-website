@@ -25,6 +25,8 @@ import SchemaTutorialStep from './routes/tutorial/SchemaTutorialStep';
 import PolicyTemplatesStep from './routes/tutorial/PolicyTemplatesStep';
 import Integrations from './routes/integrations/Integrations';
 import Learn from './routes/learn/Learn';
+import Sdks from './routes/sdks/Sdks';
+import Community from './routes/community/Community';
 import cedarLogo from '../static/logo.svg';
 import { BlogList } from './routes/blog/BlogList';
 import * as BlogEntryLazyImports from './routes/blogEntries';
@@ -122,6 +124,14 @@ export const routes = [
         element: <Learn />,
     },
     {
+        path: '/:lang/sdks',
+        element: <Sdks />,
+    },
+    {
+        path: '/:lang/community',
+        element: <Community />,
+    },
+    {
         path: '/',
         element: <Navigate to={`/${defaultLocale}`} replace />,
     },
@@ -132,6 +142,14 @@ export const routes = [
     {
         path: '/learn',
         element: <Navigate to={`/${defaultLocale}/learn`} replace />,
+    },
+    {
+        path: '/sdks',
+        element: <Navigate to={`/${defaultLocale}/sdks`} replace />,
+    },
+    {
+        path: '/community',
+        element: <Navigate to={`/${defaultLocale}/community`} replace />,
     },
     {
         path: '/playground',
@@ -270,11 +288,31 @@ export default function App() {
                                 },
                                 {
                                     type: 'button',
-                                    text: t('topNavbar.cedarSDK.link'),
+                                    text: t('topNavbar.sdks'),
+                                    href: `/${locale}/sdks`,
+                                    external: false,
+                                    onClick: (e) => {
+                                        e.preventDefault();
+                                        navigate(`/${locale}/sdks`);
+                                    },
+                                },
+                                {
+                                    type: 'button',
+                                    text: t('topNavbar.community'),
+                                    href: `/${locale}/community`,
+                                    external: false,
+                                    onClick: (e) => {
+                                        e.preventDefault();
+                                        navigate(`/${locale}/community`);
+                                    },
+                                },
+                                {
+                                    type: 'button',
+                                    text: t('topNavbar.github.link'),
                                     href: 'https://github.com/cedar-policy',
                                     external: true,
-                                    externalIconAriaLabel: t('topNavbar.cedarSDK.ariaLabel'),
-                                    iconSvg: <img src={'/github.svg'} alt={t('topNavbar.cedarSDK.iconAltText')} />,
+                                    externalIconAriaLabel: t('topNavbar.github.ariaLabel'),
+                                    iconSvg: <img src={'/github.svg'} alt={t('topNavbar.github.iconAltText')} />,
                                 },
                             ]}
                             i18nStrings={{

@@ -16,10 +16,10 @@
             "text":"Policy playground",
             "note":"Button text for a navbar button"
         },
-        "cedarSDK":{
+        "github":{
             "link":{
-                "text":"Cedar SDK",
-                "note":"Button text for a navbar button"
+                "text":"GitHub",
+                "note":"Button text for a navbar button linking to the Cedar GitHub organization"
             },
             "ariaLabel":{
                 "text":"Link to GitHub",
@@ -33,6 +33,14 @@
         "integrations":{
             "text":"Integrations",
             "note":"Button text for a navbar button"
+        },
+        "sdks":{
+            "text":"SDKs",
+            "note":"Button text for a navbar button linking to the SDKs page"
+        },
+        "community":{
+            "text":"Community",
+            "note":"Button text for a navbar button linking to the Community page"
         },
         "overflowMenu":{
             "triggerText":{
@@ -241,6 +249,14 @@
         "blog":{
             "text":"Blog | Cedar language",
             "note":"Page title for the blog"
+        },
+        "sdks":{
+            "text":"SDKs | Cedar language",
+            "note":"Page title for the SDKs page"
+        },
+        "community":{
+            "text":"Community | Cedar language",
+            "note":"Page title for the Community page"
         }
     },
     "errorBoundary":{
@@ -1706,10 +1722,158 @@
             }
         }
     },
+    "sdks":{
+        "title":{
+            "text":"SDKs & language bindings",
+            "note":"Title for the SDKs page"
+        },
+        "description":{
+            "text":"Cedar is written in Rust, with official bindings for other languages and ready-made integrations for common platforms. All of these are open source and available under the Apache-2.0 license on GitHub.",
+            "note":"Intro paragraph for the SDKs page"
+        },
+        "coreSection":{
+            "title":{
+                "text":"Core engine & bindings",
+                "note":"Section heading grouping the core engine and language bindings"
+            }
+        },
+        "toolingSection":{
+            "title":{
+                "text":"Integrations & tooling",
+                "note":"Section heading grouping integrations and developer tooling"
+            }
+        },
+        "viewOnGithub":{
+            "text":"View on GitHub",
+            "note":"Button linking to a repository on GitHub"
+        },
+        "getPackage":{
+            "text":"Get it on {registry}",
+            "note":"Button linking to the official package distribution. {registry} is the registry name, e.g. crates.io, npm, PyPI."
+        },
+        "rust":{
+            "description":{
+                "text":"The reference implementation of the Cedar policy language and evaluation engine.",
+                "note":"Description of the Rust core SDK"
+            }
+        },
+        "java":{
+            "description":{
+                "text":"Official Java bindings for the Cedar engine, for authorizing requests from JVM applications and services.",
+                "note":"Description of the Java SDK"
+            }
+        },
+        "go":{
+            "description":{
+                "text":"A native Go implementation of the Cedar policy language, with no cgo or WASM dependency.",
+                "note":"Description of the Go SDK"
+            }
+        },
+        "wasm":{
+            "description":{
+                "text":"WebAssembly build of the Cedar engine for the browser and Node.js. This very site uses it to evaluate policies client-side.",
+                "note":"Description of the WASM SDK"
+            }
+        },
+        "python":{
+            "description":{
+                "text":"Community-maintained Python bindings for the Rust Cedar engine, for authorizing, validating, and formatting policies from Python.",
+                "note":"Description of the community Python bindings"
+            }
+        },
+        "expressjs":{
+            "description":{
+                "text":"Middleware that adds Cedar-based authorization to Express.js applications with minimal wiring.",
+                "note":"Description of the Express.js integration"
+            }
+        },
+        "vscode":{
+            "description":{
+                "text":"The official Visual Studio Code extension: syntax highlighting, validation, and formatting for Cedar policies and schemas.",
+                "note":"Description of the VS Code extension"
+            }
+        },
+        "examples":{
+            "description":{
+                "text":"Worked examples of using Cedar to specify and enforce authorization, including the TinyTodo sample application.",
+                "note":"Description of the cedar-examples repository"
+            }
+        }
+    },
+    "community":{
+        "title":{
+            "text":"Community",
+            "note":"Title for the Community page"
+        },
+        "description":{
+            "text":"Cedar is an open source project and a Cloud Native Computing Foundation (CNCF) sandbox project. Here is how to get help, get involved, and follow along.",
+            "note":"Intro paragraph for the Community page"
+        },
+        "slack":{
+            "title":{
+                "text":"Chat on Slack",
+                "note":"Heading for the Slack community card"
+            },
+            "body":{
+                "text":"Ask questions, share what you are building, and talk to the maintainers in the #cedar-general channel on the CNCF Slack.",
+                "note":"Body for the Slack community card"
+            },
+            "cta":{
+                "text":"Join Slack",
+                "note":"Button text for the Slack community card"
+            }
+        },
+        "github":{
+            "title":{
+                "text":"Contribute on GitHub",
+                "note":"Heading for the GitHub community card"
+            },
+            "body":{
+                "text":"Cedar is open source under Apache-2.0. File issues, open pull requests, and browse the code across the cedar-policy organization.",
+                "note":"Body for the GitHub community card"
+            },
+            "cta":{
+                "text":"View on GitHub",
+                "note":"Button text for the GitHub community card"
+            }
+        },
+        "rfcs":{
+            "title":{
+                "text":"Shape the language",
+                "note":"Heading for the RFCs community card"
+            },
+            "body":{
+                "text":"Significant changes to Cedar go through a public RFC process. Read active proposals and weigh in on the future of the language.",
+                "note":"Body for the RFCs community card"
+            },
+            "cta":{
+                "text":"Browse RFCs",
+                "note":"Button text for the RFCs community card"
+            }
+        },
+        "security":{
+            "title":{
+                "text":"Report a security issue",
+                "note":"Heading for the security community card"
+            },
+            "body":{
+                "text":"If you discover a potential security issue, please notify us directly by email rather than opening a public issue.",
+                "note":"Body for the security community card"
+            },
+            "cta":{
+                "text":"Email the security team",
+                "note":"Button text for the security community card"
+            }
+        }
+    },
     "common":{
         "avp": {
             "text":"Amazon Verified Permissions",
             "note":"Link text of the name of the AVP service."
+        },
+        "trademarkDisclaimer": {
+            "text":"Various trademarks held by their respective owners.",
+            "note":"Small trademark disclaimer shown at the bottom of pages that display third-party logos."
         }
     }
 }
