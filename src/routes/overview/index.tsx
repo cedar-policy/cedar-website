@@ -55,20 +55,20 @@ export default function Overview() {
                 <Box padding={{ horizontal: 'xxl', vertical: 's' }}>
                     <span className="announcement-text">
                         <b>
-                            <CedarIntl id="overview.announcement.date" defaultMessage="February 9, 2026:" />
+                            <CedarIntl id="overview.announcement.date" defaultMessage="July 27, 2026:" />
                         </b>
                         &nbsp;
                         <CedarIntl
                             id="overview.announcement.body"
                             defaultMessage={
-                                'Cedar 4.11 is now released, with a new programmatic interface to construct policies, the PST (Public Syntax Tree).'
+                                'Cedar 4.12 is now released, with public syntax tree (PST) support for variadic-is-in-range and improvements to the experimental type-aware partial evaluation (TPE) feature.'
                             }
                         />
                         &nbsp;
                         <a
                             target={'_blank'}
                             rel="noopener noreferrer"
-                            href="https://github.com/cedar-policy/cedar/releases/tag/v4.11.0"
+                            href="https://github.com/cedar-policy/cedar/releases/tag/v4.12.0"
                         >
                             <CedarIntl
                                 id="overview.announcement.learnMore"
