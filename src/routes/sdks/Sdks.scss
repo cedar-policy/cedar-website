@@ -1,0 +1,12 @@
+.sdk-card-title {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.sdk-card-icon {
+    width: 36px;
+    height: 36px;
+    flex: 0 0 auto;
+    object-fit: contain;
+}

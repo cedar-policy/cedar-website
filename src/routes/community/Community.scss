@@ -1,0 +1,12 @@
+.community-card-title {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.community-card-icon {
+    width: 32px;
+    height: 32px;
+    flex: 0 0 auto;
+    object-fit: contain;
+}

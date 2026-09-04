@@ -459,3 +459,54 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
+
+------
+
+** Language & product logos (static/img/logos)
+
+All third-party names, logos, and trademarks referenced below are the property
+of their respective owners. Their inclusion here does not imply affiliation
+with, sponsorship of, or endorsement by those owners.
+
+Go, Python, TypeScript, WebAssembly, and GitHub logos from
+https://simpleicons.org/, CC0 1.0 Universal:
+https://github.com/simple-icons/simple-icons/blob/develop/LICENSE.md
+
+Rust logo -- The Rust Foundation, licensed CC-BY
+(https://creativecommons.org/licenses/by/4.0/). See the Rust trademark policy:
+https://rustfoundation.org/policy/rust-trademark-policy/
+
+Java "Duke" mascot from
+https://commons.wikimedia.org/wiki/File:Duke_(Java_mascot)_waving.svg
+
+Copyright © Sun Microsystems Inc.
+
+Redistribution and use in source and binary forms, with or without
+modification, are permitted provided that the following conditions are met:
+
+Redistributions of source code must retain the above copyright notice, this
+list of conditions and the following disclaimer.
+
+Redistributions in binary form must reproduce the above copyright notice, this
+list of conditions and the following disclaimer in the documentation and/or
+other materials provided with the distribution.
+
+Neither the name of Sun Microsystems Inc. nor the names of its contributors may
+be used to endorse or promote products derived from this software without
+specific prior written permission.
+
+This software is provided by Sun Microsystems Inc. "as is" and any express or
+implied warranties, including, but not limited to, the implied warranties of
+merchantability and fitness for a particular purpose are disclaimed. In no
+event shall Sun Microsystems Inc. be liable for any direct, indirect,
+incidental, special, exemplary, or consequential damages (including, but not
+limited to, procurement of substitute goods or services; loss of use, data, or
+profits; or business interruption) however caused and on any theory of
+liability, whether in contract, strict liability, or tort (including negligence
+or otherwise) arising in any way out of the use of this software, even if
+advised of the possibility of such damage.
+
+http://opensource.org/licenses/bsd-license.php
+
+Slack logo from https://slack.com/. "Slack" and the Slack logo are trademarks
+of Slack Technologies, LLC, a Salesforce company.
