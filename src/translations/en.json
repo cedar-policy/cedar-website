@@ -104,7 +104,7 @@
         },
         "announcement":{
             "body":{
-                "text":"Cedar 4.12 is now released, with public syntax tree (PST) support for variadic-is-in-range and improvements to the experimental type-aware partial evaluation (TPE) feature.",
+                "text":"Cedar 4.13 is now released, with improvements to the experimental type-aware partial evaluation (TPE) feature.",
                 "note":"Announcement text shown in a thin bar below the main section"
             },
             "date":{
