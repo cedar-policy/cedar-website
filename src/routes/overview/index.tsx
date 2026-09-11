@@ -61,14 +61,14 @@ export default function Overview() {
                         <CedarIntl
                             id="overview.announcement.body"
                             defaultMessage={
-                                'Cedar 4.12 is now released, with public syntax tree (PST) support for variadic-is-in-range and improvements to the experimental type-aware partial evaluation (TPE) feature.'
+                                'Cedar 4.13 is now released, with improvements to the experimental type-aware partial evaluation (TPE) feature.'
                             }
                         />
                         &nbsp;
                         <a
                             target={'_blank'}
                             rel="noopener noreferrer"
-                            href="https://github.com/cedar-policy/cedar/releases/tag/v4.12.0"
+                            href="https://github.com/cedar-policy/cedar/releases/tag/v4.13.0"
                         >
                             <CedarIntl
                                 id="overview.announcement.learnMore"
