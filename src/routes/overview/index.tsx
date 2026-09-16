@@ -55,7 +55,7 @@ export default function Overview() {
                 <Box padding={{ horizontal: 'xxl', vertical: 's' }}>
                     <span className="announcement-text">
                         <b>
-                            <CedarIntl id="overview.announcement.date" defaultMessage="July 27, 2026:" />
+                            <CedarIntl id="overview.announcement.date" defaultMessage="September 15, 2026:" />
                         </b>
                         &nbsp;
                         <CedarIntl
