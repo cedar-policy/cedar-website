@@ -104,7 +104,7 @@
         },
         "announcement":{
             "body":{
-                "text":"Cedar 4.13 is now released, with improvements to the experimental type-aware partial evaluation (TPE) feature.",
+                "text":"Cedar 4.14 is now released, with support for modular schema development using schema fragments.",
                 "note":"Announcement text shown in a thin bar below the main section"
             },
             "date":{
