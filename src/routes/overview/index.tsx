@@ -55,20 +55,20 @@ export default function Overview() {
                 <Box padding={{ horizontal: 'xxl', vertical: 's' }}>
                     <span className="announcement-text">
                         <b>
-                            <CedarIntl id="overview.announcement.date" defaultMessage="September 15, 2026:" />
+                            <CedarIntl id="overview.announcement.date" defaultMessage="October 17, 2026:" />
                         </b>
                         &nbsp;
                         <CedarIntl
                             id="overview.announcement.body"
                             defaultMessage={
-                                'Cedar 4.13 is now released, with improvements to the experimental type-aware partial evaluation (TPE) feature.'
+                                'Cedar 4.14 is now released, with support for modular schema development using schema fragments.'
                             }
                         />
                         &nbsp;
                         <a
                             target={'_blank'}
                             rel="noopener noreferrer"
-                            href="https://github.com/cedar-policy/cedar/releases/tag/v4.13.0"
+                            href="https://github.com/cedar-policy/cedar/releases/tag/v4.14.0"
                         >
                             <CedarIntl
                                 id="overview.announcement.learnMore"
