@@ -5,6 +5,9 @@
   "author": "",
   "license": "Apache-2.0",
   "private": false,
+  "engines": {
+    "node": ">=22"
+  },
   "scripts": {
     "start": "webpack serve --mode development --env NODE_ENV=development",
     "build": "webpack --mode production --env NODE_ENV=production",

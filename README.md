@@ -13,7 +13,7 @@ Open http://127.0.0.1:3000 in your browser.
 
 ## Prerequisites
 
-- Node.js 16+
+- Node.js 22+
 - npm 8+
 
 No other tooling, accounts, or infrastructure required.
