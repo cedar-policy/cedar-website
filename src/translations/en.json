@@ -42,6 +42,16 @@
             "text":"Community",
             "note":"Button text for a navbar button linking to the Community page"
         },
+        "docs":{
+            "link":{
+                "text":"Docs",
+                "note":"Button text for a navbar button linking to the Cedar documentation site"
+            },
+            "ariaLabel":{
+                "text":"Link to Cedar documentation",
+                "note":"Aria label text for external link arrow"
+            }
+        },
         "overflowMenu":{
             "triggerText":{
                 "text":"More",
