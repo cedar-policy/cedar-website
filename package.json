@@ -8,6 +8,8 @@
   "scripts": {
     "start": "webpack serve --mode development --env NODE_ENV=development",
     "build": "webpack --mode production --env NODE_ENV=production",
+    "build:tpe": "scripts/build-tpe-explorer.sh",
+    "fetch:cvc5": "scripts/fetch-cvc5.sh",
     "clean": "rm -rf node_modules && rm -rf build",
     "lint": "eslint .",
     "lint-fix": "eslint --fix .",

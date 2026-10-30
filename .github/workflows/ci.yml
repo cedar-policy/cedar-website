@@ -16,6 +16,11 @@ jobs:
           cache: npm
 
       - run: npm ci
+      - uses: ./.github/actions/build-tpe-explorer
+        with:
+          tpe-tui-repository: ${{ vars.TPE_TUI_REPOSITORY }}
+          tpe-tui-ref: ${{ vars.TPE_TUI_REF || 'main' }}
+          cedar-ref: ${{ vars.TPE_CEDAR_REF || 'symcc-wasm' }}
       - run: npm run build
       - run: npm test
 

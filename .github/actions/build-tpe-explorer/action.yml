@@ -1,0 +1,68 @@
+name: Build the TPE explorer
+description: >
+  Builds the TPE explorer's WASM bindings from a tpe-tui checkout into
+  src/routes/tpe-explorer/pkg and downloads the CVC5 WebAssembly build into
+  static/cvc5. Without this step the site still builds, with the explorer
+  page showing a "not built" message.
+
+inputs:
+  tpe-tui-repository:
+    description: GitHub repository (owner/name) containing tpe-tui
+    required: true
+  tpe-tui-ref:
+    description: Branch, tag, or SHA of tpe-tui to build
+    required: false
+    default: main
+  cedar-repository:
+    description: >
+      Repository with the cedar branch tpe-tui builds against. tpe-tui's
+      Cargo.toml [patch]es cedar to ../cedar, so it is checked out next to it.
+    required: false
+    default: cedar-policy/cedar
+  cedar-ref:
+    description: Branch, tag, or SHA of cedar
+    required: false
+    default: symcc-wasm
+
+runs:
+  using: composite
+  steps:
+    - uses: actions/checkout@v4
+      with:
+        repository: ${{ inputs.tpe-tui-repository }}
+        ref: ${{ inputs.tpe-tui-ref }}
+        path: .tpe/tpe-tui
+
+    - uses: actions/checkout@v4
+      with:
+        repository: ${{ inputs.cedar-repository }}
+        ref: ${{ inputs.cedar-ref }}
+        path: .tpe/cedar
+
+    - uses: dtolnay/rust-toolchain@stable
+      with:
+        targets: wasm32-unknown-unknown
+
+    - uses: Swatinem/rust-cache@v2
+      with:
+        workspaces: .tpe/tpe-tui
+
+    - name: Read the pinned wasm-bindgen version
+      id: wasm-bindgen
+      shell: bash
+      run: |
+        v=$(sed -n 's/^wasm-bindgen = "=\(.*\)"/\1/p' .tpe/tpe-tui/crates/tpe-explorer-wasm/Cargo.toml)
+        test -n "$v"
+        echo "version=$v" >> "$GITHUB_OUTPUT"
+
+    - uses: taiki-e/install-action@v2
+      with:
+        tool: wasm-bindgen@${{ steps.wasm-bindgen.outputs.version }}
+
+    - name: Build WASM bindings
+      shell: bash
+      run: TPE_TUI_DIR=.tpe/tpe-tui npm run build:tpe
+
+    - name: Fetch CVC5 (WebAssembly)
+      shell: bash
+      run: npm run fetch:cvc5

@@ -1,0 +1,130 @@
+// TPE explorer: a terminal-like rendering of facts and residuals, echoing the
+// cedar-tpe-tui color scheme.
+
+$bg: #1e1e2e;
+$fg: #cdd6f4;
+$muted: #6c7086;
+$pink: #f2a8d4;
+$green: #a6e3a1;
+$teal: #94e2d5;
+$yellow: #f9e2af;
+$red: #f38ba8;
+$surface: #585b70;
+$black: #11111b;
+
+.tpe-explorer {
+    .tpe-status {
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 10px;
+        font-family: monospace;
+        font-size: 14px;
+    }
+
+    .tpe-status-actions {
+        margin-left: auto;
+    }
+
+    .tpe-badge {
+        padding: 2px 8px;
+        font-weight: bold;
+        color: $black;
+
+        &.tpe-badge-unknown { background: $yellow; }
+        &.tpe-badge-allow { background: $green; }
+        &.tpe-badge-deny { background: $red; }
+    }
+
+    .tpe-reasons {
+        font-weight: bold;
+
+        &.tpe-reasons-allow { color: #2e7d32; }
+        &.tpe-reasons-deny { color: #c62828; }
+    }
+
+    .tpe-panes {
+        display: grid;
+        grid-template-columns: 52fr 48fr;
+        gap: 12px;
+    }
+
+    .tpe-pane {
+        background: $bg;
+        border: 1px solid $surface;
+        border-radius: 6px;
+        padding: 8px 12px;
+        min-height: 420px;
+        overflow: auto;
+
+        &.tpe-focused { border-color: $teal; }
+
+        // Cloudscape tabs on a dark background
+        [class*='awsui_tabs-tab-label'] { color: $muted; }
+    }
+
+    .tpe-pane-title {
+        color: $teal;
+        font-family: monospace;
+        margin-bottom: 4px;
+    }
+
+    .tpe-doc {
+        margin: 0;
+        color: $fg;
+        font-family: 'JetBrains Mono', Menlo, Consolas, monospace;
+        font-size: 13.5px;
+        line-height: 1.45;
+        white-space: pre;
+    }
+
+    .tpe-line { min-height: 1.45em; }
+    .tpe-dim, .tpe-dim * { color: $muted !important; }
+
+    .tpe-slot {
+        all: unset;
+        cursor: pointer;
+        white-space: pre;
+
+        &:focus-visible { outline: 1px dotted $teal; }
+    }
+
+    .tpe-policy-title { cursor: pointer; }
+
+    .tpe-gutter {
+        display: inline-block;
+        min-width: 1ch;
+    }
+
+    .tpe-g-needed { color: $yellow; }
+    .tpe-g-residual, .tpe-g-not, .tpe-g-error { color: $muted; }
+    .tpe-g-satisfied { color: $teal; }
+
+    .tpe-s-plain { color: $fg; }
+    .tpe-s-keyword { color: $pink; }
+    .tpe-s-type, .tpe-s-str, .tpe-s-lit { color: $green; }
+    .tpe-s-ident { color: $teal; }
+    .tpe-s-comment, .tpe-s-muted, .tpe-s-unknown-weak { color: $muted; }
+    .tpe-s-unknown-strong { color: $yellow; font-weight: bold; }
+    .tpe-s-error { color: $red; }
+
+    .tpe-selected { background: $surface; }
+    .tpe-selected.tpe-s-unknown-strong, .tpe-editing.tpe-s-unknown-strong { background: $yellow; color: $black; }
+    .tpe-editing { background: $teal; color: $black; }
+    .tpe-changed { background: $green; color: $black; }
+    .tpe-underline { text-decoration: underline; }
+
+    .tpe-need { color: #b7791f; }
+    .tpe-prompt { font-family: monospace; color: $muted; line-height: 32px; }
+    .tpe-flash { margin-left: 4px; }
+    .tpe-error-text { white-space: pre-wrap; margin: 0; }
+
+    .tpe-source textarea {
+        font-family: 'JetBrains Mono', Menlo, Consolas, monospace;
+        font-size: 13px;
+    }
+}
+
+.tpe-suggest-title { font-weight: bold; }
+.tpe-assignments { font-family: monospace; color: #2e7d32; }
+.tpe-effects { font-family: monospace; color: #b0347c; }

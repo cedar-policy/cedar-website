@@ -32,6 +32,7 @@ import { BlogList } from './routes/blog/BlogList';
 import * as BlogEntryLazyImports from './routes/blogEntries';
 import IntroducingAvp from './routes/integrations/IntroducingAvp';
 import GettingStartedAvp from './routes/integrations/GettingStartedAvp';
+const TpeExplorer = React.lazy(() => import('./routes/tpe-explorer/TpeExplorer'));
 
 const steps: TutorialStepDetails[] = [
     {
@@ -104,6 +105,10 @@ export const routes = [
         element: <PolicyPlayground />,
     },
     {
+        path: '/:lang/tpe-explorer',
+        element: <TpeExplorer />,
+    },
+    {
         path: '/:lang/aws-verified-access',
         element: <AWSVerifiedAccessPlayground />,
     },
@@ -158,6 +163,10 @@ export const routes = [
     {
         path: '/sandbox',
         element: <Navigate to={`/${defaultLocale}/playground`} replace />,
+    },
+    {
+        path: '/tpe-explorer',
+        element: <Navigate to={`/${defaultLocale}/tpe-explorer`} replace />,
     },
     {
         path: '/aws-verified-access',
@@ -274,6 +283,16 @@ export default function App() {
                                     onClick: (e) => {
                                         e.preventDefault();
                                         navigate(`/${locale}/playground`);
+                                    },
+                                },
+                                {
+                                    type: 'button',
+                                    text: 'TPE explorer',
+                                    href: `/${locale}/tpe-explorer`,
+                                    external: false,
+                                    onClick: (e) => {
+                                        e.preventDefault();
+                                        navigate(`/${locale}/tpe-explorer`);
                                     },
                                 },
                                 {

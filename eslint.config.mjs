@@ -10,7 +10,7 @@ import stylistic from '@stylistic/eslint-plugin';
 export default tseslint.config(
     // Global ignores (replaces .eslintignore)
     {
-        ignores: ['build/**', 'node_modules/**', 'webpack.config.ts', 'vitest.config.ts', 'eslint.config.mjs', '**/*.test.tsx', '**/*.test.ts', '**/setupTests.ts'],
+        ignores: ['build/**', 'node_modules/**', 'webpack.config.ts', 'vitest.config.ts', 'eslint.config.mjs', '**/*.test.tsx', '**/*.test.ts', '**/setupTests.ts', 'src/routes/tpe-explorer/pkg/**', 'static/cvc5/**', '.tpe/**'],
     },
     // Base configs
     js.configs.recommended,
@@ -40,6 +40,8 @@ export default tseslint.config(
             },
         },
         settings: {
+            // Resolved by a webpack alias (see webpack.config.ts).
+            'import/core-modules': ['tpe-explorer-wasm'],
             polyfills: ['Promise'],
             react: { version: 'detect' },
         },

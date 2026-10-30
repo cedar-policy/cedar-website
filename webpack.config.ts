@@ -1,4 +1,5 @@
 /* eslint-disable */
+import * as fs from 'fs';
 import * as path from 'path';
 import { fileURLToPath } from 'url';
 import 'webpack-dev-server';
@@ -11,6 +12,8 @@ import type { WebpackPluginInstance } from 'webpack';
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 type WebpackPlugins = Array<HtmlWebpackPlugin|WebpackPluginInstance>;
+
+const tpeExplorerPkg = path.resolve(__dirname, 'src/routes/tpe-explorer/pkg/tpe_explorer_wasm.js');
 
 const config = (env: any, args: any) => {
     const production = args.mode === 'production';
@@ -31,6 +34,13 @@ const config = (env: any, args: any) => {
         },
         resolve: {
             extensions: ['.tsx', '.ts', '.js'],
+            alias: {
+                // WASM bindings for the TPE explorer, built by `npm run build:tpe`.
+                // Fall back to a stub so the rest of the site builds without Rust.
+                'tpe-explorer-wasm': fs.existsSync(tpeExplorerPkg)
+                    ? tpeExplorerPkg
+                    : path.resolve(__dirname, 'src/routes/tpe-explorer/wasmStub.ts'),
+            },
         },
         experiments: { asyncWebAssembly: true, topLevelAwait: true },
         plugins: [

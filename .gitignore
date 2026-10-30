@@ -9,3 +9,9 @@ build
 cypress/screenshots/
 cypress/videos/
 cypress/downloads/
+# TPE explorer: generated WASM bindings, the downloaded CVC5 build, and CI checkouts
+.tpe/
+src/routes/tpe-explorer/pkg/
+static/cvc5/cvc5.js
+static/cvc5/cvc5.wasm
+static/cvc5/.version
