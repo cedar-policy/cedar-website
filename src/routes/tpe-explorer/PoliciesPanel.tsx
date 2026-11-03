@@ -88,7 +88,7 @@ function PolicyCard({ policy }: { policy: PolicyModel }) {
                         ))}
                     </div>
                 ) : null}
-                {policy.status === 'residual' ? (
+                {policy.status === 'residual' && policy.relevant ? (
                     <ExpandableSection
                         headerText="Ways to settle it"
                         expanded={settleOpen}

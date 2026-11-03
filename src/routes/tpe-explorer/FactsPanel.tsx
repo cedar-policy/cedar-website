@@ -158,7 +158,8 @@ function FieldRows({ field, depth }: { field: Field; depth: number }) {
     const { setValue, setState, model } = useExplorer();
     const [error, setError] = useState<string | null>(null);
     const known = field.state === 'value';
-    const placeholder = stateText(field.state, field.required);
+    // An empty string is a known value; don't let it read as unknown.
+    const placeholder = known && field.text === '' ? 'empty string ""' : stateText(field.state, field.required);
     const name = (
         <>
             <code className="tpe-name">{field.name}</code>
