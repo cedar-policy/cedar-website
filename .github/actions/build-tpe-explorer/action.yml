@@ -1,38 +1,23 @@
 name: Build the TPE explorer
 description: >
-  Builds the TPE explorer's WASM bindings from a tpe-tui checkout into
-  src/routes/tpe-explorer/pkg and downloads the CVC5 WebAssembly build into
-  static/cvc5. Without this step the site still builds, with the explorer
-  page showing a "not built" message.
+  Builds the TPE explorer's WASM bindings from the cedar-tpe-explorer crate
+  into src/routes/tpe-explorer/pkg and downloads the CVC5 WebAssembly build
+  into static/cvc5. Without this step the site still builds, with the
+  explorer page showing a "not built" message.
 
 inputs:
-  tpe-tui-repository:
-    description: GitHub repository (owner/name) containing tpe-tui
-    required: true
-  tpe-tui-ref:
-    description: Branch, tag, or SHA of tpe-tui to build
-    required: false
-    default: main
   cedar-repository:
-    description: >
-      Repository with the cedar branch tpe-tui builds against. tpe-tui's
-      Cargo.toml [patch]es cedar to ../cedar, so it is checked out next to it.
+    description: Repository (owner/name) with the cedar-tpe-explorer crate
     required: false
     default: cedar-policy/cedar
   cedar-ref:
     description: Branch, tag, or SHA of cedar
     required: false
-    default: symcc-wasm
+    default: tpe-explorer
 
 runs:
   using: composite
   steps:
-    - uses: actions/checkout@v4
-      with:
-        repository: ${{ inputs.tpe-tui-repository }}
-        ref: ${{ inputs.tpe-tui-ref }}
-        path: .tpe/tpe-tui
-
     - uses: actions/checkout@v4
       with:
         repository: ${{ inputs.cedar-repository }}
@@ -45,13 +30,13 @@ runs:
 
     - uses: Swatinem/rust-cache@v2
       with:
-        workspaces: .tpe/tpe-tui
+        workspaces: .tpe/cedar
 
     - name: Read the pinned wasm-bindgen version
       id: wasm-bindgen
       shell: bash
       run: |
-        v=$(sed -n 's/^wasm-bindgen = "=\(.*\)"/\1/p' .tpe/tpe-tui/crates/tpe-explorer-wasm/Cargo.toml)
+        v=$(sed -n 's/^wasm-bindgen = { version = "=\([^"]*\)".*/\1/p' .tpe/cedar/cedar-tpe-explorer/Cargo.toml)
         test -n "$v"
         echo "version=$v" >> "$GITHUB_OUTPUT"
 
@@ -61,7 +46,7 @@ runs:
 
     - name: Build WASM bindings
       shell: bash
-      run: TPE_TUI_DIR=.tpe/tpe-tui npm run build:tpe
+      run: CEDAR_DIR=.tpe/cedar npm run build:tpe
 
     - name: Fetch CVC5 (WebAssembly)
       shell: bash

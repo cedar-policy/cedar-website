@@ -5,7 +5,7 @@ export default defineConfig({
     test: {
         environment: 'jsdom',
         setupFiles: ['./tests/setupTests.ts'],
-        // CI checks out tpe-tui and cedar here for the TPE explorer build.
+        // CI checks out cedar here for the TPE explorer build.
         exclude: [...configDefaults.exclude, '.tpe/**'],
         deps: {
             inline: ['@cloudscape-design/components'],

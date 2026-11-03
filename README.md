@@ -30,8 +30,7 @@ No other tooling, accounts, or infrastructure required.
 ## TPE explorer (`/tpe-explorer`)
 
 An interactive explorer for Cedar's type-aware partial evaluation (TPE). It is
-built from the tpe-tui Rust workspace (the
-`tpe-explorer-wasm` crate) and runs entirely in the browser. Suggestions use
+built from the `cedar-tpe-explorer` crate in the cedar repository and runs entirely in the browser. Suggestions use
 Cedar's symbolic compiler with the WebAssembly build of
 [CVC5](https://github.com/cvc5/cvc5/releases), run in a Web Worker
 (`static/cvc5/worker.js`).
@@ -40,14 +39,14 @@ Both are generated, not committed:
 
 ```bash
 npm run build:tpe    # needs Rust + wasm32-unknown-unknown + the pinned wasm-bindgen CLI;
-                     # set TPE_TUI_DIR if tpe-tui isn't at ../tpe-tui
+                     # set CEDAR_DIR if cedar isn't at ../cedar
 npm run fetch:cvc5   # downloads the pinned, checksummed CVC5 WASM release into static/cvc5/
 ```
 
 Without them the site still builds; the explorer page reports that it wasn't
 built. In GitHub Actions, `.github/actions/build-tpe-explorer` does both. It reads
-the repository variables `TPE_TUI_REPOSITORY` (required, `owner/name`),
-`TPE_TUI_REF` (default `main`), and `TPE_CEDAR_REF` (default `symcc-wasm`).
+the optional repository variables `TPE_CEDAR_REPOSITORY` (default
+`cedar-policy/cedar`) and `TPE_CEDAR_REF` (default `tpe-explorer`).
 
 ## Deploying
 

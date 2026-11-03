@@ -13,7 +13,7 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 type WebpackPlugins = Array<HtmlWebpackPlugin|WebpackPluginInstance>;
 
-const tpeExplorerPkg = path.resolve(__dirname, 'src/routes/tpe-explorer/pkg/tpe_explorer_wasm.js');
+const tpeExplorerPkg = path.resolve(__dirname, 'src/routes/tpe-explorer/pkg/cedar_tpe_explorer.js');
 
 const config = (env: any, args: any) => {
     const production = args.mode === 'production';

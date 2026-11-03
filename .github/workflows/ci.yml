@@ -18,9 +18,8 @@ jobs:
       - run: npm ci
       - uses: ./.github/actions/build-tpe-explorer
         with:
-          tpe-tui-repository: ${{ vars.TPE_TUI_REPOSITORY }}
-          tpe-tui-ref: ${{ vars.TPE_TUI_REF || 'main' }}
-          cedar-ref: ${{ vars.TPE_CEDAR_REF || 'symcc-wasm' }}
+          cedar-repository: ${{ vars.TPE_CEDAR_REPOSITORY || 'cedar-policy/cedar' }}
+          cedar-ref: ${{ vars.TPE_CEDAR_REF || 'tpe-explorer' }}
       - run: npm run build
       - run: npm test
 
