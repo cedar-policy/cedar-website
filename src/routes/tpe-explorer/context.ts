@@ -10,6 +10,7 @@ export interface ExplorerActions {
     setEntityType: (key: string, type: string) => string | null;
     suggestFact: (key: string) => Promise<Suggestion[]>;
     suggestPolicy: (id: string) => Promise<Suggestion[]>;
+    suggestDecision: (want: 'allow' | 'deny') => Promise<Suggestion[]>;
     apply: (s: Suggestion) => string | null;
     /** Scroll to and briefly highlight a fact. */
     revealFact: (key: string) => void;
@@ -18,6 +19,8 @@ export interface ExplorerActions {
     setHovered: (key: string | null) => void;
     /** Facts changed by the last applied suggestion. */
     changed: string[];
+    /** Fact being revealed (scrolled to and highlighted). */
+    revealed: string | null;
 }
 
 export const ExplorerContext = React.createContext<ExplorerActions | null>(null);

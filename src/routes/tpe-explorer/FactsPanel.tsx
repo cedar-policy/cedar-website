@@ -40,6 +40,8 @@ function NeedBadge({ needs }: { needs: Needs | null }) {
 
 interface RowProps {
     factKey: string;
+    /** Human-readable name of the fact, for screen readers. */
+    label: string;
     needs: Needs | null;
     name: React.ReactNode;
     editor: React.ReactNode;
@@ -51,12 +53,13 @@ interface RowProps {
 
 /** One fact: name, editor, and whether a policy still needs it. */
 function FactRow(props: RowProps) {
-    const { hovered, setHovered, changed, suggestFact } = useExplorer();
+    const { hovered, setHovered, changed, revealed, suggestFact } = useExplorer();
     const [suggesting, setSuggesting] = useState(false);
     const classes = ['tpe-fact'];
     if (props.needs) classes.push('tpe-fact-needed');
     if (related(hovered, props.factKey)) classes.push('tpe-fact-hovered');
     if (changed.includes(props.factKey)) classes.push('tpe-fact-changed');
+    if (revealed === props.factKey) classes.push('tpe-fact-revealed');
     return (
         <div
             className={classes.join(' ')}
@@ -71,8 +74,12 @@ function FactRow(props: RowProps) {
                 <div className="tpe-fact-meta">
                     <NeedBadge needs={props.needs} />
                     {props.suggest ? (
-                        <Button variant="inline-link" onClick={() => setSuggesting((s) => !s)}>
-                            {suggesting ? 'Hide suggestions' : 'Suggest'}
+                        <Button
+                            variant="inline-link"
+                            ariaLabel={`${suggesting ? 'Hide suggestions' : 'Suggest a value'} for ${props.label}`}
+                            onClick={() => setSuggesting((s) => !s)}
+                        >
+                            {suggesting ? 'Hide' : 'Suggest'}
                         </Button>
                     ) : null}
                 </div>
@@ -84,6 +91,7 @@ function FactRow(props: RowProps) {
                         load={() => suggestFact(props.factKey)}
                         emptyText="No value for this fact changes anything on its own. Try settling a policy instead."
                         onApplied={() => setSuggesting(false)}
+                        onClose={() => setSuggesting(false)}
                     />
                 </div>
             ) : null}
@@ -92,7 +100,13 @@ function FactRow(props: RowProps) {
 }
 
 /** Menu for putting a fact into one of its non-value states. */
-function StateMenu(props: { factKey: string; allowed: FactState[]; required: boolean; current: FactState }) {
+function StateMenu(props: {
+    factKey: string;
+    label: string;
+    allowed: FactState[];
+    required: boolean;
+    current: FactState;
+}) {
     const { setState } = useExplorer();
     const items = props.allowed
         .filter((s) => s !== 'value')
@@ -101,7 +115,7 @@ function StateMenu(props: { factKey: string; allowed: FactState[]; required: boo
     return (
         <ButtonDropdown
             variant="icon"
-            ariaLabel="Change what is known"
+            ariaLabel={`Change what is known about ${props.label}`}
             items={items}
             onItemClick={({ detail }) => setState(props.factKey, detail.id as FactState)}
         />
@@ -158,8 +172,9 @@ function FieldRows({ field, depth }: { field: Field; depth: number }) {
     const { setValue, setState, model } = useExplorer();
     const [error, setError] = useState<string | null>(null);
     const known = field.state === 'value';
-    // An empty string is a known value; don't let it read as unknown.
-    const placeholder = known && field.text === '' ? 'empty string ""' : stateText(field.state, field.required);
+    const placeholder = stateText(field.state, field.required);
+    // An empty string is a known value: show it as `""`, not as a blank box.
+    const text = known && field.text === '' ? '""' : field.text;
     const name = (
         <>
             <code className="tpe-name">{field.name}</code>
@@ -182,6 +197,7 @@ function FieldRows({ field, depth }: { field: Field; depth: number }) {
             <>
                 <FactRow
                     factKey={field.key}
+                    label={field.label}
                     needs={field.required ? null : field.needs}
                     depth={depth}
                     name={name}
@@ -196,6 +212,7 @@ function FieldRows({ field, depth }: { field: Field; depth: number }) {
                             ) : null}
                             <StateMenu
                                 factKey={field.key}
+                                label={field.label}
                                 allowed={field.allowedStates}
                                 required={field.required}
                                 current={field.state}
@@ -210,13 +227,24 @@ function FieldRows({ field, depth }: { field: Field; depth: number }) {
 
     let editor: React.ReactNode;
     if (field.valueKind === 'bool') {
-        const options = [{ value: 'true', label: 'true' }, { value: 'false', label: 'false' }];
+        const stateOptions = field.allowedStates
+            .filter((s) => s !== 'value')
+            .map((s) => ({ value: `state:${s}`, label: stateText(s, field.required) }));
+        const options = [{ value: 'true', label: 'true' }, { value: 'false', label: 'false' }, ...stateOptions];
+        const current = known
+            ? { value: field.text, label: field.text }
+            : options.find((o) => o.value === `state:${field.state}`) ?? null;
         editor = (
             <Select
-                selectedOption={known ? { value: field.text, label: field.text } : null}
+                selectedOption={current}
                 options={options}
                 placeholder={placeholder}
-                onChange={({ detail }) => setError(setValue(field.key, detail.selectedOption.value ?? ''))}
+                onChange={({ detail }) => {
+                    const v = detail.selectedOption.value ?? '';
+                    setError(
+                        v.startsWith('state:') ? setState(field.key, v.slice(6) as FactState) : setValue(field.key, v),
+                    );
+                }}
                 ariaLabel={field.label}
             />
         );
@@ -224,7 +252,7 @@ function FieldRows({ field, depth }: { field: Field; depth: number }) {
         const ids = field.entityType ? model.knownIds[field.entityType] ?? [] : undefined;
         editor = (
             <CommitInput
-                value={field.text}
+                value={text}
                 placeholder={placeholder}
                 onCommit={commit}
                 options={ids}
@@ -236,6 +264,7 @@ function FieldRows({ field, depth }: { field: Field; depth: number }) {
     return (
         <FactRow
             factKey={field.key}
+            label={field.label}
             needs={field.needs}
             depth={depth}
             name={name}
@@ -246,6 +275,7 @@ function FieldRows({ field, depth }: { field: Field; depth: number }) {
                     {editor}
                     <StateMenu
                         factKey={field.key}
+                        label={field.label}
                         allowed={field.allowedStates}
                         required={field.required}
                         current={field.state}
@@ -273,6 +303,7 @@ function UidRow({ name, fact }: { name: string; fact: UidFact }) {
     return (
         <FactRow
             factKey={fact.key}
+            label={`the ${name}`}
             needs={fact.needs}
             name={<code className="tpe-name">{name}</code>}
             error={error}
@@ -299,6 +330,7 @@ function ActionRow({ fact }: { fact: ActionFact }) {
     return (
         <FactRow
             factKey={fact.key}
+            label="the action"
             needs={null}
             name={<code className="tpe-name">action</code>}
             error={error}
@@ -336,6 +368,7 @@ function ParentsRow({ fact }: { fact: ParentsFact }) {
     return (
         <FactRow
             factKey={fact.key}
+            label={fact.label}
             needs={fact.needs}
             name={
                 <>
@@ -366,10 +399,16 @@ function ParentsRow({ fact }: { fact: ParentsFact }) {
                             options={candidates.filter((c) => !fact.values.includes(c)).map((c) => ({ value: c }))}
                             placeholder={single ? `add a ${basename(single)}` : 'add a parent'}
                             enteredTextLabel={(v) => `Add "${v}"`}
-                            ariaLabel="add a parent"
+                            ariaLabel={`Add a parent of ${fact.label.replace(/ parents$/, '')}`}
                             empty="Type an id"
                         />
-                        <StateMenu factKey={fact.key} allowed={['absent', 'unknown']} required current={fact.state} />
+                        <StateMenu
+                            factKey={fact.key}
+                            label={fact.label}
+                            allowed={['absent', 'unknown']}
+                            required
+                            current={fact.state}
+                        />
                     </SpaceBetween>
                 </SpaceBetween>
             }
@@ -383,11 +422,12 @@ function TagsRow({ fact }: { fact: TagsFact }) {
     return (
         <FactRow
             factKey={fact.key}
+            label={fact.label}
             needs={fact.needs}
             name={
                 <>
                     <code className="tpe-name">tags</code>
-                    <span className="tpe-type">{fact.typeName}</span>
+                    <span className="tpe-type">{fact.typeName} values</span>
                 </>
             }
             error={error}

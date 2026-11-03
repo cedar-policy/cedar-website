@@ -16,10 +16,16 @@ import { related, useExplorer } from './context';
 import type { DecisionModel, PolicyModel, Token } from './types';
 
 const STATUS: Record<PolicyModel['status'], [StatusIndicatorProps.Type, string]> = {
-    residual: ['pending', 'Depends on unknown facts'],
-    satisfied: ['success', 'Satisfied'],
-    'not-satisfied': ['stopped', 'Not satisfied'],
-    error: ['warning', 'Errors, so it does not apply'],
+    residual: ['pending', 'Waiting on unknown facts'],
+    satisfied: ['success', 'Applies'],
+    'not-satisfied': ['stopped', "Doesn't apply"],
+    error: ['warning', "Doesn't apply (it would error)"],
+};
+
+const STATUS_DETAIL: Partial<Record<PolicyModel['status'], string>> = {
+    satisfied: 'Its scope and conditions all hold for what you have filled in.',
+    'not-satisfied': 'Its scope or a condition is ruled out by what you have filled in.',
+    error: 'Evaluating it would fail (for example, reading an attribute that is absent), so it does not apply.',
 };
 
 /** A residual expression; tokens are linked to the facts they depend on. */
@@ -36,6 +42,7 @@ function Residual({ tokens }: { tokens: Token[] }) {
                     <button
                         key={i}
                         type="button"
+                        tabIndex={-1}
                         className={`tpe-token ${cls}`}
                         onMouseEnter={() => setHovered(mark)}
                         onMouseLeave={() => setHovered(null)}
@@ -70,7 +77,11 @@ function PolicyCard({ policy }: { policy: PolicyModel }) {
             }
         >
             <SpaceBetween size="s">
-                {policy.status === 'residual' ? <Residual tokens={policy.residual} /> : null}
+                {policy.status === 'residual' ? (
+                    <Residual tokens={policy.residual} />
+                ) : (
+                    <Box variant="small" color="text-body-secondary">{STATUS_DETAIL[policy.status]}</Box>
+                )}
                 {policy.needs.length ? (
                     <div className="tpe-needs">
                         <span className="tpe-needs-label">Waiting on</span>
@@ -99,6 +110,7 @@ function PolicyCard({ policy }: { policy: PolicyModel }) {
                                 load={() => suggestPolicy(policy.id)}
                                 emptyText="No assignment of the unknown facts settles this policy."
                                 onApplied={() => setSettleOpen(false)}
+                                onClose={() => setSettleOpen(false)}
                             />
                         ) : null}
                     </ExpandableSection>
@@ -113,13 +125,17 @@ function PolicyCard({ policy }: { policy: PolicyModel }) {
     );
 }
 
+/** The overall decision, with ways to reach a decision while it's open. */
 export function DecisionBanner({ decision, onExplain }: { decision: DecisionModel; onExplain: () => void }) {
+    const { suggestDecision } = useExplorer();
+    const [asking, setAsking] = useState<'allow' | 'deny' | null>(null);
     const config = {
         allow: { type: 'success' as const, header: 'Allowed' },
         deny: { type: 'error' as const, header: 'Denied' },
         undecided: { type: 'info' as const, header: 'Not decided yet' },
         error: { type: 'warning' as const, header: 'Could not evaluate' },
     }[decision.state];
+    const undecided = decision.state === 'undecided';
     return (
         <Alert
             type={config.type}
@@ -127,6 +143,15 @@ export function DecisionBanner({ decision, onExplain }: { decision: DecisionMode
             action={
                 decision.state === 'allow' || decision.state === 'deny' ? (
                     <Button onClick={onExplain}>Why?</Button>
+                ) : undecided ? (
+                    <SpaceBetween direction="horizontal" size="xs">
+                        <Button onClick={() => setAsking((a) => (a === 'allow' ? null : 'allow'))}>
+                            How could it be allowed?
+                        </Button>
+                        <Button onClick={() => setAsking((a) => (a === 'deny' ? null : 'deny'))}>
+                            How could it be denied?
+                        </Button>
+                    </SpaceBetween>
                 ) : undefined
             }
         >
@@ -134,6 +159,20 @@ export function DecisionBanner({ decision, onExplain }: { decision: DecisionMode
             {decision.warnings?.map((w) => (
                 <Box key={w} variant="small" color="text-status-warning">{w}</Box>
             ))}
+            {undecided && asking ? (
+                <div className="tpe-decision-suggestions">
+                    <Box variant="h4">
+                        Fewest facts that would make it {asking === 'allow' ? 'allowed' : 'denied'}
+                    </Box>
+                    <Suggestions
+                        key={asking}
+                        load={() => suggestDecision(asking)}
+                        emptyText={`No way to make it ${asking === 'allow' ? 'allowed' : 'denied'} from here.`}
+                        onApplied={() => setAsking(null)}
+                        onClose={() => setAsking(null)}
+                    />
+                </div>
+            ) : null}
         </Alert>
     );
 }

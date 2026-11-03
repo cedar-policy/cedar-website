@@ -18,6 +18,7 @@ declare module 'tpe-explorer-wasm' {
         explain(): string;
         suggest_slot(key: string, solver: SmtSolver): Promise<string>;
         suggest_policy(id: string, solver: SmtSolver): Promise<string>;
+        suggest_decision(want: 'allow' | 'deny', solver: SmtSolver): Promise<string>;
         apply_suggestion(id: number): string;
     }
 }

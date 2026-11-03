@@ -26,6 +26,7 @@ import './styles.scss';
 type WasmModule = typeof import('tpe-explorer-wasm');
 
 const EDITOR_HEIGHT = '480px';
+const EDITOR_OPTIONS = { minimap: { enabled: false }, wordWrap: 'on', scrollBeyondLastLine: false };
 
 function ExplanationModal({ explanation, onClose }: { explanation: Explanation | null; onClose: () => void }) {
     return (
@@ -48,7 +49,9 @@ function ExplanationModal({ explanation, onClose }: { explanation: Explanation |
                             : ', since no permit can apply.'}
                     </div>
                     <div>
-                        These {explanation.facts?.length} of the {explanation.known} known facts are enough.
+                        {explanation.facts?.length === explanation.known
+                            ? `All ${explanation.known} known facts are needed. `
+                            : `These ${explanation.facts?.length} of the ${explanation.known} known facts are enough. `}
                         Forgetting any one of them leaves the request undecided.
                     </div>
                     <ul className="tpe-assignments">
@@ -79,6 +82,9 @@ export default function TpeExplorer() {
     const [tab, setTab] = useState('explore');
     const [hovered, setHovered] = useState<string | null>(null);
     const [changed, setChanged] = useState<string[]>([]);
+    const [revealed, setRevealed] = useState<string | null>(null);
+    const [pendingExample, setPendingExample] = useState<string | null>(null);
+
     const [explanation, setExplanation] = useState<Explanation | null>(null);
 
     useEffect(() => {
@@ -151,6 +157,8 @@ export default function TpeExplorer() {
             refresh();
         }
     };
+    const undoRef = useRef(undo);
+    undoRef.current = undo;
     const redo = () => {
         if (explorer.current?.redo()) {
             setChanged([]);
@@ -178,10 +186,11 @@ export default function TpeExplorer() {
         const el = document.querySelector(`[data-fact-key="${CSS.escape(key)}"]`);
         if (!el) return;
         el.scrollIntoView({ behavior: 'smooth', block: 'center' });
-        el.classList.remove('tpe-fact-revealed');
-        void (el as HTMLElement).offsetWidth; // restart the animation
-        el.classList.add('tpe-fact-revealed');
         el.querySelector<HTMLElement>('input, button')?.focus({ preventScroll: true });
+        // Re-trigger the highlight even when revealing the same fact again.
+        setRevealed(null);
+        requestAnimationFrame(() => setRevealed(key));
+        setTimeout(() => setRevealed((r) => (r === key ? null : r)), 1600);
     }, []);
 
     const actions: ExplorerActions | null = useMemo(() => {
@@ -194,6 +203,7 @@ export default function TpeExplorer() {
             setEntityType: (key, type) => edit((ex) => ex.set_entity_type(key, type)),
             suggestFact: async (key) => parse(await explorer.current!.suggest_slot(key, (s) => runCvc5(s))),
             suggestPolicy: async (id) => parse(await explorer.current!.suggest_policy(id, (s) => runCvc5(s))),
+            suggestDecision: async (want) => parse(await explorer.current!.suggest_decision(want, (s) => runCvc5(s))),
             apply: (s) => {
                 let effect = '';
                 const err = edit((ex) => {
@@ -201,15 +211,30 @@ export default function TpeExplorer() {
                 });
                 if (err) return err;
                 setChanged(s.slots);
-                toast.success(effect ? `Applied: ${effect}` : 'Applied');
+                toast.success(effect ? `Applied: ${effect}` : 'Applied', {
+                    duration: 5000,
+                    action: { label: 'Undo', onClick: () => undoRef.current() },
+                });
                 return null;
             },
             revealFact,
             hovered,
             setHovered,
             changed,
+            revealed,
         };
-    }, [model, hovered, changed, edit, revealFact]);
+    }, [model, hovered, changed, revealed, edit, revealFact]);
+
+    const example = TPE_EXAMPLES.find((x) => x.id === exampleId);
+    const dirty = !!model?.canUndo || (example !== undefined && (policies !== example.policies || schema !== example.schema));
+    const switchExample = (id: string) => {
+        const ex = TPE_EXAMPLES.find((x) => x.id === id);
+        if (!ex) return;
+        setExampleId(ex.id);
+        setSchema(ex.schema);
+        setPolicies(ex.policies);
+        setSourceError(load(ex.schema, ex.policies));
+    };
 
     if (loadError) {
         return (
@@ -219,7 +244,6 @@ export default function TpeExplorer() {
         );
     }
 
-    const example = TPE_EXAMPLES.find((x) => x.id === exampleId);
     const header = (
         <Header
             variant="h1"
@@ -237,12 +261,10 @@ export default function TpeExplorer() {
                         selectedOption={example ? { value: example.id, label: example.label } : null}
                         options={TPE_EXAMPLES.map((x) => ({ value: x.id, label: x.label }))}
                         onChange={({ detail }) => {
-                            const ex = TPE_EXAMPLES.find((x) => x.id === detail.selectedOption.value);
-                            if (!ex) return;
-                            setExampleId(ex.id);
-                            setSchema(ex.schema);
-                            setPolicies(ex.policies);
-                            setSourceError(load(ex.schema, ex.policies));
+                            const id = detail.selectedOption.value;
+                            if (!id || id === exampleId) return;
+                            if (dirty) setPendingExample(id);
+                            else switchExample(id);
                         }}
                         ariaLabel="Example"
                     />
@@ -258,113 +280,144 @@ export default function TpeExplorer() {
 
     return (
         <ContentLayout header={header}>
-            {!model || !actions ? (
-                <Box textAlign="center" padding="xxl">
-                    <Spinner size="large" />
-                </Box>
-            ) : (
-                <ExplorerContext.Provider value={actions}>
-                    <Tabs
-                        activeTabId={tab}
-                        onChange={({ detail }) => setTab(detail.activeTabId)}
-                        tabs={[
-                            {
-                                id: 'explore',
-                                label: 'Explore',
-                                content: (
-                                    <SpaceBetween size="l">
-                                        <DecisionBanner
-                                            decision={model.decision}
-                                            onExplain={() => {
-                                                try {
-                                                    setExplanation(
-                                                        JSON.parse(explorer.current!.explain()) as Explanation,
-                                                    );
-                                                } catch (e) {
-                                                    toast.error(errorText(e));
-                                                }
-                                            }}
-                                        />
-                                        {sourceError ? (
-                                            <Alert type="warning" header="The policies don't load">
-                                                Showing the last version that did.{' '}
-                                                <Button variant="inline-link" onClick={() => setTab('source')}>
-                                                    Edit policies
-                                                </Button>
-                                            </Alert>
-                                        ) : null}
-                                        <div className="tpe-layout">
-                                            <div className="tpe-column">
-                                                <FactsPanel />
-                                            </div>
-                                            <div className="tpe-column tpe-column-sticky">
-                                                <PoliciesPanel />
-                                            </div>
-                                        </div>
-                                    </SpaceBetween>
-                                ),
-                            },
-                            {
-                                id: 'source',
-                                label: 'Schema and policies',
-                                content: (
-                                    <SpaceBetween size="l">
-                                        {sourceError ? (
-                                            <Alert type="error" header="Not loaded">
-                                                <pre className="tpe-error-text">{sourceError}</pre>
-                                            </Alert>
-                                        ) : null}
-                                        <div className="tpe-layout">
-                                            <Container
-                                                header={
-                                                    <Header
-                                                        variant="h2"
-                                                        description="Changes apply as you type and keep what is known."
-                                                    >
-                                                        Policies
-                                                    </Header>
-                                                }
-                                            >
-                                                <CedarPolicyEditor
-                                                    value={policies}
-                                                    onChange={setPolicies}
-                                                    schema={{ type: 'cedarFormat', value: loadedSchema }}
-                                                    height={EDITOR_HEIGHT}
-                                                />
-                                            </Container>
-                                            <Container
-                                                header={
-                                                    <Header
-                                                        variant="h2"
-                                                        description="A new schema starts over with nothing known."
-                                                        actions={
-                                                            <Button
-                                                                disabled={schema === loadedSchema}
-                                                                onClick={() => setSourceError(load(schema, policies))}
-                                                            >
-                                                                Apply schema
-                                                            </Button>
+            <main className="tpe-page">
+                {!model || !actions ? (
+                    <Box textAlign="center" padding="xxl">
+                        <Spinner size="large" />
+                    </Box>
+                ) : (
+                    <ExplorerContext.Provider value={actions}>
+                        <Tabs
+                            activeTabId={tab}
+                            onChange={({ detail }) => setTab(detail.activeTabId)}
+                            tabs={[
+                                {
+                                    id: 'explore',
+                                    label: 'Explore',
+                                    content: (
+                                        <SpaceBetween size="l">
+                                            {sourceError ? (
+                                                <Alert type="warning" header="The policies don't load">
+                                                    Showing the last version that did.{' '}
+                                                    <Button variant="inline-link" onClick={() => setTab('source')}>
+                                                        Edit policies
+                                                    </Button>
+                                                </Alert>
+                                            ) : null}
+                                            <div>
+                                                <DecisionBanner
+                                                    decision={model.decision}
+                                                    onExplain={() => {
+                                                        try {
+                                                            setExplanation(
+                                                                JSON.parse(explorer.current!.explain()) as Explanation,
+                                                            );
+                                                        } catch (e) {
+                                                            toast.error(errorText(e));
                                                         }
-                                                    >
-                                                        Schema
-                                                    </Header>
-                                                }
-                                            >
-                                                <CedarSchemaEditor
-                                                    value={schema}
-                                                    onChange={setSchema}
-                                                    height={EDITOR_HEIGHT}
+                                                    }}
                                                 />
-                                            </Container>
-                                        </div>
+                                            </div>
+                                            <div className="tpe-layout">
+                                                <div className="tpe-column">
+                                                    <FactsPanel />
+                                                </div>
+                                                <div className="tpe-column tpe-column-sticky">
+                                                    <PoliciesPanel />
+                                                </div>
+                                            </div>
+                                        </SpaceBetween>
+                                    ),
+                                },
+                                {
+                                    id: 'source',
+                                    label: 'Schema and policies',
+                                    content: (
+                                        <SpaceBetween size="l">
+                                            {sourceError ? (
+                                                <Alert type="error" header="Not loaded">
+                                                    <pre className="tpe-error-text">{sourceError}</pre>
+                                                </Alert>
+                                            ) : null}
+                                            <div className="tpe-layout">
+                                                <Container
+                                                    header={
+                                                        <Header
+                                                            variant="h2"
+                                                            description="Changes apply as you type and keep what is known."
+                                                        >
+                                                            Policies
+                                                        </Header>
+                                                    }
+                                                >
+                                                    <CedarPolicyEditor
+                                                        value={policies}
+                                                        onChange={setPolicies}
+                                                        schema={{ type: 'cedarFormat', value: loadedSchema }}
+                                                        height={EDITOR_HEIGHT}
+                                                        options={EDITOR_OPTIONS}
+                                                    />
+                                                </Container>
+                                                <Container
+                                                    header={
+                                                        <Header
+                                                            variant="h2"
+                                                            description="A new schema starts over with nothing known."
+                                                            actions={
+                                                                <Button
+                                                                    disabled={schema === loadedSchema}
+                                                                    onClick={() => setSourceError(load(schema, policies))}
+                                                                >
+                                                                    Apply schema
+                                                                </Button>
+                                                            }
+                                                        >
+                                                            Schema
+                                                        </Header>
+                                                    }
+                                                >
+                                                    <CedarSchemaEditor
+                                                        value={schema}
+                                                        onChange={setSchema}
+                                                        height={EDITOR_HEIGHT}
+                                                        options={EDITOR_OPTIONS}
+                                                    />
+                                                </Container>
+                                            </div>
+                                        </SpaceBetween>
+                                    ),
+                                },
+                            ]}
+                        />
+                        <ExplanationModal explanation={explanation} onClose={() => setExplanation(null)} />
+                        <Modal
+                            visible={pendingExample !== null}
+                            onDismiss={() => setPendingExample(null)}
+                            header="Switch example?"
+                            footer={
+                                <Box float="right">
+                                    <SpaceBetween direction="horizontal" size="xs">
+                                        <Button variant="link" onClick={() => setPendingExample(null)}>
+                                            Cancel
+                                        </Button>
+                                        <Button
+                                            variant="primary"
+                                            onClick={() => {
+                                                if (pendingExample) switchExample(pendingExample);
+                                                setPendingExample(null);
+                                            }}
+                                        >
+                                            Switch
+                                        </Button>
                                     </SpaceBetween>
-                                ),
-                            },
-                        ]}
-                    />
-                    <ExplanationModal explanation={explanation} onClose={() => setExplanation(null)} />
-                </ExplorerContext.Provider>
-            )}
+                                </Box>
+                            }
+                        >
+                            The facts you filled in and any changes to the schema or policies will be lost.
+                        </Modal>
+                    </ExplorerContext.Provider>
+                )}
+            </main>
         </ContentLayout>
     );
 }

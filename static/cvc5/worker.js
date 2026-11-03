@@ -28,13 +28,37 @@ async function load() {
         if (!r.ok) throw new Error('cvc5.js not found (run `npm run fetch:cvc5`)');
         return r.text();
     });
-    wasmModule = await WebAssembly.compileStreaming(fetch(new URL('cvc5.wasm', base)));
+    wasmModule = await WebAssembly.compile(await download(new URL('cvc5.wasm', base)));
     // The release is built for ENVIRONMENT=web only and refuses to start in a
     // worker. Nothing it needs differs between the two, so hide the worker scope.
     if (!js.includes('globalThis.WorkerGlobalScope')) {
         throw new Error('unexpected cvc5.js: environment check not found');
     }
     glue = js.split('globalThis.WorkerGlobalScope').join('undefined');
+}
+
+/** Fetch a file, reporting `{ progress: { loaded, total } }` as it arrives. */
+async function download(url) {
+    const res = await fetch(url);
+    if (!res.ok || !res.body) throw new Error(`could not download ${url.pathname} (${res.status})`);
+    const total = Number(res.headers.get('content-length')) || 0;
+    const reader = res.body.getReader();
+    const chunks = [];
+    let loaded = 0;
+    for (;;) {
+        const { done, value } = await reader.read();
+        if (done) break;
+        chunks.push(value);
+        loaded += value.length;
+        self.postMessage({ progress: { loaded, total } });
+    }
+    const bytes = new Uint8Array(loaded);
+    let at = 0;
+    for (const c of chunks) {
+        bytes.set(c, at);
+        at += c.length;
+    }
+    return bytes;
 }
 
 function solve(script, timeoutMs) {
