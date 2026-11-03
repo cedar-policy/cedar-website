@@ -1,7 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Alert, Box, Button, ProgressBar, SpaceBetween, Spinner } from '@cloudscape-design/components';
+import { Alert, Box, Button, SpaceBetween, Spinner } from '@cloudscape-design/components';
 import { errorText, useExplorer } from './context';
-import { onSolverProgress, Progress, solverReady } from './solver';
 import type { Suggestion } from './types';
 
 interface SuggestionsProps {
@@ -17,8 +16,8 @@ function Effects({ s }: { s: Suggestion }) {
     return (
         <ul className="tpe-effects">
             {s.effects.map((e) => (
-                <li key={e.text} className={`tpe-effect-${e.kind}`}>
-                    {e.text}
+                <li key={e} className={/^decides/.test(e) ? 'tpe-effect-decides' : undefined}>
+                    {e}
                 </li>
             ))}
         </ul>
@@ -30,17 +29,14 @@ export default function Suggestions(props: SuggestionsProps) {
     const { apply } = useExplorer();
     const [items, setItems] = useState<Suggestion[] | null>(null);
     const [error, setError] = useState<string | null>(null);
-    const [progress, setProgress] = useState<Progress | null>(null);
     const root = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
         let live = true;
-        const unsubscribe = onSolverProgress((p) => live && setProgress(p));
         props.load().then(
             (s) => {
                 if (!live) return;
                 setItems(s);
-                setProgress(null);
                 // Results can land below the fold; bring them into view.
                 requestAnimationFrame(() => root.current?.scrollIntoView({ block: 'nearest', behavior: 'smooth' }));
             },
@@ -48,7 +44,6 @@ export default function Suggestions(props: SuggestionsProps) {
         );
         return () => {
             live = false;
-            unsubscribe();
         };
     }, []);
 
@@ -56,20 +51,11 @@ export default function Suggestions(props: SuggestionsProps) {
     if (error) {
         body = <Alert type="error">{error}</Alert>;
     } else if (!items) {
-        const downloading = !solverReady() && progress;
         body = (
             <SpaceBetween size="xs">
-                {downloading ? (
-                    <ProgressBar
-                        value={progress.total ? (100 * progress.loaded) / progress.total : 0}
-                        label="Downloading the solver (once per visit)"
-                        description={`${(progress.loaded / 1e6).toFixed(1)} of ${(progress.total / 1e6).toFixed(0)} MB`}
-                    />
-                ) : (
-                    <Box color="text-body-secondary">
-                        <Spinner /> Asking the solver…
-                    </Box>
-                )}
+                <Box color="text-body-secondary">
+                    <Spinner /> Asking the solver… (the first time downloads CVC5, about 28 MB)
+                </Box>
                 {props.onClose ? (
                     <Button variant="inline-link" onClick={props.onClose}>
                         Cancel

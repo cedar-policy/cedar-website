@@ -10,7 +10,6 @@ export interface ExplorerActions {
     setEntityType: (key: string, type: string) => string | null;
     suggestFact: (key: string) => Promise<Suggestion[]>;
     suggestPolicy: (id: string) => Promise<Suggestion[]>;
-    suggestDecision: (want: 'allow' | 'deny') => Promise<Suggestion[]>;
     apply: (s: Suggestion) => string | null;
     /** Scroll to and briefly highlight a fact. */
     revealFact: (key: string) => void;

@@ -1,5 +1,4 @@
 import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
-import { toast } from 'sonner';
 import {
     Alert,
     Box,
@@ -157,8 +156,6 @@ export default function TpeExplorer() {
             refresh();
         }
     };
-    const undoRef = useRef(undo);
-    undoRef.current = undo;
     const redo = () => {
         if (explorer.current?.redo()) {
             setChanged([]);
@@ -203,18 +200,12 @@ export default function TpeExplorer() {
             setEntityType: (key, type) => edit((ex) => ex.set_entity_type(key, type)),
             suggestFact: async (key) => parse(await explorer.current!.suggest_slot(key, (s) => runCvc5(s))),
             suggestPolicy: async (id) => parse(await explorer.current!.suggest_policy(id, (s) => runCvc5(s))),
-            suggestDecision: async (want) => parse(await explorer.current!.suggest_decision(want, (s) => runCvc5(s))),
             apply: (s) => {
-                let effect = '';
                 const err = edit((ex) => {
-                    effect = ex.apply_suggestion(s.id);
+                    ex.apply_suggestion(s.id);
                 });
                 if (err) return err;
                 setChanged(s.slots);
-                toast.success(effect ? `Applied: ${effect}` : 'Applied', {
-                    duration: 5000,
-                    action: { label: 'Undo', onClick: () => undoRef.current() },
-                });
                 return null;
             },
             revealFact,
@@ -312,8 +303,8 @@ export default function TpeExplorer() {
                                                             setExplanation(
                                                                 JSON.parse(explorer.current!.explain()) as Explanation,
                                                             );
-                                                        } catch (e) {
-                                                            toast.error(errorText(e));
+                                                        } catch {
+                                                            setExplanation({ decision: null });
                                                         }
                                                     }}
                                                 />

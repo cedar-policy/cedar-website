@@ -125,17 +125,14 @@ function PolicyCard({ policy }: { policy: PolicyModel }) {
     );
 }
 
-/** The overall decision, with ways to reach a decision while it's open. */
+/** The overall decision. */
 export function DecisionBanner({ decision, onExplain }: { decision: DecisionModel; onExplain: () => void }) {
-    const { suggestDecision } = useExplorer();
-    const [asking, setAsking] = useState<'allow' | 'deny' | null>(null);
     const config = {
         allow: { type: 'success' as const, header: 'Allowed' },
         deny: { type: 'error' as const, header: 'Denied' },
         undecided: { type: 'info' as const, header: 'Not decided yet' },
         error: { type: 'warning' as const, header: 'Could not evaluate' },
     }[decision.state];
-    const undecided = decision.state === 'undecided';
     return (
         <Alert
             type={config.type}
@@ -143,15 +140,6 @@ export function DecisionBanner({ decision, onExplain }: { decision: DecisionMode
             action={
                 decision.state === 'allow' || decision.state === 'deny' ? (
                     <Button onClick={onExplain}>Why?</Button>
-                ) : undecided ? (
-                    <SpaceBetween direction="horizontal" size="xs">
-                        <Button onClick={() => setAsking((a) => (a === 'allow' ? null : 'allow'))}>
-                            How could it be allowed?
-                        </Button>
-                        <Button onClick={() => setAsking((a) => (a === 'deny' ? null : 'deny'))}>
-                            How could it be denied?
-                        </Button>
-                    </SpaceBetween>
                 ) : undefined
             }
         >
@@ -159,20 +147,6 @@ export function DecisionBanner({ decision, onExplain }: { decision: DecisionMode
             {decision.warnings?.map((w) => (
                 <Box key={w} variant="small" color="text-status-warning">{w}</Box>
             ))}
-            {undecided && asking ? (
-                <div className="tpe-decision-suggestions">
-                    <Box variant="h4">
-                        Fewest facts that would make it {asking === 'allow' ? 'allowed' : 'denied'}
-                    </Box>
-                    <Suggestions
-                        key={asking}
-                        load={() => suggestDecision(asking)}
-                        emptyText={`No way to make it ${asking === 'allow' ? 'allowed' : 'denied'} from here.`}
-                        onApplied={() => setAsking(null)}
-                        onClose={() => setAsking(null)}
-                    />
-                </div>
-            ) : null}
         </Alert>
     );
 }

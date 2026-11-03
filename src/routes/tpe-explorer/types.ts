@@ -108,19 +108,11 @@ export interface Model {
     canRedo: boolean;
 }
 
-export interface SuggestionEffect {
-    kind: 'decides' | 'applies' | 'does-not-apply' | 'no-longer-matters';
-    policy: string | null;
-    decision: 'ALLOW' | 'DENY' | null;
-    /** Plain-language description. */
-    text: string;
-}
-
 export interface Suggestion {
     id: number;
     assignments: string[];
     slots: string[];
-    effects: SuggestionEffect[];
+    effects: string[];
 }
 
 export interface Explanation {

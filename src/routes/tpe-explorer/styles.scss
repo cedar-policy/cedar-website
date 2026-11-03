@@ -8,10 +8,6 @@ $mono: Monaco, Menlo, Consolas, 'Courier Prime', Courier, 'Courier New', monospa
     padding: 0 awsui.$space-scaled-l awsui.$space-scaled-xl;
 }
 
-.tpe-decision-suggestions {
-    margin-top: awsui.$space-scaled-s;
-    max-width: 900px;
-}
 
 .tpe-layout {
     display: grid;
@@ -94,7 +90,7 @@ $mono: Monaco, Menlo, Consolas, 'Courier Prime', Courier, 'Courier New', monospa
     display: grid;
     // Fixed outer columns keep inputs aligned and stop rows shifting as
     // badges come and go.
-    grid-template-columns: 170px minmax(0, 1fr) 200px;
+    grid-template-columns: 170px minmax(0, 1fr) auto;
     gap: awsui.$space-scaled-s;
     align-items: center;
     min-height: 36px;
@@ -133,6 +129,7 @@ $mono: Monaco, Menlo, Consolas, 'Courier Prime', Courier, 'Courier New', monospa
 }
 
 .tpe-fact-meta {
+    white-space: nowrap;
     display: flex;
     align-items: center;
     gap: awsui.$space-scaled-xs;
@@ -279,7 +276,6 @@ $mono: Monaco, Menlo, Consolas, 'Courier Prime', Courier, 'Courier New', monospa
         font-weight: bold;
     }
 
-    &.tpe-effect-applies { color: awsui.$color-text-status-success; }
 }
 
 .tpe-error-text {
