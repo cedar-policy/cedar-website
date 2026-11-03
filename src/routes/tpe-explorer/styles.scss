@@ -1,130 +1,269 @@
-// TPE explorer: a terminal-like rendering of facts and residuals, echoing the
-// cedar-tpe-tui color scheme.
+// TPE explorer, styled with the site's Cloudscape design tokens.
+@use "~@cloudscape-design/design-tokens" as awsui;
 
-$bg: #1e1e2e;
-$fg: #cdd6f4;
-$muted: #6c7086;
-$pink: #f2a8d4;
-$green: #a6e3a1;
-$teal: #94e2d5;
-$yellow: #f9e2af;
-$red: #f38ba8;
-$surface: #585b70;
-$black: #11111b;
+$mono: Monaco, Menlo, Consolas, 'Courier Prime', Courier, 'Courier New', monospace;
 
-.tpe-explorer {
-    .tpe-status {
-        display: flex;
-        align-items: center;
-        flex-wrap: wrap;
-        gap: 10px;
-        font-family: monospace;
-        font-size: 14px;
-    }
+.tpe-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+    gap: awsui.$space-scaled-l;
+    align-items: start;
 
-    .tpe-status-actions {
-        margin-left: auto;
-    }
-
-    .tpe-badge {
-        padding: 2px 8px;
-        font-weight: bold;
-        color: $black;
-
-        &.tpe-badge-unknown { background: $yellow; }
-        &.tpe-badge-allow { background: $green; }
-        &.tpe-badge-deny { background: $red; }
-    }
-
-    .tpe-reasons {
-        font-weight: bold;
-
-        &.tpe-reasons-allow { color: #2e7d32; }
-        &.tpe-reasons-deny { color: #c62828; }
-    }
-
-    .tpe-panes {
-        display: grid;
-        grid-template-columns: 52fr 48fr;
-        gap: 12px;
-    }
-
-    .tpe-pane {
-        background: $bg;
-        border: 1px solid $surface;
-        border-radius: 6px;
-        padding: 8px 12px;
-        min-height: 420px;
-        overflow: auto;
-
-        &.tpe-focused { border-color: $teal; }
-
-        // Cloudscape tabs on a dark background
-        [class*='awsui_tabs-tab-label'] { color: $muted; }
-    }
-
-    .tpe-pane-title {
-        color: $teal;
-        font-family: monospace;
-        margin-bottom: 4px;
-    }
-
-    .tpe-doc {
-        margin: 0;
-        color: $fg;
-        font-family: 'JetBrains Mono', Menlo, Consolas, monospace;
-        font-size: 13.5px;
-        line-height: 1.45;
-        white-space: pre;
-    }
-
-    .tpe-line { min-height: 1.45em; }
-    .tpe-dim, .tpe-dim * { color: $muted !important; }
-
-    .tpe-slot {
-        all: unset;
-        cursor: pointer;
-        white-space: pre;
-
-        &:focus-visible { outline: 1px dotted $teal; }
-    }
-
-    .tpe-policy-title { cursor: pointer; }
-
-    .tpe-gutter {
-        display: inline-block;
-        min-width: 1ch;
-    }
-
-    .tpe-g-needed { color: $yellow; }
-    .tpe-g-residual, .tpe-g-not, .tpe-g-error { color: $muted; }
-    .tpe-g-satisfied { color: $teal; }
-
-    .tpe-s-plain { color: $fg; }
-    .tpe-s-keyword { color: $pink; }
-    .tpe-s-type, .tpe-s-str, .tpe-s-lit { color: $green; }
-    .tpe-s-ident { color: $teal; }
-    .tpe-s-comment, .tpe-s-muted, .tpe-s-unknown-weak { color: $muted; }
-    .tpe-s-unknown-strong { color: $yellow; font-weight: bold; }
-    .tpe-s-error { color: $red; }
-
-    .tpe-selected { background: $surface; }
-    .tpe-selected.tpe-s-unknown-strong, .tpe-editing.tpe-s-unknown-strong { background: $yellow; color: $black; }
-    .tpe-editing { background: $teal; color: $black; }
-    .tpe-changed { background: $green; color: $black; }
-    .tpe-underline { text-decoration: underline; }
-
-    .tpe-need { color: #b7791f; }
-    .tpe-prompt { font-family: monospace; color: $muted; line-height: 32px; }
-    .tpe-flash { margin-left: 4px; }
-    .tpe-error-text { white-space: pre-wrap; margin: 0; }
-
-    .tpe-source textarea {
-        font-family: 'JetBrains Mono', Menlo, Consolas, monospace;
-        font-size: 13px;
+    @media (max-width: 1100px) {
+        grid-template-columns: minmax(0, 1fr);
     }
 }
 
-.tpe-suggest-title { font-weight: bold; }
-.tpe-assignments { font-family: monospace; color: #2e7d32; }
-.tpe-effects { font-family: monospace; color: #b0347c; }
+// Keep the policies in view while filling in a long list of facts.
+.tpe-column-sticky {
+    position: sticky;
+    top: awsui.$space-scaled-m;
+    max-height: calc(100vh - 32px);
+    overflow-y: auto;
+
+    @media (max-width: 1100px) {
+        position: static;
+        max-height: none;
+    }
+}
+
+// ----- Facts -----
+
+.tpe-facts {
+    display: flex;
+    flex-direction: column;
+}
+
+.tpe-facts-heading {
+    margin: awsui.$space-scaled-s 0 awsui.$space-scaled-xxs;
+    color: awsui.$color-text-body-secondary;
+    font-size: awsui.$font-size-body-s;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+}
+
+.tpe-fact {
+    border-left: 3px solid transparent;
+    border-radius: awsui.$border-radius-item;
+    padding: awsui.$space-scaled-xxs awsui.$space-scaled-xs;
+    transition: background-color 0.15s;
+
+    & + & {
+        border-top: 1px solid awsui.$color-border-divider-default;
+    }
+
+    &.tpe-fact-needed {
+        border-left-color: awsui.$color-border-status-info;
+    }
+
+    &.tpe-fact-hovered {
+        background: awsui.$color-background-item-selected;
+    }
+
+    &.tpe-fact-changed {
+        animation: tpe-changed 2.5s ease-out;
+    }
+
+    &.tpe-fact-revealed {
+        animation: tpe-revealed 1.5s ease-out;
+    }
+}
+
+@keyframes tpe-changed {
+    from { background: awsui.$color-background-status-success; }
+    to { background: transparent; }
+}
+
+@keyframes tpe-revealed {
+    from { background: awsui.$color-background-status-info; }
+    to { background: transparent; }
+}
+
+.tpe-fact-main {
+    display: grid;
+    grid-template-columns: minmax(140px, 0.8fr) minmax(0, 1.4fr) auto;
+    gap: awsui.$space-scaled-s;
+    align-items: center;
+    min-height: 36px;
+}
+
+.tpe-fact-name {
+    display: flex;
+    align-items: baseline;
+    gap: 4px;
+    flex-wrap: wrap;
+}
+
+.tpe-name {
+    font-family: $mono;
+    font-size: awsui.$font-size-body-m;
+    color: awsui.$color-text-body-default;
+}
+
+.tpe-optional {
+    color: awsui.$color-text-body-secondary;
+}
+
+.tpe-type {
+    color: awsui.$color-text-body-secondary;
+    font-size: awsui.$font-size-body-s;
+}
+
+.tpe-state-text {
+    color: awsui.$color-text-body-secondary;
+    font-style: italic;
+}
+
+.tpe-entity-id {
+    font-family: $mono;
+    font-weight: normal;
+}
+
+.tpe-fact-meta {
+    display: flex;
+    align-items: center;
+    gap: awsui.$space-scaled-xs;
+    justify-content: flex-end;
+}
+
+.tpe-need {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.tpe-need-who {
+    color: awsui.$color-text-body-secondary;
+    font-size: awsui.$font-size-body-s;
+    max-width: 220px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.tpe-fact-error {
+    color: awsui.$color-text-status-error;
+    font-size: awsui.$font-size-body-s;
+    margin-top: 2px;
+}
+
+.tpe-fact-suggestions {
+    margin: awsui.$space-scaled-xs 0 awsui.$space-scaled-xs awsui.$space-scaled-l;
+}
+
+// ----- Policies -----
+
+.tpe-effect {
+    font-family: $mono;
+    font-weight: bold;
+
+    &.tpe-effect-permit { color: awsui.$color-text-status-success; }
+    &.tpe-effect-forbid { color: awsui.$color-text-status-error; }
+}
+
+.tpe-policy-irrelevant {
+    opacity: 0.7;
+}
+
+.tpe-code {
+    margin: 0;
+    padding: awsui.$space-scaled-s;
+    background: awsui.$color-background-container-header;
+    border: 1px solid awsui.$color-border-divider-default;
+    border-radius: awsui.$border-radius-item;
+    font-family: $mono;
+    font-size: 13px;
+    line-height: 1.5;
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+}
+
+// Residual tokens, in a light code palette.
+.tpe-t-keyword { color: #0000ff; }
+.tpe-t-type, .tpe-t-str { color: #a31515; }
+.tpe-t-lit { color: #098658; }
+.tpe-t-ident { color: #001080; }
+.tpe-t-comment, .tpe-t-muted { color: awsui.$color-text-body-secondary; }
+
+.tpe-token {
+    all: unset;
+    cursor: pointer;
+    white-space: pre-wrap;
+    border-radius: 2px;
+    text-decoration: underline dotted awsui.$color-text-body-secondary;
+    text-underline-offset: 3px;
+
+    &:focus-visible { outline: 2px solid awsui.$color-border-item-focused; }
+}
+
+.tpe-t-hovered {
+    background: awsui.$color-background-item-selected;
+    text-decoration: none;
+}
+
+.tpe-needs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: awsui.$space-scaled-xs;
+    align-items: center;
+}
+
+.tpe-needs-label {
+    color: awsui.$color-text-body-secondary;
+    font-size: awsui.$font-size-body-s;
+}
+
+.tpe-need-chip {
+    all: unset;
+    cursor: pointer;
+    padding: 1px 8px;
+    border: 1px solid awsui.$color-border-status-info;
+    border-radius: 12px;
+    font-family: $mono;
+    font-size: awsui.$font-size-body-s;
+    color: awsui.$color-text-link-default;
+
+    &:hover { background: awsui.$color-background-item-selected; }
+    &:focus-visible { outline: 2px solid awsui.$color-border-item-focused; }
+}
+
+// ----- Suggestions -----
+
+.tpe-suggestion {
+    display: flex;
+    gap: awsui.$space-scaled-s;
+    align-items: flex-start;
+    justify-content: space-between;
+    padding: awsui.$space-scaled-xs awsui.$space-scaled-s;
+    border: 1px solid awsui.$color-border-divider-default;
+    border-radius: awsui.$border-radius-item;
+}
+
+.tpe-assignments, .tpe-effects {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.tpe-assignments code {
+    font-family: $mono;
+    font-size: 13px;
+}
+
+.tpe-effects li {
+    color: awsui.$color-text-body-secondary;
+    font-size: awsui.$font-size-body-s;
+
+    &::before { content: '→ '; }
+
+    &.tpe-effect-decides {
+        color: awsui.$color-text-body-default;
+        font-weight: bold;
+    }
+}
+
+.tpe-error-text {
+    white-space: pre-wrap;
+    margin: 0;
+}
