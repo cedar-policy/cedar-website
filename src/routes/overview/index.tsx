@@ -61,14 +61,14 @@ export default function Overview() {
                         <CedarIntl
                             id="overview.announcement.body"
                             defaultMessage={
-                                'Cedar 4.14 is now released, with support for modular schema development using schema fragments.'
+                                'Cedar 4.15 is now released, stabilizing the variadic isInRange operator (RFC99).'
                             }
                         />
                         &nbsp;
                         <a
                             target={'_blank'}
                             rel="noopener noreferrer"
-                            href="https://github.com/cedar-policy/cedar/releases/tag/v4.14.0"
+                            href="https://github.com/cedar-policy/cedar/releases/tag/v4.15.0"
                         >
                             <CedarIntl
                                 id="overview.announcement.learnMore"
