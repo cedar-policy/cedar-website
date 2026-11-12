@@ -104,11 +104,11 @@
         },
         "announcement":{
             "body":{
-                "text":"Cedar 4.14 is now released, with support for modular schema development using schema fragments.",
+                "text":"Cedar 4.15 is now released, stabilizing the variadic isInRange operator (RFC99).",
                 "note":"Announcement text shown in a thin bar below the main section"
             },
             "date":{
-                "text":"October 17, 2026:",
+                "text":"November 16, 2026:",
                 "note":"A date, shown in bold before the announcement"
             },
             "learnMore":{
