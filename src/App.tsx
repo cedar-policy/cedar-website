@@ -308,6 +308,13 @@ export default function App() {
                                 },
                                 {
                                     type: 'button',
+                                    text: t('topNavbar.docs.link'),
+                                    href: 'https://docs.cedarpolicy.com',
+                                    external: true,
+                                    externalIconAriaLabel: t('topNavbar.docs.ariaLabel'),
+                                },
+                                {
+                                    type: 'button',
                                     text: t('topNavbar.github.link'),
                                     href: 'https://github.com/cedar-policy',
                                     external: true,
